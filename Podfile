@@ -1,0 +1,10 @@
+platform:ios
+pod 'MBProgressHUD', '~>0.9.1'
+#pod 'XMPPFramework', '~>3.6.4'
+pod 'UMengAnalytics'
+platform:ios, '7.0'
+pod 'Masonry'
+pod 'ReactiveCocoa', '~>2.5'
+pod 'CocoaLumberjack'
+pod 'SDWebImage', '~>3.7.2'
+pod 'pop', '~>1.0'
