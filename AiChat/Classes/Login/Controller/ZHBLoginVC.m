@@ -1,0 +1,23 @@
+//
+//  ZHBLoginVC.m
+//  AiChat
+//
+//  Created by 庄彪 on 15/7/1.
+//  Copyright (c) 2015年 XMPP. All rights reserved.
+//
+
+#import "ZHBLoginVC.h"
+#import <ReactiveCocoa.h>
+
+@interface ZHBLoginVC ()
+
+@property (weak, nonatomic) IBOutlet UITextField *userNameTxtf;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTxtf;
+
+@end
+
+@implementation ZHBLoginVC
+
+
+
+@end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7528AC581B4415FC00F96C0F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7528AC571B4415FC00F96C0F /* Login.storyboard */; };
+		7528AC5B1B441FA700F96C0F /* ZHBControllerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7528AC5A1B441FA700F96C0F /* ZHBControllerTool.m */; };
+		7528AC5E1B44223500F96C0F /* ZHBLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7528AC5D1B44223500F96C0F /* ZHBLoginVC.m */; };
 		753808B01B43E73400F2033F /* begin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 753808971B43E73400F2033F /* begin.wav */; };
 		753808B11B43E73400F2033F /* blank.wav in Resources */ = {isa = PBXBuildFile; fileRef = 753808981B43E73400F2033F /* blank.wav */; };
 		753808B21B43E73400F2033F /* camera.wav in Resources */ = {isa = PBXBuildFile; fileRef = 753808991B43E73400F2033F /* camera.wav */; };
@@ -186,6 +189,11 @@
 /* Begin PBXFileReference section */
 		603CB1F2F8E08B2DC58DCB69 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6EFEEC52B9C2942959FE52F9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7528AC571B4415FC00F96C0F /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		7528AC591B441FA700F96C0F /* ZHBControllerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBControllerTool.h; sourceTree = "<group>"; };
+		7528AC5A1B441FA700F96C0F /* ZHBControllerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBControllerTool.m; sourceTree = "<group>"; };
+		7528AC5C1B44223500F96C0F /* ZHBLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBLoginVC.h; sourceTree = "<group>"; };
+		7528AC5D1B44223500F96C0F /* ZHBLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBLoginVC.m; sourceTree = "<group>"; };
 		753808971B43E73400F2033F /* begin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = begin.wav; sourceTree = "<group>"; };
 		753808981B43E73400F2033F /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		753808991B43E73400F2033F /* camera.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = camera.wav; sourceTree = "<group>"; };
@@ -579,6 +587,8 @@
 		753808CE1B43F05900F2033F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7528AC5C1B44223500F96C0F /* ZHBLoginVC.h */,
+				7528AC5D1B44223500F96C0F /* ZHBLoginVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -607,6 +617,7 @@
 		753808D21B43F05900F2033F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7528AC571B4415FC00F96C0F /* Login.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -646,6 +657,8 @@
 			children = (
 				753828D01B43929900CD136B /* ViewController.h */,
 				753828D11B43929900CD136B /* ViewController.m */,
+				7528AC591B441FA700F96C0F /* ZHBControllerTool.h */,
+				7528AC5A1B441FA700F96C0F /* ZHBControllerTool.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1644,6 +1657,7 @@
 		75F2F71C1B428443004829AA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = ZHB;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = XMPP;
 				TargetAttributes = {
@@ -1693,6 +1707,7 @@
 				753808B91B43E73400F2033F /* qrcode_found.wav in Resources */,
 				753808C01B43E73400F2033F /* standby.wav in Resources */,
 				753808C41B43E73400F2033F /* Talkie_Up.wav in Resources */,
+				7528AC581B4415FC00F96C0F /* Login.storyboard in Resources */,
 				753808BC1B43E73400F2033F /* shake_nomatch.wav in Resources */,
 				753808BD1B43E73400F2033F /* shake_sound_male.wav in Resources */,
 				753808C31B43E73400F2033F /* Talkie_Tick_Short_Loud.wav in Resources */,
@@ -1785,6 +1800,7 @@
 				75382EB61B43929D00CD136B /* XMPPvCard.xcdatamodeld in Sources */,
 				75382E7A1B43929D00CD136B /* AppDelegate.mm in Sources */,
 				75382E851B43929D00CD136B /* NSNumber+XMPP.m in Sources */,
+				7528AC5E1B44223500F96C0F /* ZHBLoginVC.m in Sources */,
 				75382E8E1B43929D00CD136B /* XMPPPresence.m in Sources */,
 				75382E7B1B43929D00CD136B /* main.m in Sources */,
 				75382EA51B43929D00CD136B /* XMPPIQ+LastActivity.m in Sources */,
@@ -1812,6 +1828,7 @@
 				75382E9E1B43929D00CD136B /* XMPPRosterMemoryStorage.m in Sources */,
 				75382E901B43929D00CD136B /* XMPPBandwidthMonitor.m in Sources */,
 				75382EEF1B43929D00CD136B /* NSXMLElement+XEP_0297.m in Sources */,
+				7528AC5B1B441FA700F96C0F /* ZHBControllerTool.m in Sources */,
 				75382EBC1B43929D00CD136B /* XMPPvCardTempAdr.m in Sources */,
 				75382E9B1B43929D00CD136B /* XMPPRosterCoreDataStorage.m in Sources */,
 				75382ED81B43929D00CD136B /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
