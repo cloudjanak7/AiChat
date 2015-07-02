@@ -10,8 +10,16 @@
 
 @interface ZHBControllerTool : NSObject
 
+/**
+ *  @brief  选择keyWindow的根控制器
+ */
 + (void)chooseRootViewController;
 
+/**
+ *  @brief  根据登录状态选择主界面
+ *
+ *  @param isUserLogon 是否登录成功
+ */
 + (void)showStoryboardWithLogonState:(BOOL)isUserLogon;
 
 @end

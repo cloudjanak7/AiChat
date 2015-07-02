@@ -23,7 +23,7 @@
         <!--LoginVC-->
         <scene sceneID="McG-2T-LeE">
             <objects>
-                <viewController id="kHx-Gs-sFb" customClass="ZHBLoginVC" sceneMemberID="viewController">
+                <viewController id="kHx-Gs-sFb" customClass="DLLoginVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O3X-zd-Nsp"/>
                         <viewControllerLayoutGuide type="bottom" id="9p6-Pj-MGU"/>
@@ -79,6 +79,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="VXm-4d-adV"/>
                     <connections>
+                        <outlet property="loginBtn" destination="Zpf-Zx-GVJ" id="JtR-9o-38F"/>
                         <outlet property="passwordTxtf" destination="1hK-6I-UWz" id="VNm-cR-Z1Y"/>
                         <outlet property="userNameTxtf" destination="KeY-5P-81R" id="9MV-Pf-j5J"/>
                     </connections>

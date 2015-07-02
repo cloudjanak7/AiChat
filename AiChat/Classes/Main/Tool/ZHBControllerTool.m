@@ -11,9 +11,6 @@
 
 @implementation ZHBControllerTool
 
-/**
- *  @brief  选择启动界面
- */
 + (void)chooseRootViewController {
     //版本Key
     NSString *versionKey = (__bridge NSString *)kCFBundleVersionKey;

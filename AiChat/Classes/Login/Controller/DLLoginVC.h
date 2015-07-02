@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZHBLoginVC : UIViewController
+@interface DLLoginVC : UIViewController
 
 @end

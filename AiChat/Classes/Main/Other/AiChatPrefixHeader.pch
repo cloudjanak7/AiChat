@@ -11,4 +11,7 @@
 
 #import "ZHBCommon.h"
 
+//是否为本地测试
+#define LOCAL_TEST 1
+
 #endif
