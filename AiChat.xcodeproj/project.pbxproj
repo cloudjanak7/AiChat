@@ -194,6 +194,8 @@
 		7528AC5A1B441FA700F96C0F /* ZHBControllerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBControllerTool.m; sourceTree = "<group>"; };
 		7528AC5C1B44223500F96C0F /* ZHBLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBLoginVC.h; sourceTree = "<group>"; };
 		7528AC5D1B44223500F96C0F /* ZHBLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBLoginVC.m; sourceTree = "<group>"; };
+		7528AC5F1B45188D00F96C0F /* AiChatPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AiChatPrefixHeader.pch; sourceTree = "<group>"; };
+		7528AC611B45216700F96C0F /* ZHBCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBCommon.h; sourceTree = "<group>"; };
 		753808971B43E73400F2033F /* begin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = begin.wav; sourceTree = "<group>"; };
 		753808981B43E73400F2033F /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		753808991B43E73400F2033F /* camera.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = camera.wav; sourceTree = "<group>"; };
@@ -673,9 +675,11 @@
 		753828D31B43929900CD136B /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				7528AC5F1B45188D00F96C0F /* AiChatPrefixHeader.pch */,
 				753828D41B43929900CD136B /* AppDelegate.h */,
 				753828D51B43929900CD136B /* AppDelegate.mm */,
 				753828D61B43929900CD136B /* main.m */,
+				7528AC611B45216700F96C0F /* ZHBCommon.h */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -2016,7 +2020,9 @@
 			baseConfigurationReference = 603CB1F2F8E08B2DC58DCB69 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = AiChat/Classes/Main/Other/AiChatPrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2067,7 +2073,9 @@
 			baseConfigurationReference = 6EFEEC52B9C2942959FE52F9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREFIX_HEADER = AiChat/Classes/Main/Other/AiChatPrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
