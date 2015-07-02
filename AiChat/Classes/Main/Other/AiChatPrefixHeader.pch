@@ -1,0 +1,17 @@
+//
+//  AiChatPrefixHeader.pch
+//  AiChat
+//
+//  Created by 庄彪 on 15/7/2.
+//  Copyright (c) 2015年 XMPP. All rights reserved.
+//
+
+#ifndef AiChat_AiChatPrefixHeader_pch
+#define AiChat_AiChatPrefixHeader_pch
+
+#import "ZHBCommon.h"
+
+//是否为本地测试
+#define LOCAL_TEST 1
+
+#endif

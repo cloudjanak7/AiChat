@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ZHBControllerTool.h"
+#import "DDLogConfig.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +16,14 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [DDLogConfig setupLogConfig];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = [[UIViewController alloc] init];
+    [self.window makeKeyAndVisible];
+    DDLogInfo(@"选择启动界面info");
+    [ZHBControllerTool chooseRootViewController];
+
     return YES;
 }
 
