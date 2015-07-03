@@ -11,9 +11,27 @@
 #import "ZHBXMPPConst.h"
 #import "UIDevice+Hardware.h"
 
-@interface ZHBXMPPTool ()<XMPPStreamDelegate>
+@interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate>
 
 @property (nonatomic, strong, readwrite) XMPPStream *xmppStream;
+
+@property (nonatomic, strong, readwrite) XMPPvCardTempModule *xmppvCardModule;
+
+@property (nonatomic, strong, readwrite) XMPPRoster *xmppRoster;
+
+@property (nonatomic, strong, readwrite) XMPPRosterCoreDataStorage *xmppRosterStorage;
+
+@property (nonatomic, strong, readwrite) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
+
+@property (nonatomic, strong) XMPPvCardCoreDataStorage *xmppvCardStorage;
+/**
+ *  @brief  自动重连模块
+ */
+@property (nonatomic, strong) XMPPReconnect *xmppReconnect;
+/**
+ *  @brief  聊天消息模块
+ */
+@property (nonatomic, strong) XMPPMessageArchiving *xmppMessage;
 
 @property (nonatomic, copy) XMPPResultCallBack callBack;
 
@@ -25,6 +43,10 @@
 #pragma mark Life Cycle
 
 ZHBSingletonM(XMPPTool)
+
+- (void)dealloc {
+    [self teardownXMPP];
+}
 
 #pragma mark -
 #pragma mark Public Methods
@@ -39,6 +61,15 @@ ZHBSingletonM(XMPPTool)
     }
     // 连接主机 成功后发送注册密码
     [self connectToHost];
+}
+
+- (void)userLogout {
+    
+}
+
+- (void)disConnectFromHost {
+    [self sendOfflineToHost];
+    [self.xmppStream disconnect];
 }
 
 #pragma mark -
@@ -77,6 +108,12 @@ ZHBSingletonM(XMPPTool)
     }
 }
 
+#pragma mark -
+#pragma mark XMPPRoster Delegate
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {
+    DDLogInfo(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"presence: %@", presence);
+}
 
 #pragma mark -
 #pragma mark Private Methods
@@ -90,11 +127,6 @@ ZHBSingletonM(XMPPTool)
     self.xmppStream.hostPort = xmppHostPort;
 
     [self.xmppStream connectWithTimeout:xmppTimeout error:nil];
-}
-
-- (void)disConnectFromHost {
-    [self sendOfflineToHost];
-    [self.xmppStream disconnect];
 }
 
 - (void)sendPwdToHost {
@@ -117,6 +149,35 @@ ZHBSingletonM(XMPPTool)
     [self.xmppStream sendElement:presence];
 }
 
+- (void)setupXMPP {
+    [self.xmppReconnect activate:self.xmppStream];
+    [self.xmppvCardModule activate:self.xmppStream];
+    [self.xmppRoster activate:self.xmppStream];
+}
+
+- (void)teardownXMPP {
+    [self.xmppStream removeDelegate:self];
+    
+    [self.xmppReconnect deactivate];
+    [self.xmppvCardModule deactivate];
+    [self.xmppRoster deactivate];
+    [self.xmppMessage deactivate];
+    
+    [self.xmppStream disconnect];
+    
+    self.xmppStream = nil;
+    self.xmppReconnect = nil;
+    self.xmppvCardModule = nil;
+    self.xmppvCardStorage = nil;
+    self.xmppRoster = nil;
+    self.xmppRosterStorage = nil;
+    self.xmppMessage = nil;
+    self.xmppMessageStorage = nil;
+//    _xmppvCardAvatarModule = nil;
+//    _xmppCapabilities = nil;
+//    _xmppCapabilitiesStorage = nil;
+}
+
 #pragma mark -
 #pragma mark Getters
 
@@ -130,8 +191,63 @@ ZHBSingletonM(XMPPTool)
 #else
         DDLogWarn(@"模拟器不支持后台连接");
 #endif
+        [self setupXMPP];
     }
     return _xmppStream;
+}
+
+- (XMPPReconnect *)xmppReconnect {
+    if (nil == _xmppReconnect) {
+        _xmppReconnect = [[XMPPReconnect alloc] init];
+    }
+    return _xmppReconnect;
+}
+
+- (XMPPvCardCoreDataStorage *)xmppvCardStorage {
+    if (nil == _xmppvCardStorage) {
+        _xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
+    }
+    return _xmppvCardStorage;
+}
+
+- (XMPPvCardTempModule *)xmppvCardModule {
+    if (nil == _xmppvCardModule) {
+        _xmppvCardModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:self.xmppvCardStorage];
+    }
+    return _xmppvCardModule;
+}
+
+- (XMPPRosterCoreDataStorage *)xmppRosterStorage {
+    if (nil == _xmppRosterStorage) {
+        _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+        _xmppRosterStorage.autoRemovePreviousDatabaseFile = NO;
+        _xmppRosterStorage.autoRecreateDatabaseFile = NO;
+    }
+    return _xmppRosterStorage;
+}
+
+- (XMPPRoster *)xmppRoster {
+    if (nil == _xmppRoster) {
+        _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:self.xmppRosterStorage];
+        [_xmppRoster addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        _xmppRoster.autoFetchRoster = YES;
+        _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
+    }
+    return _xmppRoster;
+}
+
+- (XMPPMessageArchivingCoreDataStorage *)xmppMessageStorage {
+    if (nil == _xmppMessageStorage) {
+        _xmppMessageStorage = [[XMPPMessageArchivingCoreDataStorage alloc] init];
+    }
+    return _xmppMessageStorage;
+}
+
+- (XMPPMessageArchiving *)xmppMessage {
+    if (nil == _xmppMessage) {
+        _xmppMessage = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:self.xmppMessageStorage];
+    }
+    return _xmppMessage;
 }
 
 #pragma mark Setters

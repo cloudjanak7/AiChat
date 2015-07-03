@@ -30,12 +30,19 @@
 //#import "XMPPBandwidthMonitor.h"
 // 
 //#import "XMPPCoreDataStorage.h"
-//
-//#import "XMPPReconnect.h"
-//
-//#import "XMPPRoster.h"
+
+//断线重连
+#import "XMPPReconnect.h"
+
+//花名册
+#import "XMPPRoster.h"
 //#import "XMPPRosterMemoryStorage.h"
-//#import "XMPPRosterCoreDataStorage.h"
+#import "XMPPRosterCoreDataStorage.h"
+
+//消息
+#import "XMPPMessageArchiving.h"
+#import "XMPPMessageArchivingCoreDataStorage.h"
+
 //
 //#import "XMPPJabberRPCModule.h"
 //#import "XMPPIQ+JabberRPC.h"
@@ -48,9 +55,10 @@
 //#import "XMPPRoomMemoryStorage.h"
 //#import "XMPPRoomCoreDataStorage.h"
 //#import "XMPPRoomHybridStorage.h"
-//
-//#import "XMPPvCardTempModule.h"
-//#import "XMPPvCardCoreDataStorage.h"
+
+//电子名片
+#import "XMPPvCardTempModule.h"
+#import "XMPPvCardCoreDataStorage.h"
 //
 //#import "XMPPPubSub.h"
 //
