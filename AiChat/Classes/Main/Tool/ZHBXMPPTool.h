@@ -19,12 +19,35 @@ typedef enum {
     XMPPStatusTypeRegisterFailure//注册失败
 }XMPPStatusType;
 
+typedef enum {
+    XMPPUserStatusTypeOnline = 0,
+    XMPPUserStatusTypeLeave,
+    XMPPUserStatusTypeOffline
+}XMPPUserStatusType;
+
 //XMPP请求结果的block
 typedef void (^XMPPResultCallBack)(XMPPStatusType type);
 
 @interface ZHBXMPPTool : NSObject
 
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
+/**
+ *  @brief  电子名片
+ */
+@property (nonatomic, strong, readonly) XMPPvCardTempModule *xmppvCardModule;
+/**
+ *  @brief  花名册
+ */
+@property (nonatomic, strong, readonly) XMPPRoster *xmppRoster;
+/**
+ *  @brief  花名册数据存储
+ */
+@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *xmppRosterStorage;
+/**
+ *  @brief  消息数据存储
+ */
+@property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
+
 
 /**
  *  @brief  单例sharedXMPPTool
@@ -37,5 +60,9 @@ ZHBSingletonH(XMPPTool)
  *  @param callBack 回掉block
  */
 - (void)userLogin:(XMPPResultCallBack)callBack;
+
+- (void)userLogout;
+
+- (void)disConnectFromHost;
 
 @end
