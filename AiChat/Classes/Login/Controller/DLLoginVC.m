@@ -62,7 +62,7 @@
             [MBProgressHUD hideHUD];
             switch ([type integerValue]) {
                 case XMPPStatusTypeLoginSuccess:
-                    //                [ZHBControllerTool showStoryboardWithLogonState:YES];
+                    [ZHBControllerTool showStoryboardWithLogonState:YES];
                     break;
                 case XMPPStatusTypeLoginFailure:
                     [MBProgressHUD showError:@"用户名或者密码不正确"];

@@ -181,6 +181,7 @@
 		753831291B43929D00CD136B /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75382E661B43929D00CD136B /* libidn.a */; };
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
+		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
 		75F2F7441B428443004829AA /* AiChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F2F7431B428443004829AA /* AiChatTests.m */; };
 		AB54744C06FD2006ED9B425C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5089D826E508437A53A0E41 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -532,6 +533,7 @@
 		7538318D1B43933200CD136B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		7538318F1B43939500CD136B /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
+		756724201B461AB600554473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		75F2F7241B428443004829AA /* AiChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AiChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2F73D1B428443004829AA /* AiChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2F7421B428443004829AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -669,7 +671,7 @@
 				753828D31B43929900CD136B /* Other */,
 				753828D71B43929900CD136B /* Tool */,
 				753828D81B43929900CD136B /* Vendor */,
-				75382E681B43929D00CD136B /* View */,
+				7567241F1B461AAD00554473 /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1588,9 +1590,10 @@
 			path = libidn;
 			sourceTree = "<group>";
 		};
-		75382E681B43929D00CD136B /* View */ = {
+		7567241F1B461AAD00554473 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				756724201B461AB600554473 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1751,6 +1754,7 @@
 				753808BB1B43E73400F2033F /* shake_match.wav in Resources */,
 				753808C21B43E73400F2033F /* Talkie_Tick_Short.wav in Resources */,
 				753808BA1B43E73400F2033F /* sasasa.wav in Resources */,
+				756724211B461AB600554473 /* Main.storyboard in Resources */,
 				753808C61B43E73400F2033F /* VoiceSearchOn.wav in Resources */,
 				753808B01B43E73400F2033F /* begin.wav in Resources */,
 				753808B91B43E73400F2033F /* qrcode_found.wav in Resources */,

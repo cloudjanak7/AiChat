@@ -32,10 +32,11 @@ ZHBSingletonM(XMPPTool)
 - (void)userLogin:(XMPPResultCallBack)callBack {
     self.callBack = callBack;
     if ([self.xmppStream isConnecting]) {
-        DDLogWarn(@"XMPP服务器已经连接");
+        DDLogWarn(@"XMPP服务器存在连接");
+//        [self.xmppStream disconnect];
+        [self disConnectFromHost];
+        DDLogWarn(@"取消旧连接");
     }
-    [self.xmppStream disconnect];
-    DDLogWarn(@"取消上次连接");
     // 连接主机 成功后发送注册密码
     [self connectToHost];
 }
@@ -91,6 +92,11 @@ ZHBSingletonM(XMPPTool)
     [self.xmppStream connectWithTimeout:xmppTimeout error:nil];
 }
 
+- (void)disConnectFromHost {
+    [self sendOfflineToHost];
+    [self.xmppStream disconnect];
+}
+
 - (void)sendPwdToHost {
     DDLogInfo(@"发送密码到服务器进行确认");
     NSError *error = nil;
@@ -100,6 +106,13 @@ ZHBSingletonM(XMPPTool)
 - (void)sendOnlineToHost {
     DDLogInfo(@"设置在线状态");
     XMPPPresence *presence = [XMPPPresence presence];
+    DDLogVerbose(@"%@", presence);
+    [self.xmppStream sendElement:presence];
+}
+
+- (void)sendOfflineToHost {
+    DDLogInfo(@"设置离线状态");
+    XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
     DDLogVerbose(@"%@", presence);
     [self.xmppStream sendElement:presence];
 }
