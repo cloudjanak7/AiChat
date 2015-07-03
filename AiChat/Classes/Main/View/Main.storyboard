@@ -86,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="1190" y="-538"/>
         </scene>
-        <!--Table View Controller-->
+        <!--ContactsTVC-->
         <scene sceneID="rpx-tI-24f">
             <objects>
-                <tableViewController id="pZo-1D-rkK" sceneMemberID="viewController">
+                <tableViewController id="pZo-1D-rkK" customClass="TXLContactsTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bfb-1K-scJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
