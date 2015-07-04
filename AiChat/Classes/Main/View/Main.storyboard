@@ -64,6 +64,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Pjb-fo-drc"/>
+                    <connections>
+                        <segue destination="Wla-NN-MaC" kind="show" id="Dzc-JE-fk5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMf-ty-TeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -72,7 +75,7 @@
         <!--通讯录-->
         <scene sceneID="MU0-UR-qxK">
             <objects>
-                <navigationController id="DtX-g9-VER" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" id="DtX-g9-VER" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="通讯录" image="tabbar_contacts" id="TCn-uf-KtM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H7m-fe-W5V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -108,10 +111,61 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="GIM-BX-aeO"/>
+                    <connections>
+                        <segue destination="Wla-NN-MaC" kind="show" identifier="contactstvc2chatvc" id="C1x-gj-CIM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zi-CO-dsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1892" y="-538"/>
+        </scene>
+        <!--ChatVC-->
+        <scene sceneID="lno-rL-vrt">
+            <objects>
+                <viewController id="Wla-NN-MaC" customClass="TXLChatVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="35s-p5-qH8"/>
+                        <viewControllerLayoutGuide type="bottom" id="cZJ-j4-WmF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hnI-60-GIg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="col-UC-hVa">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="6u0-2F-AiJ"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qbc-i3-52n">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Wla-NN-MaC" id="2cB-vK-MPx"/>
+                                    <outlet property="delegate" destination="Wla-NN-MaC" id="0eT-4b-AH9"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="col-UC-hVa" firstAttribute="leading" secondItem="hnI-60-GIg" secondAttribute="leading" id="Luu-CR-ESk"/>
+                            <constraint firstAttribute="trailing" secondItem="col-UC-hVa" secondAttribute="trailing" id="bAB-YX-H1K"/>
+                            <constraint firstAttribute="trailing" secondItem="qbc-i3-52n" secondAttribute="trailing" id="bTh-hp-zH2"/>
+                            <constraint firstAttribute="bottom" secondItem="col-UC-hVa" secondAttribute="bottom" id="dKJ-wB-iEa"/>
+                            <constraint firstItem="col-UC-hVa" firstAttribute="top" secondItem="qbc-i3-52n" secondAttribute="bottom" id="frn-4S-JHa"/>
+                            <constraint firstItem="qbc-i3-52n" firstAttribute="leading" secondItem="hnI-60-GIg" secondAttribute="leading" id="gh1-68-yaQ"/>
+                            <constraint firstItem="qbc-i3-52n" firstAttribute="top" secondItem="35s-p5-qH8" secondAttribute="bottom" id="v0T-ty-goX"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="contentTV" destination="qbc-i3-52n" id="V4g-Ug-Wbg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zXT-fL-hVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2608" y="-907"/>
         </scene>
         <!--发现-->
         <scene sceneID="c8a-aH-bmH">
@@ -208,4 +262,7 @@
         <image name="tabbar_mainframe" width="25" height="23"/>
         <image name="tabbar_me" width="23" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="C1x-gj-CIM"/>
+    </inferredMetricsTieBreakers>
 </document>

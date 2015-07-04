@@ -9,6 +9,7 @@
 #import "TXLContactsTVC.h"
 #import "TXLContactsTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
+#import "TXLChatVC.h"
 #import <ReactiveCocoa.h>
 @interface TXLContactsTVC ()
 
@@ -33,11 +34,22 @@
     }];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TXLChatVC class]]) {
+        TXLChatVC *chatVc = segue.destinationViewController;
+        chatVc.friendUser = (XMPPUserCoreDataStorageObject *)sender;
+    }
+}
+
 #pragma mark -
 #pragma mark UITableView Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.contactsTool.friends.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"contactstvc2chatvc" sender:self.contactsTool.friends[indexPath.row]];
 }
 
 #pragma mark -
