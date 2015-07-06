@@ -133,9 +133,68 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="col-UC-hVa">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVR-V0-aDI">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="e9J-5o-CQR"/>
+                                        </constraints>
+                                        <state key="normal" title="录音">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDg-HL-Uox">
+                                        <rect key="frame" x="556" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="NTg-Vm-Rmk"/>
+                                        </constraints>
+                                        <state key="normal" title="发送">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="2ZS-P8-6za">
+                                        <rect key="frame" x="44" y="0.0" width="512" height="44"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wco-OR-s8B">
+                                                <rect key="frame" x="0.0" y="2" width="468" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvj-9c-uLJ">
+                                                <rect key="frame" x="468" y="0.0" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="jxr-1B-bt2"/>
+                                                </constraints>
+                                                <state key="normal" title="表情">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="uvj-9c-uLJ" secondAttribute="trailing" id="4c8-t2-PLb"/>
+                                            <constraint firstItem="wco-OR-s8B" firstAttribute="top" secondItem="2ZS-P8-6za" secondAttribute="top" constant="2" id="P3y-ia-NPX"/>
+                                            <constraint firstItem="uvj-9c-uLJ" firstAttribute="top" secondItem="2ZS-P8-6za" secondAttribute="top" id="Tw5-z5-KCW"/>
+                                            <constraint firstItem="wco-OR-s8B" firstAttribute="leading" secondItem="2ZS-P8-6za" secondAttribute="leading" id="hoR-G9-R9e"/>
+                                            <constraint firstAttribute="bottom" secondItem="wco-OR-s8B" secondAttribute="bottom" constant="2" id="rD3-Ny-aec"/>
+                                            <constraint firstItem="uvj-9c-uLJ" firstAttribute="leading" secondItem="wco-OR-s8B" secondAttribute="trailing" id="sYY-Q5-xZ0"/>
+                                            <constraint firstAttribute="bottom" secondItem="uvj-9c-uLJ" secondAttribute="bottom" id="xS0-VF-Oen"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="2ZS-P8-6za" firstAttribute="leading" secondItem="EVR-V0-aDI" secondAttribute="trailing" id="2rT-aO-xDa"/>
+                                    <constraint firstAttribute="bottom" secondItem="2ZS-P8-6za" secondAttribute="bottom" id="3ch-LM-zAY"/>
+                                    <constraint firstItem="yDg-HL-Uox" firstAttribute="top" secondItem="col-UC-hVa" secondAttribute="top" id="5gR-NL-3rm"/>
                                     <constraint firstAttribute="height" constant="44" id="6u0-2F-AiJ"/>
+                                    <constraint firstItem="yDg-HL-Uox" firstAttribute="leading" secondItem="2ZS-P8-6za" secondAttribute="trailing" id="7JA-dT-6aN"/>
+                                    <constraint firstItem="2ZS-P8-6za" firstAttribute="top" secondItem="col-UC-hVa" secondAttribute="top" id="Cjx-0b-vH1"/>
+                                    <constraint firstItem="EVR-V0-aDI" firstAttribute="top" secondItem="col-UC-hVa" secondAttribute="top" id="R49-BZ-7Wi"/>
+                                    <constraint firstItem="EVR-V0-aDI" firstAttribute="leading" secondItem="col-UC-hVa" secondAttribute="leading" id="UsN-Lm-Cy0"/>
+                                    <constraint firstAttribute="bottom" secondItem="EVR-V0-aDI" secondAttribute="bottom" id="cgY-3O-5mv"/>
+                                    <constraint firstAttribute="trailing" secondItem="yDg-HL-Uox" secondAttribute="trailing" id="fWr-Ex-aOg"/>
+                                    <constraint firstAttribute="bottom" secondItem="yDg-HL-Uox" secondAttribute="bottom" id="qul-AX-ZzN"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qbc-i3-52n">
@@ -161,6 +220,8 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contentTV" destination="qbc-i3-52n" id="V4g-Ug-Wbg"/>
+                        <outlet property="contentTxtf" destination="wco-OR-s8B" id="sr6-9d-Y9g"/>
+                        <outlet property="sendBtn" destination="yDg-HL-Uox" id="NDj-JN-9Pz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXT-fL-hVR" userLabel="First Responder" sceneMemberID="firstResponder"/>

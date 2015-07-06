@@ -33,6 +33,13 @@
     [self loadMessages];
 }
 
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)sendMessage:(NSString *)message {
+    [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.friendJid];
+}
+
 
 #pragma mark -
 #pragma mark Private Methods
@@ -68,7 +75,7 @@
         DDLogVerbose(@"%@", err);
     } else {
         DDLogInfo(@"消息查询结果:");
-        DDLogVerbose(@"%@",self.resultsController.fetchedObjects);
+//        DDLogVerbose(@"%@",self.resultsController.fetchedObjects);
         self.messages = self.resultsController.fetchedObjects;
         [(RACSubject *)self.updateSignal sendNext:nil];
     }

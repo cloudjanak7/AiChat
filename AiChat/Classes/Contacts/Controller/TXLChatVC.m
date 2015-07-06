@@ -18,6 +18,10 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *contentTV;
 
+@property (weak, nonatomic) IBOutlet UITextField *contentTxtf;
+
+@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+
 @property (nonatomic, strong) TXLChatTool *chatTool;
 
 @end
@@ -28,16 +32,40 @@
 #pragma mark Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tabBarController.tabBar.hidden = YES;
     @weakify(self);
+    
+    [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
+        @strongify(self);
+        return @(self.contentTxtf.text.length > 0);
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        [self.chatTool sendMessage:self.contentTxtf.text];
+        self.contentTxtf.text = @"";
+        [self.view endEditing:YES];
+    }];
+    
+    self.chatTool.friendJid = self.friendUser.jid;
     [self.chatTool.updateSignal subscribeNext:^(id x) {
         @strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.contentTV reloadData];
+            [self scrollToLastMessage];
         });
     }];
-    
-    self.chatTool.friendJid = self.friendUser.jid;
+}
+
+#pragma mark -
+#pragma mark Private Methods
+- (void)scrollToLastMessage {
+    NSUInteger lastIndex = self.chatTool.messages.count - 1;
+    if (0 == lastIndex) return;
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:lastIndex inSection:0];
+    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (BOOL)isValidMessage {
+    return self.contentTxtf.text.length > 0;
 }
 
 #pragma mark - 

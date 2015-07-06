@@ -65,4 +65,12 @@ ZHBSingletonH(XMPPTool)
 
 - (void)disConnectFromHost;
 
+/**
+ *  @brief  发送消息
+ *
+ *  @param message 消息内容
+ *  @param jid     对方JID
+ */
+- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid;
+
 @end

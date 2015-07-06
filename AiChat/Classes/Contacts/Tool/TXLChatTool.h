@@ -30,4 +30,6 @@
 
 //- (void)loadMessageWithJid:(XMPPJID *)friendJid;
 
+- (void)sendMessage:(NSString *)message;
+
 @end

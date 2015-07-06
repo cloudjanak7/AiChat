@@ -72,6 +72,13 @@ ZHBSingletonM(XMPPTool)
     [self.xmppStream disconnect];
 }
 
+- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid {
+    XMPPMessage *xmppMessage = [XMPPMessage messageWithType:@"chat" to:jid];
+    [xmppMessage addBody:message];
+    DDLogInfo(@"发送消息:%@-->%@", xmppMessage, jid);
+    [self.xmppStream sendElement:xmppMessage];
+}
+
 #pragma mark -
 #pragma mark XMPPStream Delegate
 
