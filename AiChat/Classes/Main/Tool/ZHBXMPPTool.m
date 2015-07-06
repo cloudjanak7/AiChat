@@ -153,6 +153,7 @@ ZHBSingletonM(XMPPTool)
     [self.xmppReconnect activate:self.xmppStream];
     [self.xmppvCardModule activate:self.xmppStream];
     [self.xmppRoster activate:self.xmppStream];
+    [self.xmppMessage activate:self.xmppStream];
 }
 
 - (void)teardownXMPP {

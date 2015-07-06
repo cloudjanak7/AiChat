@@ -9,6 +9,7 @@
 #import "TXLContactsTool.h"
 #import "ZHBXMPPTool.h"
 #import "ZHBUserInfo.h"
+#import "ZHBXMPPConst.h"
 
 @interface TXLContactsTool ()<NSFetchedResultsControllerDelegate>
 
@@ -39,7 +40,7 @@
     NSManagedObjectContext *context = [ZHBXMPPTool sharedXMPPTool].xmppRosterStorage.mainThreadManagedObjectContext;
     
     // 2.FetchRequest【查哪张表】
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XMPPUserCoreDataStorageObject"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppUserCoreDataStorageObject];
     
     // 3.设置过滤和排序
     // 过滤当前登录用户的好友
