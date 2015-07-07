@@ -198,6 +198,7 @@
 
 - (void)setFriendJid:(XMPPJID *)friendJid {
     _friendJid = friendJid;
+    [self loadHistoryMessages];
     [self loadFreshMessages];
 }
 

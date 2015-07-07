@@ -36,10 +36,17 @@
     self.tabBarController.tabBar.hidden = YES;
     @weakify(self);
     
-    self.contentTV.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         @strongify(self);
         [self.chatTool loadHistoryMessages];
     }];
+    refreshHeader.lastUpdatedTimeLabel.hidden = YES;
+    [refreshHeader setTitle:@"加载历史消息" forState:MJRefreshStateIdle];
+    [refreshHeader setTitle:@"加载历史消息" forState:MJRefreshStatePulling];
+    [refreshHeader setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+    
+    self.contentTV.header = refreshHeader;
+    
     
     [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
         @strongify(self);
