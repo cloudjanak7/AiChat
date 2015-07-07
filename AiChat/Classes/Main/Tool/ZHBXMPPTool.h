@@ -49,6 +49,7 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
 
 
+
 /**
  *  @brief  单例sharedXMPPTool
  */

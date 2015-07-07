@@ -729,14 +729,14 @@
 		753828D31B43929900CD136B /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				75048E0C1B453ED9008C94CC /* ZHBSingleton.h */,
-				7528AC5F1B45188D00F96C0F /* AiChatPrefixHeader.pch */,
+				753828D61B43929900CD136B /* main.m */,
 				753828D41B43929900CD136B /* AppDelegate.h */,
 				753828D51B43929900CD136B /* AppDelegate.mm */,
-				753828D61B43929900CD136B /* main.m */,
 				7528AC611B45216700F96C0F /* ZHBCommon.h */,
+				75048E0C1B453ED9008C94CC /* ZHBSingleton.h */,
 				75048E061B4537B0008C94CC /* ZHBXMPPConst.h */,
 				75048E071B4537B0008C94CC /* ZHBXMPPConst.m */,
+				7528AC5F1B45188D00F96C0F /* AiChatPrefixHeader.pch */,
 			);
 			path = Other;
 			sourceTree = "<group>";

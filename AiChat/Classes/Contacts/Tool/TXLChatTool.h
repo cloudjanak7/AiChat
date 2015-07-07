@@ -13,23 +13,30 @@
 @interface TXLChatTool : NSObject
 
 /**
- *  @brief  好友消息更新信号
+ *  @brief  有新消息信号
  */
-@property (nonatomic, strong, readonly) RACSignal *updateSignal;
-
+@property (nonatomic, strong, readonly) RACSignal *freshSignal;
+/**
+ *  @brief  获取到历史信息信号
+ */
+@property (nonatomic, strong, readonly) RACSignal *historySignal;
 /**
  *  @brief  存储XMPPMessageArchiving_Message_CoreDataObject
  */
-@property (nonatomic, strong, readonly) NSArray *messages;
+@property (nonatomic, strong, readonly) NSMutableArray *messages;
 
 /**
  *  @brief  好友JID
  */
 @property (nonatomic, strong) XMPPJID *friendJid;
 
-
-//- (void)loadMessageWithJid:(XMPPJID *)friendJid;
-
+/**
+ *  @brief  发送消息
+ *
+ *  @param message 消息内容
+ */
 - (void)sendMessage:(NSString *)message;
+
+- (void)loadHistoryMessages;
 
 @end

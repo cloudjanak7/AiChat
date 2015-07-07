@@ -10,6 +10,7 @@
 #import "TXLChatTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPMessageArchiving_Message_CoreDataObject.h"
+#import <MJRefresh.h>
 #import <ReactiveCocoa.h>
 
 #define MESSAGE_OF_INDEX(index) ((XMPPMessageArchiving_Message_CoreDataObject *)self.chatTool.messages[index])
@@ -35,6 +36,11 @@
     self.tabBarController.tabBar.hidden = YES;
     @weakify(self);
     
+    self.contentTV.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self);
+        [self.chatTool loadHistoryMessages];
+    }];
+    
     [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
         @strongify(self);
         return @(self.contentTxtf.text.length > 0);
@@ -46,26 +52,42 @@
     }];
     
     self.chatTool.friendJid = self.friendUser.jid;
-    [self.chatTool.updateSignal subscribeNext:^(id x) {
-        @strongify(self);
+    [self.chatTool.freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            @strongify(self);
             [self.contentTV reloadData];
             [self scrollToLastMessage];
+        });
+    }];
+    
+    [self.chatTool.historySignal subscribeNext:^(NSNumber *lastIndex) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            @strongify(self);
+            [self.contentTV.header endRefreshing];
+            [self.contentTV reloadData];
+            [self scrollToLastOldMessage:(NSNumber *)lastIndex];
         });
     }];
 }
 
 #pragma mark -
 #pragma mark Private Methods
+
+- (void)scrollToLastOldMessage:(NSNumber *)lastIndex {
+    NSInteger index = [lastIndex integerValue];
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
 - (void)scrollToLastMessage {
-    NSUInteger lastIndex = self.chatTool.messages.count - 1;
-    if (0 == lastIndex) return;
-    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:lastIndex inSection:0];
+    NSInteger messagesCount = self.chatTool.messages.count;
+    if (0 == messagesCount || 1 == messagesCount) return;
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:messagesCount - 1 inSection:0];
     [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (BOOL)isValidMessage {
-    return self.contentTxtf.text.length > 0;
+    return (nil != self.contentTxtf.text && self.contentTxtf.text.length > 0);
 }
 
 #pragma mark - 
