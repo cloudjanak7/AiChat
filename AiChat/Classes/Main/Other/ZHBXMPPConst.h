@@ -18,6 +18,10 @@ extern NSString * const xmppDoMain;
 
 extern NSString * const xmppHostName;
 
-extern NSInteger const xmppHostPort;
+extern NSInteger  const xmppHostPort;
 
 extern NSTimeInterval const xmppTimeout;
+
+extern NSString * const xmppUserCoreDataStorageObject;
+
+extern NSString * const xmppMessageArchivingMessageCoreDataObject;

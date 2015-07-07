@@ -49,6 +49,7 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
 
 
+
 /**
  *  @brief  单例sharedXMPPTool
  */
@@ -64,5 +65,13 @@ ZHBSingletonH(XMPPTool)
 - (void)userLogout;
 
 - (void)disConnectFromHost;
+
+/**
+ *  @brief  发送消息
+ *
+ *  @param message 消息内容
+ *  @param jid     对方JID
+ */
+- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid;
 
 @end

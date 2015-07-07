@@ -23,3 +23,8 @@ NSInteger  const xmppHostPort = @"?";
 #endif
 
 NSTimeInterval const xmppTimeout = 15.f;
+
+
+NSString * const xmppUserCoreDataStorageObject = @"XMPPUserCoreDataStorageObject";
+
+NSString * const xmppMessageArchivingMessageCoreDataObject = @"XMPPMessageArchiving_Message_CoreDataObject";

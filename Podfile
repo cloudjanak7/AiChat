@@ -1,10 +1,13 @@
 platform:ios
-pod 'MBProgressHUD', '~>0.9.1'
-#pod 'XMPPFramework', '~>3.6.4'
+pod 'MBProgressHUD'
 pod 'UMengAnalytics'
+pod 'MJRefresh'#上拉下拉刷新库
+pod 'UITableView+FDTemplateLayoutCell'#计算tableviewcell高度
+pod 'Mantle', '~>1.5.3'#字典模型转换
 platform:ios, '7.0'
 pod 'Masonry'
 pod 'ReactiveCocoa', '~>2.5'
 pod 'CocoaLumberjack'
 pod 'SDWebImage', '~>3.7.2'
 pod 'pop', '~>1.0'
+pod 'AFNetworking', '~>2.0'#网络请求库
