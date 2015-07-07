@@ -17,4 +17,6 @@ static const DDLogLevel ddLogLevel = LOG_LEVEL_VERBOSE;
 static const DDLogLevel ddLogLevel = LOG_LEVEL_OFF;
 #endif
 
+#define DDLOG_INFO DDLogInfo(@"%@::%@", THIS_FILE, THIS_METHOD);
+
 #endif

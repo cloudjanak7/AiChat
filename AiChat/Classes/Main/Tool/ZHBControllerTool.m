@@ -7,11 +7,14 @@
 //
 
 #import "ZHBControllerTool.h"
+#import "ZHBUserInfo.h"
+#import "ZHBXMPPTool.h"
 #import <UIKit/UIKit.h>
 
 @implementation ZHBControllerTool
 
 + (void)chooseRootViewController {
+    DDLOG_INFO
     //版本Key
     NSString *versionKey = (__bridge NSString *)kCFBundleVersionKey;
     //从沙盒种获取上次版本信息
@@ -21,20 +24,11 @@
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
     
     if ([currentVersion isEqualToString:lastVersion]) {
-        //版本相等，显示登录界面
-        DDLogInfo(@"版本无更新");
+        DDLogInfo(@"版本无更新,选择启动界面");
         //读取本地存储的账户信息
-        if (/* DISABLES CODE */ (NO)) {
-            //有存储,显示主页
-            DDLogInfo(@"本地存储有帐号,跳转主页面");
-            [self showStoryboardWithLogonState:YES];
-        } else {
-            //无存储,转到登录界面
-            DDLogInfo(@"本地存储无帐号,不能自动登录,跳转登录界面");
-            [self showStoryboardWithLogonState:NO];
-        }
+        [[ZHBUserInfo sharedUserInfo] userInfoFromSanbox];
+        [self showStoryboardWithLogonState:[ZHBUserInfo sharedUserInfo].canAutoLogin];
     } else {
-        //版本不相等，显示新特性界面
         DDLogInfo(@"版本有更新,显示新特性界面");
         //存储当前版本信息到沙盒中
         [defaults setObject:currentVersion forKey:versionKey];
@@ -48,9 +42,12 @@
     UIStoryboard *storyboard = nil;
     if (isUserLogon) {
         // 显示Main.storyboard
+        DDLogInfo(@"本地存储有帐号,跳转主页面");
+        [[ZHBXMPPTool sharedXMPPTool] userLogin:nil];
         storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     } else {
         // 显示Login.sotryboard
+        DDLogInfo(@"本地存储无帐号,不能自动登录,跳转登录界面");
         storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     }
     

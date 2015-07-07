@@ -53,13 +53,7 @@ ZHBSingletonM(XMPPTool)
 
 - (void)userLogin:(XMPPResultCallBack)callBack {
     self.callBack = callBack;
-    if ([self.xmppStream isConnecting]) {
-        DDLogWarn(@"XMPP服务器存在连接");
-//        [self.xmppStream disconnect];
-        [self disConnectFromHost];
-        DDLogWarn(@"取消旧连接");
-    }
-    // 连接主机 成功后发送注册密码
+    [self.xmppStream disconnect];
     [self connectToHost];
 }
 
@@ -73,9 +67,10 @@ ZHBSingletonM(XMPPTool)
 }
 
 - (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid {
+    DDLOG_INFO
     XMPPMessage *xmppMessage = [XMPPMessage messageWithType:@"chat" to:jid];
     [xmppMessage addBody:message];
-    DDLogInfo(@"发送消息:%@-->%@", xmppMessage, jid);
+    DDLogInfo(@"发送消息-->%@", jid);
     [self.xmppStream sendElement:xmppMessage];
 }
 
@@ -83,33 +78,35 @@ ZHBSingletonM(XMPPTool)
 #pragma mark XMPPStream Delegate
 
 - (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender {
-    DDLogError(@"连接服务器超时");
+    DDLOG_INFO
 }
 
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
-    DDLogInfo(@"连接服务器成功");
+    DDLOG_INFO
     [self sendPwdToHost];
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
-    DDLogWarn(@"与服务器断开连接");
-    DDLogVerbose(@"error:\n%@", error);
+    DDLOG_INFO
+    DDLogError(@"error:\n%@", error);
     if (error && self.callBack) {
         self.callBack(XMPPStatusTypeNetErr);
     }
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
-    DDLogInfo(@"验证密码成功");
+    DDLOG_INFO
     [self sendOnlineToHost];
+    [ZHBUserInfo sharedUserInfo].autoLogin = YES;
+    [[ZHBUserInfo sharedUserInfo] saveInfoToSanbox];
     if (self.callBack) {
         self.callBack(XMPPStatusTypeLoginSuccess);
     }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error {
-    DDLogError(@"验证密码失败");
-    DDLogVerbose(@"error:\n%@", error);
+    DDLOG_INFO
+    DDLogError(@"error:\n%@", error);
     if (self.callBack) {
         self.callBack(XMPPStatusTypeLoginFailure);
     }
@@ -118,16 +115,13 @@ ZHBSingletonM(XMPPTool)
 #pragma mark -
 #pragma mark XMPPRoster Delegate
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {
-    DDLogInfo(@"%@: %@", THIS_FILE, THIS_METHOD);
-    DDLogVerbose(@"presence: %@", presence);
+    DDLOG_INFO
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)connectToHost {
-    NSAssert(nil != self.xmppStream, @"xmppStream未设置");
-    DDLogInfo(@"开始连接服务器");
     XMPPJID *myJID = [XMPPJID jidWithUser:[ZHBUserInfo sharedUserInfo].name domain:xmppDoMain resource:[UIDevice hardWareName]];
     self.xmppStream.myJID = myJID;
     self.xmppStream.hostName = xmppHostName;
@@ -137,22 +131,17 @@ ZHBSingletonM(XMPPTool)
 }
 
 - (void)sendPwdToHost {
-    DDLogInfo(@"发送密码到服务器进行确认");
     NSError *error = nil;
     [self.xmppStream authenticateWithPassword:[ZHBUserInfo sharedUserInfo].password error:&error];
 }
 
 - (void)sendOnlineToHost {
-    DDLogInfo(@"设置在线状态");
     XMPPPresence *presence = [XMPPPresence presence];
-    DDLogVerbose(@"%@", presence);
     [self.xmppStream sendElement:presence];
 }
 
 - (void)sendOfflineToHost {
-    DDLogInfo(@"设置离线状态");
     XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
-    DDLogVerbose(@"%@", presence);
     [self.xmppStream sendElement:presence];
 }
 

@@ -20,14 +20,14 @@ ZHBSingletonM(UserInfo)
 - (void)saveInfoToSanbox {
     [ZHBUserDefaults setObject:self.name forKey:userName];
     [ZHBUserDefaults setObject:self.password forKey:userPwd];
-    [ZHBUserDefaults setObject:@(self.canAutoLogin) forKey:loginStatus];
+    [ZHBUserDefaults setBool:self.canAutoLogin forKey:loginStatus];
     [ZHBUserDefaults synchronize];
 }
 
 - (void)userInfoFromSanbox {
-    self.name      = [[ZHBUserDefaults objectForKey:userName] stringValue];
-    self.password  = [[ZHBUserDefaults objectForKey:userPwd] stringValue];
-    self.autoLogin = [[ZHBUserDefaults objectForKey:loginStatus] boolValue];
+    self.name      = [ZHBUserDefaults objectForKey:userName];
+    self.password  = [ZHBUserDefaults objectForKey:userPwd];
+    self.autoLogin = [ZHBUserDefaults boolForKey:loginStatus];
 }
 
 #pragma mark -
