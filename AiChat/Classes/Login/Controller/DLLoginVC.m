@@ -21,6 +21,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
+
 @end
 
 @implementation DLLoginVC
@@ -30,12 +32,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    @weakify(self);
     RACSignal *validUsernameSignal = [self.userNameTxtf.rac_textSignal map:^id(NSString * name) {
+        @strongify(self);
         return @([self isValidUserName:name]);
     }];
     
     RACSignal *validPasswordSignal = [self.passwordTxtf.rac_textSignal map:^id(NSString *pwd) {
+        @strongify(self);
         return @([self isValidPassword:pwd]);
     }];
     
@@ -50,12 +54,14 @@
     [[RACSignal combineLatest:@[validUsernameSignal, validPasswordSignal] reduce:^id(NSNumber *userNameValid, NSNumber *passwordValid) {
         return @([userNameValid boolValue] && [passwordValid boolValue]);
     }] subscribeNext:^(NSNumber *loginValid) {
+        @strongify(self);
         self.loginBtn.enabled = [loginValid boolValue];
     }];
     
     [[[[self.loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside] doNext:^(id x) {
         [MBProgressHUD showMessage:@"登录中..."];
     }] flattenMap:^RACStream *(id value) {
+        @strongify(self);
         return [self loginSignal];
     }] subscribeNext:^(NSNumber *type) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -66,6 +72,30 @@
                     break;
                 case XMPPStatusTypeLoginFailure:
                     [MBProgressHUD showError:@"用户名或者密码不正确"];
+                    break;
+                case XMPPStatusTypeNetErr:
+                    [MBProgressHUD showError:@"网络不给力"];
+                    break;
+                default:
+                    break;
+            }
+        });
+    }];
+    
+    [[[[self.registerBtn rac_signalForControlEvents:UIControlEventTouchUpInside] doNext:^(id x) {
+        [MBProgressHUD showMessage:@"注册中..."];
+    }] flattenMap:^RACStream *(id value) {
+        @strongify(self);
+        return [self registerSignal];
+    }] subscribeNext:^(NSNumber *type) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+            switch ([type integerValue]) {
+                case XMPPStatusTypeRegisterSuccess:
+                    [MBProgressHUD showError:@"注册成功"];
+                    break;
+                case XMPPStatusTypeRegisterFailure:
+                    [MBProgressHUD showError:@"注册失败"];
                     break;
                 case XMPPStatusTypeNetErr:
                     [MBProgressHUD showError:@"网络不给力"];
@@ -94,6 +124,19 @@
         user.name = self.userNameTxtf.text;
         user.password = self.passwordTxtf.text;
         [[ZHBXMPPTool sharedXMPPTool] userLogin:^(XMPPStatusType type) {
+            [subscriber sendNext:@(type)];
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+
+- (RACSignal *)registerSignal {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        ZHBUserInfo *user = [ZHBUserInfo sharedUserInfo];
+        user.name = self.userNameTxtf.text;
+        user.password = self.passwordTxtf.text;
+        [[ZHBXMPPTool sharedXMPPTool] userRegister:^(XMPPStatusType type) {
             [subscriber sendNext:@(type)];
             [subscriber sendCompleted];
         }];

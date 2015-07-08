@@ -35,6 +35,8 @@
 
 @property (nonatomic, copy) XMPPResultCallBack callBack;
 
+@property (nonatomic, assign, getter=isRegisterOperation) BOOL registerOperation;
+
 @end
 
 @implementation ZHBXMPPTool
@@ -52,6 +54,14 @@ ZHBSingletonM(XMPPTool)
 #pragma mark Public Methods
 
 - (void)userLogin:(XMPPResultCallBack)callBack {
+    self.registerOperation = NO;
+    self.callBack = callBack;
+    [self.xmppStream disconnect];
+    [self connectToHost];
+}
+
+- (void)userRegister:(XMPPResultCallBack)callBack {
+    self.registerOperation = YES;
     self.callBack = callBack;
     [self.xmppStream disconnect];
     [self connectToHost];
@@ -83,7 +93,11 @@ ZHBSingletonM(XMPPTool)
 
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
     DDLOG_INFO
-    [self sendPwdToHost];
+    if (self.isRegisterOperation) {
+        [self.xmppStream registerWithPassword:[ZHBUserInfo sharedUserInfo].password error:nil];
+    } else {
+        [self sendPwdToHost];
+    }
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
@@ -109,6 +123,21 @@ ZHBSingletonM(XMPPTool)
     DDLogError(@"error:\n%@", error);
     if (self.callBack) {
         self.callBack(XMPPStatusTypeLoginFailure);
+    }
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(DDXMLElement *)error {
+    DDLOG_INFO
+    DDLogError(@"error\n:%@", error);
+    if (self.callBack) {
+        self.callBack(XMPPStatusTypeRegisterFailure);
+    }
+}
+
+- (void)xmppStreamDidRegister:(XMPPStream *)sender {
+    DDLOG_INFO
+    if (self.callBack) {
+        self.callBack(XMPPStatusTypeRegisterSuccess);
     }
 }
 

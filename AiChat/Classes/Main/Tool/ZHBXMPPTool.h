@@ -62,6 +62,8 @@ ZHBSingletonH(XMPPTool)
  */
 - (void)userLogin:(XMPPResultCallBack)callBack;
 
+- (void)userRegister:(XMPPResultCallBack)callBack;
+
 - (void)userLogout;
 
 - (void)disConnectFromHost;

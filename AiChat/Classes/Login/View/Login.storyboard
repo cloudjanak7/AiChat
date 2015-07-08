@@ -63,16 +63,28 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcu-K3-yW3">
+                                <rect key="frame" x="0.0" y="318" width="600" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="atM-aK-vLW"/>
+                                </constraints>
+                                <state key="normal" title="注册">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dcu-K3-yW3" secondAttribute="trailing" id="5wq-Zs-dfZ"/>
                             <constraint firstItem="Zpf-Zx-GVJ" firstAttribute="top" secondItem="1hK-6I-UWz" secondAttribute="bottom" constant="20" id="7z1-A7-jGh"/>
+                            <constraint firstItem="dcu-K3-yW3" firstAttribute="leading" secondItem="8Sf-HC-lqF" secondAttribute="leading" id="Hak-Es-fZQ"/>
                             <constraint firstAttribute="trailing" secondItem="Zpf-Zx-GVJ" secondAttribute="trailing" constant="20" id="Swq-JX-MAU"/>
                             <constraint firstAttribute="trailing" secondItem="KeY-5P-81R" secondAttribute="trailing" constant="20" id="boy-kF-qU6"/>
                             <constraint firstItem="Zpf-Zx-GVJ" firstAttribute="leading" secondItem="8Sf-HC-lqF" secondAttribute="leading" constant="20" id="d2P-R5-6ba"/>
                             <constraint firstItem="KeY-5P-81R" firstAttribute="top" secondItem="O3X-zd-Nsp" secondAttribute="bottom" constant="100" id="fIG-ay-4DK"/>
                             <constraint firstAttribute="trailing" secondItem="1hK-6I-UWz" secondAttribute="trailing" constant="20" id="gex-Hc-7lh"/>
                             <constraint firstItem="KeY-5P-81R" firstAttribute="leading" secondItem="8Sf-HC-lqF" secondAttribute="leading" constant="20" id="kcW-m1-5IP"/>
+                            <constraint firstItem="dcu-K3-yW3" firstAttribute="top" secondItem="Zpf-Zx-GVJ" secondAttribute="bottom" constant="10" id="lqc-Ky-7QJ"/>
                             <constraint firstItem="1hK-6I-UWz" firstAttribute="leading" secondItem="8Sf-HC-lqF" secondAttribute="leading" constant="20" id="qVV-cd-XmF"/>
                             <constraint firstItem="1hK-6I-UWz" firstAttribute="top" secondItem="KeY-5P-81R" secondAttribute="bottom" constant="20" id="sBP-sz-cZg"/>
                         </constraints>
@@ -81,12 +93,31 @@
                     <connections>
                         <outlet property="loginBtn" destination="Zpf-Zx-GVJ" id="JtR-9o-38F"/>
                         <outlet property="passwordTxtf" destination="1hK-6I-UWz" id="VNm-cR-Z1Y"/>
+                        <outlet property="registerBtn" destination="dcu-K3-yW3" id="frx-hd-xoe"/>
                         <outlet property="userNameTxtf" destination="KeY-5P-81R" id="9MV-Pf-j5J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XhQ-8A-NBW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="725" y="298"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="iCi-Lm-UPB">
+            <objects>
+                <viewController id="EEV-Uu-j9l" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rFc-PF-vcy"/>
+                        <viewControllerLayoutGuide type="bottom" id="JYZ-sx-gv6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E1k-VZ-Sqz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rz5-5X-0IH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1420" y="298"/>
         </scene>
     </scenes>
 </document>
