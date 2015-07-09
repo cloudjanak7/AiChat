@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>微信</string>
+		<string>消息</string>
 		<key>norImage</key>
 		<string>tabbar_mainframe</string>
 		<key>selImage</key>

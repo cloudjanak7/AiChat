@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="153" y="403"/>
         </scene>
-        <!--BaseNC-->
+        <!--微信-->
         <scene sceneID="sc9-Fk-FlY">
             <objects>
-                <navigationController id="TjP-9l-jX6" customClass="ZHBBaseNC" sceneMemberID="viewController">
+                <navigationController id="TjP-9l-jX6" userLabel="微信" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="G2L-tX-JLV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iYa-Hq-tvu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="1190" y="-1278"/>
         </scene>
-        <!--Table View Controller-->
+        <!--消息-->
         <scene sceneID="AnW-6i-7Gd">
             <objects>
-                <tableViewController id="5gT-Lr-qrj" sceneMemberID="viewController">
+                <tableViewController id="5gT-Lr-qrj" customClass="XXMessagesTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UHJ-eq-3gf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,9 @@
                             <outlet property="delegate" destination="5gT-Lr-qrj" id="eHT-xY-5eY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Pjb-fo-drc"/>
+                    <navigationItem key="navigationItem" title="消息" id="Pjb-fo-drc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="fnh-cf-MDu"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="Wla-NN-MaC" kind="show" identifier="messagetvc2chatvc" id="Dzc-JE-fk5"/>
                     </connections>
@@ -64,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="1892" y="-1278"/>
         </scene>
-        <!--BaseNC-->
+        <!--通讯录-->
         <scene sceneID="MU0-UR-qxK">
             <objects>
-                <navigationController id="DtX-g9-VER" customClass="ZHBBaseNC" sceneMemberID="viewController">
+                <navigationController id="DtX-g9-VER" userLabel="通讯录" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="" id="TCn-uf-KtM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H7m-fe-W5V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -81,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="1190" y="-538"/>
         </scene>
-        <!--ContactsTVC-->
+        <!--通讯录-->
         <scene sceneID="rpx-tI-24f">
             <objects>
                 <tableViewController id="pZo-1D-rkK" customClass="TXLContactsTVC" sceneMemberID="viewController">
@@ -94,7 +96,7 @@
                             <outlet property="delegate" destination="pZo-1D-rkK" id="xjA-sd-zEI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="GIM-BX-aeO"/>
+                    <navigationItem key="navigationItem" title="通讯录" id="GIM-BX-aeO"/>
                     <connections>
                         <segue destination="Wla-NN-MaC" kind="show" identifier="contactstvc2chatvc" id="C1x-gj-CIM"/>
                     </connections>
@@ -212,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="2608" y="-907"/>
         </scene>
-        <!--BaseNC-->
+        <!--发现-->
         <scene sceneID="c8a-aH-bmH">
             <objects>
-                <navigationController id="fej-aZ-kUz" customClass="ZHBBaseNC" sceneMemberID="viewController">
+                <navigationController id="fej-aZ-kUz" userLabel="发现" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" id="crj-uC-Fcr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l1n-wq-cCi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -229,7 +231,7 @@
             </objects>
             <point key="canvasLocation" x="1190" y="234"/>
         </scene>
-        <!--Table View Controller-->
+        <!--发现-->
         <scene sceneID="0s0-pn-6hr">
             <objects>
                 <tableViewController id="WU8-S7-txa" sceneMemberID="viewController">
@@ -242,16 +244,16 @@
                             <outlet property="delegate" destination="WU8-S7-txa" id="qxc-3R-Hp0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="KOT-YX-VY0"/>
+                    <navigationItem key="navigationItem" title="发现" id="KOT-YX-VY0"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ost-fw-EpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1892" y="234"/>
         </scene>
-        <!--BaseNC-->
+        <!--我-->
         <scene sceneID="E5p-lV-GvY">
             <objects>
-                <navigationController id="sRH-j7-mO1" customClass="ZHBBaseNC" sceneMemberID="viewController">
+                <navigationController id="sRH-j7-mO1" userLabel="我" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="3" title="" id="oTV-Fh-ICi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nyd-DI-3gF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -265,7 +267,7 @@
             </objects>
             <point key="canvasLocation" x="1190" y="986"/>
         </scene>
-        <!--Table View Controller-->
+        <!--我-->
         <scene sceneID="PII-78-617">
             <objects>
                 <tableViewController id="g6Q-U2-iMO" sceneMemberID="viewController">
@@ -278,7 +280,7 @@
                             <outlet property="delegate" destination="g6Q-U2-iMO" id="JXh-LE-0uy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="cdj-dI-Qmi"/>
+                    <navigationItem key="navigationItem" title="我" id="cdj-dI-Qmi"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ii2-qc-Jbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -286,6 +288,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dzc-JE-fk5"/>
+        <segue reference="C1x-gj-CIM"/>
     </inferredMetricsTieBreakers>
 </document>

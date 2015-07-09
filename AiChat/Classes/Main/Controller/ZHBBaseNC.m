@@ -56,7 +56,7 @@
 - (void)setupNavBar {
     UINavigationBar *navBar = [UINavigationBar appearance];
     [navBar setBackgroundImage:[UIImage imageNamed:@"topbarbg_ios7"] forBarMetrics:UIBarMetricsDefault];
-    
+    [navBar setTranslucent:NO];
     NSMutableDictionary *att = [NSMutableDictionary dictionary];
     att[NSForegroundColorAttributeName] = [UIColor whiteColor];
     att[NSFontAttributeName] = [UIFont boldSystemFontOfSize:18];
