@@ -7,7 +7,7 @@
         <!--BaseTBC-->
         <scene sceneID="mRs-2D-Coh">
             <objects>
-                <tabBarController id="RTa-hB-ahK" customClass="ZHBBaseTBC" sceneMemberID="viewController">
+                <tabBarController hidesBottomBarWhenPushed="YES" id="RTa-hB-ahK" customClass="ZHBBaseTBC" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="nyY-La-tNB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -25,11 +25,11 @@
             </objects>
             <point key="canvasLocation" x="153" y="403"/>
         </scene>
-        <!--消息-->
+        <!--BaseNC-->
         <scene sceneID="sc9-Fk-FlY">
             <objects>
                 <navigationController id="TjP-9l-jX6" customClass="ZHBBaseNC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="消息" image="tabbar_mainframe" id="G2L-tX-JLV"/>
+                    <tabBarItem key="tabBarItem" title="" id="G2L-tX-JLV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iYa-Hq-tvu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -64,11 +64,11 @@
             </objects>
             <point key="canvasLocation" x="1892" y="-1278"/>
         </scene>
-        <!--通讯录-->
+        <!--BaseNC-->
         <scene sceneID="MU0-UR-qxK">
             <objects>
                 <navigationController id="DtX-g9-VER" customClass="ZHBBaseNC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="通讯录" image="tabbar_contacts" id="TCn-uf-KtM"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="" id="TCn-uf-KtM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H7m-fe-W5V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -212,11 +212,11 @@
             </objects>
             <point key="canvasLocation" x="2608" y="-907"/>
         </scene>
-        <!--发现-->
+        <!--BaseNC-->
         <scene sceneID="c8a-aH-bmH">
             <objects>
                 <navigationController id="fej-aZ-kUz" customClass="ZHBBaseNC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="发现" image="tabbar_discover" id="crj-uC-Fcr"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="" id="crj-uC-Fcr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l1n-wq-cCi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -248,11 +248,11 @@
             </objects>
             <point key="canvasLocation" x="1892" y="234"/>
         </scene>
-        <!--我-->
+        <!--BaseNC-->
         <scene sceneID="E5p-lV-GvY">
             <objects>
                 <navigationController id="sRH-j7-mO1" customClass="ZHBBaseNC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="3" title="我" image="tabbar_me" id="oTV-Fh-ICi"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="" id="oTV-Fh-ICi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nyd-DI-3gF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -285,12 +285,6 @@
             <point key="canvasLocation" x="1892" y="986"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="tabbar_contacts" width="27" height="23"/>
-        <image name="tabbar_discover" width="23" height="23"/>
-        <image name="tabbar_mainframe" width="25" height="23"/>
-        <image name="tabbar_me" width="23" height="23"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Dzc-JE-fk5"/>
     </inferredMetricsTieBreakers>

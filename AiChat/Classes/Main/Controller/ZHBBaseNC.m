@@ -24,8 +24,8 @@
 }
 
 - (void)awakeFromNib {
-    [self setupTabBarItems];
-    self.tabBarController.tabBar.tintColor = TAB_BAR_TINT_COLOR;
+    [self setupTabBarItem];
+    [self setupNavBar];
 }
 
 #pragma mark -
@@ -40,16 +40,34 @@
 
 #pragma mark -
 #pragma mark Private Methods
-- (void)setupTabBarItems {
+- (void)setupTabBarItem {
+    self.tabBarController.tabBar.tintColor = TAB_BAR_TINT_COLOR;
+    
     NSString *configPath  = [[NSBundle mainBundle] pathForResource:@"TabBar" ofType:@"plist"];
     NSArray *tabBarCfgs   = [NSArray arrayWithContentsOfFile:configPath];
-    
     NSDictionary *cfgDict = [tabBarCfgs objectAtIndex:self.tabBarItem.tag];
-    UIImage *norImage     = [UIImage originalImageNamed:cfgDict[@"norImage"]];
-    UIImage *selImage     = [UIImage originalImageNamed:cfgDict[@"selImage"]];
-    NSString *title       = cfgDict[@"title"];
     
-    self.tabBarItem       = [[UITabBarItem alloc] initWithTitle:title image:norImage selectedImage:selImage];
+    UIImage *norImage = [UIImage originalImageNamed:cfgDict[@"norImage"]];
+    UIImage *selImage = [UIImage originalImageNamed:cfgDict[@"selImage"]];
+    NSString *title   = cfgDict[@"title"];
+    self.tabBarItem   = [[UITabBarItem alloc] initWithTitle:title image:norImage selectedImage:selImage];
+}
+
+- (void)setupNavBar {
+    UINavigationBar *navBar = [UINavigationBar appearance];
+    [navBar setBackgroundImage:[UIImage imageNamed:@"topbarbg_ios7"] forBarMetrics:UIBarMetricsDefault];
+    
+    NSMutableDictionary *att = [NSMutableDictionary dictionary];
+    att[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    att[NSFontAttributeName] = [UIFont boldSystemFontOfSize:18];
+    [navBar setTitleTextAttributes:att];
+    
+    UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];
+    UIImage *image = [UIImage imageNamed:@"barbuttonicon_back"];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 0)];
+    [barButtonItem setBackButtonBackgroundImage:image forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    self.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 @end

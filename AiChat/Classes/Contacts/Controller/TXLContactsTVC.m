@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"微信";
     
     @weakify(self);
     [self.contactsTool.updateSignal subscribeNext:^(id x) {
