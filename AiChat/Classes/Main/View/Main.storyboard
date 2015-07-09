@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--BaseTBC-->
         <scene sceneID="mRs-2D-Coh">
             <objects>
-                <tabBarController hidesBottomBarWhenPushed="YES" id="RTa-hB-ahK" sceneMemberID="viewController">
+                <tabBarController id="RTa-hB-ahK" customClass="ZHBBaseTBC" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="nyY-La-tNB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -28,7 +28,7 @@
         <!--消息-->
         <scene sceneID="sc9-Fk-FlY">
             <objects>
-                <navigationController id="TjP-9l-jX6" sceneMemberID="viewController">
+                <navigationController id="TjP-9l-jX6" customClass="XXMessagesNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="消息" image="tabbar_mainframe" id="G2L-tX-JLV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iYa-Hq-tvu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -50,14 +50,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="w0m-Mn-yAL">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w0m-Mn-yAL" id="STY-9F-xYz">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="5gT-Lr-qrj" id="hgH-Pc-d7J"/>
                             <outlet property="delegate" destination="5gT-Lr-qrj" id="eHT-xY-5eY"/>
@@ -65,7 +57,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Pjb-fo-drc"/>
                     <connections>
-                        <segue destination="Wla-NN-MaC" kind="show" id="Dzc-JE-fk5"/>
+                        <segue destination="Wla-NN-MaC" kind="show" identifier="messagetvc2chatvc" id="Dzc-JE-fk5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMf-ty-TeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -75,8 +67,8 @@
         <!--通讯录-->
         <scene sceneID="MU0-UR-qxK">
             <objects>
-                <navigationController hidesBottomBarWhenPushed="YES" id="DtX-g9-VER" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="通讯录" image="tabbar_contacts" id="TCn-uf-KtM"/>
+                <navigationController id="DtX-g9-VER" customClass="TXLContactsNC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="通讯录" image="tabbar_contacts" id="TCn-uf-KtM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H7m-fe-W5V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -97,14 +89,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xoe-bK-k1i">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xoe-bK-k1i" id="zlC-6V-8dK">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="pZo-1D-rkK" id="HTK-uq-wbP"/>
                             <outlet property="delegate" destination="pZo-1D-rkK" id="xjA-sd-zEI"/>
@@ -231,8 +215,8 @@
         <!--发现-->
         <scene sceneID="c8a-aH-bmH">
             <objects>
-                <navigationController id="fej-aZ-kUz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" image="tabbar_discover" id="crj-uC-Fcr"/>
+                <navigationController id="fej-aZ-kUz" customClass="FXDiscoverNC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="发现" image="tabbar_discover" id="crj-uC-Fcr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l1n-wq-cCi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -253,14 +237,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bWC-sq-eKm">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bWC-sq-eKm" id="dZI-D8-9lN">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="WU8-S7-txa" id="0jB-BR-NO1"/>
                             <outlet property="delegate" destination="WU8-S7-txa" id="qxc-3R-Hp0"/>
@@ -275,8 +251,8 @@
         <!--我-->
         <scene sceneID="E5p-lV-GvY">
             <objects>
-                <navigationController id="sRH-j7-mO1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="tabbar_me" id="oTV-Fh-ICi"/>
+                <navigationController id="sRH-j7-mO1" customClass="MEProfilesNC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="3" title="我" image="tabbar_me" id="oTV-Fh-ICi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nyd-DI-3gF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -297,14 +273,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ven-N6-haD">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ven-N6-haD" id="idi-Ce-scG">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="g6Q-U2-iMO" id="Gcm-DB-SV0"/>
                             <outlet property="delegate" destination="g6Q-U2-iMO" id="JXh-LE-0uy"/>

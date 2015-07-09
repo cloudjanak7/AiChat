@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 神州泰岳. All rights reserved.
 //
 
-#import "UIColor+Random.h"
+#import "UIColor+Helper.h"
 
-@implementation UIColor (Random)
+@implementation UIColor (Helper)
 
 + (UIColor *)colorWithFFRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue {
     return [UIColor colorWithFFRed:red green:green blue:blue alpha:1];

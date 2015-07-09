@@ -33,7 +33,6 @@
 #pragma mark Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBarController.tabBar.hidden = YES;
     @weakify(self);
     
     MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
