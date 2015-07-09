@@ -7,14 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIImage+Helper.h"
-
-typedef NS_ENUM(NSUInteger, TabBarItemTag) {
-    TabBarItemTagOfMessages = 0,
-    TabBarItemTagOfContacts,
-    TabBarItemTagOfDiscover,
-    TabBarItemTagOfMe
-};
 
 @interface ZHBBaseNC : UINavigationController
 

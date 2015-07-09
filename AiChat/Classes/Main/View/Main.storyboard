@@ -28,7 +28,7 @@
         <!--消息-->
         <scene sceneID="sc9-Fk-FlY">
             <objects>
-                <navigationController id="TjP-9l-jX6" customClass="XXMessagesNC" sceneMemberID="viewController">
+                <navigationController id="TjP-9l-jX6" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="消息" image="tabbar_mainframe" id="G2L-tX-JLV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iYa-Hq-tvu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -67,7 +67,7 @@
         <!--通讯录-->
         <scene sceneID="MU0-UR-qxK">
             <objects>
-                <navigationController id="DtX-g9-VER" customClass="TXLContactsNC" sceneMemberID="viewController">
+                <navigationController id="DtX-g9-VER" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="通讯录" image="tabbar_contacts" id="TCn-uf-KtM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H7m-fe-W5V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -215,7 +215,7 @@
         <!--发现-->
         <scene sceneID="c8a-aH-bmH">
             <objects>
-                <navigationController id="fej-aZ-kUz" customClass="FXDiscoverNC" sceneMemberID="viewController">
+                <navigationController id="fej-aZ-kUz" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="发现" image="tabbar_discover" id="crj-uC-Fcr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l1n-wq-cCi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -251,7 +251,7 @@
         <!--我-->
         <scene sceneID="E5p-lV-GvY">
             <objects>
-                <navigationController id="sRH-j7-mO1" customClass="MEProfilesNC" sceneMemberID="viewController">
+                <navigationController id="sRH-j7-mO1" customClass="ZHBBaseNC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="3" title="我" image="tabbar_me" id="oTV-Fh-ICi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nyd-DI-3gF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -292,6 +292,6 @@
         <image name="tabbar_me" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C1x-gj-CIM"/>
+        <segue reference="Dzc-JE-fk5"/>
     </inferredMetricsTieBreakers>
 </document>

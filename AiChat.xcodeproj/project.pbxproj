@@ -186,10 +186,7 @@
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
-		757ACC031B4E5441009675B1 /* TXLContactsNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757ACC021B4E5441009675B1 /* TXLContactsNC.m */; };
-		757ACC0D1B4E589A009675B1 /* XXMessagesNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757ACC0C1B4E589A009675B1 /* XXMessagesNC.m */; };
-		757ACC1C1B4E61F9009675B1 /* FXDiscoverNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757ACC1B1B4E61F9009675B1 /* FXDiscoverNC.m */; };
-		757ACC1F1B4E620D009675B1 /* MEProfilesNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 757ACC1E1B4E620D009675B1 /* MEProfilesNC.m */; };
+		757ACC271B4E7789009675B1 /* TabBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757ACC261B4E7789009675B1 /* TabBar.plist */; };
 		75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */; };
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
@@ -555,16 +552,9 @@
 		7538318F1B43939500CD136B /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		756724201B461AB600554473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		757ACC011B4E5441009675B1 /* TXLContactsNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsNC.h; sourceTree = "<group>"; };
-		757ACC021B4E5441009675B1 /* TXLContactsNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLContactsNC.m; sourceTree = "<group>"; };
 		757ACC041B4E555A009675B1 /* ZHBTagMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBTagMacro.h; sourceTree = "<group>"; };
-		757ACC0B1B4E589A009675B1 /* XXMessagesNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXMessagesNC.h; sourceTree = "<group>"; };
-		757ACC0C1B4E589A009675B1 /* XXMessagesNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessagesNC.m; sourceTree = "<group>"; };
-		757ACC1A1B4E61F9009675B1 /* FXDiscoverNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXDiscoverNC.h; sourceTree = "<group>"; };
-		757ACC1B1B4E61F9009675B1 /* FXDiscoverNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXDiscoverNC.m; sourceTree = "<group>"; };
-		757ACC1D1B4E620D009675B1 /* MEProfilesNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEProfilesNC.h; sourceTree = "<group>"; };
-		757ACC1E1B4E620D009675B1 /* MEProfilesNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEProfilesNC.m; sourceTree = "<group>"; };
 		757ACC201B4E62C9009675B1 /* ZHBColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBColorMacro.h; sourceTree = "<group>"; };
+		757ACC261B4E7789009675B1 /* TabBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TabBar.plist; sourceTree = "<group>"; };
 		75B42FFC1B4A4D0F00ED67F1 /* TXLChatTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatTool.h; sourceTree = "<group>"; };
 		75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatTool.m; sourceTree = "<group>"; };
 		75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsTVC.h; sourceTree = "<group>"; };
@@ -621,6 +611,7 @@
 				753808961B43E73400F2033F /* Audios */,
 				753808AE1B43E73400F2033F /* Images.xcassets */,
 				753808AF1B43E73400F2033F /* Info.plist */,
+				757ACC261B4E7789009675B1 /* TabBar.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1670,8 +1661,6 @@
 		757ACC061B4E57D5009675B1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				757ACC0B1B4E589A009675B1 /* XXMessagesNC.h */,
-				757ACC0C1B4E589A009675B1 /* XXMessagesNC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1720,8 +1709,6 @@
 		757ACC0F1B4E61C7009675B1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				757ACC1A1B4E61F9009675B1 /* FXDiscoverNC.h */,
-				757ACC1B1B4E61F9009675B1 /* FXDiscoverNC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1770,8 +1757,6 @@
 		757ACC151B4E61D0009675B1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				757ACC1D1B4E620D009675B1 /* MEProfilesNC.h */,
-				757ACC1E1B4E620D009675B1 /* MEProfilesNC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1820,8 +1805,6 @@
 		75BCC2111B46443F00B1CFC0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				757ACC011B4E5441009675B1 /* TXLContactsNC.h */,
-				757ACC021B4E5441009675B1 /* TXLContactsNC.m */,
 				75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */,
 				75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */,
 				75BCC21E1B47E60D00B1CFC0 /* TXLChatVC.h */,
@@ -2032,6 +2015,7 @@
 				753831281B43929D00CD136B /* build-libidn.sh in Resources */,
 				753808BE1B43E73400F2033F /* sightone.wav in Resources */,
 				753808B71B43E73400F2033F /* playend.wav in Resources */,
+				757ACC271B4E7789009675B1 /* TabBar.plist in Resources */,
 				753808B61B43E73400F2033F /* msgtoolong.wav in Resources */,
 				753808BF1B43E73400F2033F /* sighttwo.wav in Resources */,
 				753808B11B43E73400F2033F /* blank.wav in Resources */,
@@ -2142,7 +2126,6 @@
 				75382E7D1B43929D00CD136B /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				75382E921B43929D00CD136B /* XMPPFileTransfer.m in Sources */,
 				75382E871B43929D00CD136B /* XMPPConstants.m in Sources */,
-				757ACC1F1B4E620D009675B1 /* MEProfilesNC.m in Sources */,
 				75382EDC1B43929D00CD136B /* XMPPvCardAvatarModule.m in Sources */,
 				75382EA81B43929D00CD136B /* XMPPRoom.xcdatamodeld in Sources */,
 				75382EB41B43929D00CD136B /* XMPPMUC.m in Sources */,
@@ -2197,7 +2180,6 @@
 				75382ECB1B43929D00CD136B /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				75382EA71B43929D00CD136B /* XMPPPrivacy.m in Sources */,
 				75382EE71B43929D00CD136B /* XMPPAutoTime.m in Sources */,
-				757ACC0D1B4E589A009675B1 /* XXMessagesNC.m in Sources */,
 				75382EAA1B43929D00CD136B /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				75382EA11B43929D00CD136B /* XMPPSystemInputActivityMonitor.m in Sources */,
 				75382EA61B43929D00CD136B /* XMPPLastActivity.m in Sources */,
@@ -2212,7 +2194,6 @@
 				75382E9A1B43929D00CD136B /* XMPPRoster.xcdatamodel in Sources */,
 				75382ED51B43929D00CD136B /* XMPPCapabilities.m in Sources */,
 				75382EA21B43929D00CD136B /* XMPPIQ+JabberRPC.m in Sources */,
-				757ACC1C1B4E61F9009675B1 /* FXDiscoverNC.m in Sources */,
 				75382EF51B43929D00CD136B /* RFImageToDataTransformer.m in Sources */,
 				75382ED41B43929D00CD136B /* XMPPCapsResourceCoreDataStorageObject.m in Sources */,
 				75382EB51B43929D00CD136B /* XMPPRoom.m in Sources */,
@@ -2244,7 +2225,6 @@
 				75382E9F1B43929D00CD136B /* XMPPUserMemoryStorageObject.m in Sources */,
 				75382EF81B43929D00CD136B /* XMPPStringPrep.m in Sources */,
 				75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */,
-				757ACC031B4E5441009675B1 /* TXLContactsNC.m in Sources */,
 				75048E081B4537B0008C94CC /* ZHBXMPPConst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

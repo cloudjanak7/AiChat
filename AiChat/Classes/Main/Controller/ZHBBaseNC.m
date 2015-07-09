@@ -8,6 +8,7 @@
 
 #import "ZHBBaseNC.h"
 #import "ZHBColorMacro.h"
+#import "UIImage+Helper.h"
 
 @interface ZHBBaseNC ()
 
@@ -20,6 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)awakeFromNib {
+    [self setupTabBarItems];
     self.tabBarController.tabBar.tintColor = TAB_BAR_TINT_COLOR;
 }
 
@@ -31,6 +36,20 @@
         viewController.hidesBottomBarWhenPushed = YES;
     }
     [super pushViewController:viewController animated:animated];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+- (void)setupTabBarItems {
+    NSString *configPath  = [[NSBundle mainBundle] pathForResource:@"TabBar" ofType:@"plist"];
+    NSArray *tabBarCfgs   = [NSArray arrayWithContentsOfFile:configPath];
+    
+    NSDictionary *cfgDict = [tabBarCfgs objectAtIndex:self.tabBarItem.tag];
+    UIImage *norImage     = [UIImage originalImageNamed:cfgDict[@"norImage"]];
+    UIImage *selImage     = [UIImage originalImageNamed:cfgDict[@"selImage"]];
+    NSString *title       = cfgDict[@"title"];
+    
+    self.tabBarItem       = [[UITabBarItem alloc] initWithTitle:title image:norImage selectedImage:selImage];
 }
 
 @end
