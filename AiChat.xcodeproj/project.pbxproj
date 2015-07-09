@@ -187,7 +187,7 @@
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
 		757ACC271B4E7789009675B1 /* TabBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757ACC261B4E7789009675B1 /* TabBar.plist */; };
-		759973A21B4EC114006C4C29 /* XXMessagesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A11B4EC114006C4C29 /* XXMessagesTVC.m */; };
+		759973A61B4ECDBA006C4C29 /* XXMessagesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */; };
 		75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */; };
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
@@ -556,8 +556,8 @@
 		757ACC041B4E555A009675B1 /* ZHBTagMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBTagMacro.h; sourceTree = "<group>"; };
 		757ACC201B4E62C9009675B1 /* ZHBColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBColorMacro.h; sourceTree = "<group>"; };
 		757ACC261B4E7789009675B1 /* TabBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TabBar.plist; sourceTree = "<group>"; };
-		759973A01B4EC114006C4C29 /* XXMessagesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXMessagesTVC.h; path = AiChat/Resources/XXMessagesTVC.h; sourceTree = SOURCE_ROOT; };
-		759973A11B4EC114006C4C29 /* XXMessagesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXMessagesTVC.m; path = AiChat/Resources/XXMessagesTVC.m; sourceTree = SOURCE_ROOT; };
+		759973A41B4ECDBA006C4C29 /* XXMessagesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXMessagesTVC.h; sourceTree = "<group>"; };
+		759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessagesTVC.m; sourceTree = "<group>"; };
 		75B42FFC1B4A4D0F00ED67F1 /* TXLChatTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatTool.h; sourceTree = "<group>"; };
 		75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatTool.m; sourceTree = "<group>"; };
 		75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsTVC.h; sourceTree = "<group>"; };
@@ -1651,7 +1651,7 @@
 		757ACC051B4E57D5009675B1 /* Messages（消息） */ = {
 			isa = PBXGroup;
 			children = (
-				757ACC061B4E57D5009675B1 /* Controller */,
+				759973A31B4ECDBA006C4C29 /* Controller */,
 				757ACC071B4E57D5009675B1 /* Model */,
 				757ACC081B4E57D5009675B1 /* Other */,
 				757ACC091B4E57D5009675B1 /* Tool */,
@@ -1659,15 +1659,6 @@
 			);
 			name = "Messages（消息）";
 			path = Messages;
-			sourceTree = "<group>";
-		};
-		757ACC061B4E57D5009675B1 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				759973A01B4EC114006C4C29 /* XXMessagesTVC.h */,
-				759973A11B4EC114006C4C29 /* XXMessagesTVC.m */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		757ACC071B4E57D5009675B1 /* Model */ = {
@@ -1792,6 +1783,15 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		759973A31B4ECDBA006C4C29 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				759973A41B4ECDBA006C4C29 /* XXMessagesTVC.h */,
+				759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		75BCC2101B46443F00B1CFC0 /* Contacts（通讯录） */ = {
@@ -2187,7 +2187,7 @@
 				75382EE71B43929D00CD136B /* XMPPAutoTime.m in Sources */,
 				75382EAA1B43929D00CD136B /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				75382EA11B43929D00CD136B /* XMPPSystemInputActivityMonitor.m in Sources */,
-				759973A21B4EC114006C4C29 /* XXMessagesTVC.m in Sources */,
+				759973A61B4ECDBA006C4C29 /* XXMessagesTVC.m in Sources */,
 				75382EA61B43929D00CD136B /* XMPPLastActivity.m in Sources */,
 				751B3F731B4E44660077B735 /* ZHBBaseTBC.m in Sources */,
 				75382ED91B43929D00CD136B /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
