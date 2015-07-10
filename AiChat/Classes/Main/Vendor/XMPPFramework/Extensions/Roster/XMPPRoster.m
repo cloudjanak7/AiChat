@@ -732,6 +732,7 @@ enum XMPPRosterFlags
 		
 		if (!hasRoster)
 		{
+#warning 每次获取联系人列表时，不需要删除数据库中的所有内容，有效性验证
             [xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:xmppStream];
             [self _setPopulatingRoster:YES];
             [multicastDelegate xmppRosterDidBeginPopulating:self];

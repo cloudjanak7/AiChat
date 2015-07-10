@@ -8,10 +8,16 @@
 
 #import "XXMessagesTVC.h"
 #import "UIView+Frame.h"
+#import "XXMessagesTool.h"
+#import "XMPPMessageArchiving_Contact_CoreDataObject.h"
+#import "NSDate+Helper.h"
+#import <ReactiveCocoa.h>
 
 @interface XXMessagesTVC ()<UISearchBarDelegate>
 
 @property (nonatomic, weak) UISearchBar *searchBar;
+
+@property (nonatomic, strong) XXMessagesTool *messagesTool;
 
 @end
 
@@ -19,22 +25,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.rowHeight = 70;
     [self setupSearchBar];
+    [self setupSignal];
 }
 
 
 #pragma mark -
 #pragma mark UITableView Datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.messagesTool.recentContacts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = @"1212";
+    XMPPMessageArchiving_Contact_CoreDataObject *contact = (XMPPMessageArchiving_Contact_CoreDataObject *)self.messagesTool.recentContacts[indexPath.row];
+    cell.textLabel.text = [contact.mostRecentMessageTimestamp dateString];
+    cell.detailTextLabel.text = contact.mostRecentMessageBody;
     return cell;
 }
 
@@ -53,5 +63,24 @@
     self.searchBar = searchBar;
 }
 
+- (void)setupSignal {
+    @weakify(self);
+    [self.messagesTool.rac_updateSignal subscribeNext:^(id x) {
+        @strongify(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+#pragma mark -
+#pragma mark Getters
+
+- (XXMessagesTool *)messagesTool {
+    if (nil == _messagesTool) {
+        _messagesTool = [[XXMessagesTool alloc] init];
+    }
+    return _messagesTool;
+}
 
 @end

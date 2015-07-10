@@ -25,3 +25,5 @@ extern NSTimeInterval const xmppTimeout;
 extern NSString * const xmppUserCoreDataStorageObject;
 
 extern NSString * const xmppMessageArchivingMessageCoreDataObject;
+
+extern NSString * const xmppMessageArchivingContactCoreDataObject;

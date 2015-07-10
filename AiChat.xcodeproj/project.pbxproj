@@ -188,6 +188,8 @@
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
 		757ACC271B4E7789009675B1 /* TabBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757ACC261B4E7789009675B1 /* TabBar.plist */; };
 		759973A61B4ECDBA006C4C29 /* XXMessagesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */; };
+		759973A91B4F734A006C4C29 /* XXMessagesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A81B4F734A006C4C29 /* XXMessagesTool.m */; };
+		759973AC1B4F87FA006C4C29 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */; };
 		75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */; };
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
@@ -558,6 +560,10 @@
 		757ACC261B4E7789009675B1 /* TabBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TabBar.plist; sourceTree = "<group>"; };
 		759973A41B4ECDBA006C4C29 /* XXMessagesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXMessagesTVC.h; sourceTree = "<group>"; };
 		759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessagesTVC.m; sourceTree = "<group>"; };
+		759973A71B4F734A006C4C29 /* XXMessagesTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXMessagesTool.h; sourceTree = "<group>"; };
+		759973A81B4F734A006C4C29 /* XXMessagesTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessagesTool.m; sourceTree = "<group>"; };
+		759973AA1B4F87FA006C4C29 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		75B42FFC1B4A4D0F00ED67F1 /* TXLChatTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatTool.h; sourceTree = "<group>"; };
 		75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatTool.m; sourceTree = "<group>"; };
 		75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsTVC.h; sourceTree = "<group>"; };
@@ -745,6 +751,8 @@
 				75048E1B1B45770D008C94CC /* MBProgressHUD+ZHB.m */,
 				75048E1E1B458C64008C94CC /* UIDevice+Hardware.h */,
 				75048E1F1B458C64008C94CC /* UIDevice+Hardware.m */,
+				759973AA1B4F87FA006C4C29 /* NSDate+Helper.h */,
+				759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1678,6 +1686,8 @@
 		757ACC091B4E57D5009675B1 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				759973A71B4F734A006C4C29 /* XXMessagesTool.h */,
+				759973A81B4F734A006C4C29 /* XXMessagesTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2098,6 +2108,7 @@
 				75048E151B456485008C94CC /* DDLogConfig.m in Sources */,
 				75382EAF1B43929D00CD136B /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
 				75382EAE1B43929D00CD136B /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
+				759973A91B4F734A006C4C29 /* XXMessagesTool.m in Sources */,
 				75382EEE1B43929D00CD136B /* XMPPMessageCarbons.m in Sources */,
 				75382EAC1B43929D00CD136B /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				75048E181B456CE0008C94CC /* ZHBUserInfo.m in Sources */,
@@ -2229,6 +2240,7 @@
 				75382EF41B43929D00CD136B /* GCDMulticastDelegate.m in Sources */,
 				75382EF01B43929D00CD136B /* XMPPMessage+XEP_0308.m in Sources */,
 				75382E9F1B43929D00CD136B /* XMPPUserMemoryStorageObject.m in Sources */,
+				759973AC1B4F87FA006C4C29 /* NSDate+Helper.m in Sources */,
 				75382EF81B43929D00CD136B /* XMPPStringPrep.m in Sources */,
 				75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */,
 				75048E081B4537B0008C94CC /* ZHBXMPPConst.m in Sources */,
