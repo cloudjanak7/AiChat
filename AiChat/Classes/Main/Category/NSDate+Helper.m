@@ -39,6 +39,14 @@
 }
 
 - (NSString *)dateString {
+    return [self dateWithFormat:@"yyyy/MM/dd"];
+}
+
+- (NSString *)timeString {
+    return [self dateWithFormat:@"HH:mm"];
+}
+
+- (NSString *)dateTimeString {
     return [self dateWithFormat:@"yyyy/MM/dd HH:mm:ss"];
 }
 

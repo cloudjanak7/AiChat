@@ -46,27 +46,38 @@
  */
 @property (nonatomic, strong) NSDate *latestDate;
 
-@end
+@property (nonatomic, assign, getter=canResetUnreadMessages) BOOL reset;
 
+@end
+#warning 未考虑离线消息的读取时间、待实现。
 @implementation TXLChatTool
 
 #pragma mark -
 #pragma mark Life Cycle
 
+//- (void)dealloc {
+//    [ZHBXMPPTool sharedXMPPTool].chatJid = nil;
+//}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.reset = YES;
+    }
+    return self;
+}
+
 #pragma mark -
 #pragma mark NSFetchedResultsController Delegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.messages removeAllObjects];
-    [self.messages addObjectsFromArray:self.historyMessages];
-    [self.messages addObjectsFromArray:controller.fetchedObjects];
-    self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[controller.fetchedObjects lastObject]).timestamp;
+    if (0 == controller.fetchedObjects.count) return;
+    [self updateFetchedResults];
     [(RACSubject *)self.freshSignal sendNext:nil];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 - (void)sendMessage:(NSString *)message {
-    [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.friendJid];
+    [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.toUser.jid];
 }
 
 #pragma mark 获取历史消息
@@ -74,7 +85,7 @@
     DDLogInfo(@"%@::%@", THIS_FILE, THIS_METHOD);
     
     //设置查询条件
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@ AND timestamp < %@", [ZHBUserInfo sharedUserInfo].jid, self.friendJid.bare, self.farthestDate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@ AND timestamp < %@", [ZHBUserInfo sharedUserInfo].jid, self.toUser.jid.bare, self.farthestDate];
     NSSortDescriptor *timeSort = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppMessageArchivingMessageCoreDataObject];
@@ -98,13 +109,16 @@
         for (NSInteger index = messageCount - 1; index >= 0; index --) {
             [fetchedResults addObject:historyResultesController.fetchedObjects[index]];
         }
-        DDLogInfo(@"消息查询结果:");
-        DDLogVerbose(@"%@", fetchedResults);
         [self.historyMessages insertObjects:fetchedResults atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, fetchedResults.count)]];
         [self.messages insertObjects:fetchedResults atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, fetchedResults.count)]];
         XMPPMessageArchiving_Message_CoreDataObject *message = [fetchedResults firstObject];
         self.farthestDate = message.timestamp;
-        DDLogWarn(@"farthestDate:%@", self.farthestDate);
+        if (self.canResetUnreadMessages) {
+            if ([[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare]) {
+                self.toUser.unreadMessages = @(0);
+            }
+            self.reset = NO;
+        }
         [(RACSubject *)self.historySignal sendNext:@(fetchedResults.count - 1)];
     }
 }
@@ -118,8 +132,17 @@
 
     NSError *error = nil;
     if (![self.freshResultsController performFetch:&error]) {
-        DDLogError(@"获取消息失败");
-        DDLogVerbose(@"error: %@", error);
+        DDLogError(@"获取消息失败:\n%@", error);
+    }
+}
+
+- (void)updateFetchedResults {
+    [self.messages removeAllObjects];
+    [self.messages addObjectsFromArray:self.historyMessages];
+    [self.messages addObjectsFromArray:self.freshResultsController.fetchedObjects];
+    self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).timestamp;
+    if ([[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare]) {
+        self.toUser.unreadMessages = @(0);
     }
 }
 
@@ -178,7 +201,7 @@
 - (NSFetchedResultsController *)freshResultsController {
     if (nil == _freshResultsController) {
         //设置查询条件
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@ AND timestamp > %@", [ZHBUserInfo sharedUserInfo].jid, self.friendJid.bare, self.latestDate];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@ AND timestamp > %@", [ZHBUserInfo sharedUserInfo].jid, self.toUser.jid.bare, self.latestDate];
         
         NSSortDescriptor *timeSort = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES];
         
@@ -196,8 +219,14 @@
 
 #pragma mark Setters
 
-- (void)setFriendJid:(XMPPJID *)friendJid {
-    _friendJid = friendJid;
+//- (void)setToJid:(XMPPJID *)friendJid {
+//    _toJid = friendJid;
+//    [self loadHistoryMessages];
+//    [self loadFreshMessages];
+//}
+
+- (void)setToUser:(XMPPUserCoreDataStorageObject *)toUser {
+    _toUser = toUser;
     [self loadHistoryMessages];
     [self loadFreshMessages];
 }

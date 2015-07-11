@@ -46,7 +46,6 @@
     
     self.contentTV.header = refreshHeader;
     
-    
     [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
         @strongify(self);
         return @(self.contentTxtf.text.length > 0);
@@ -57,7 +56,7 @@
         [self.view endEditing:YES];
     }];
     
-    self.chatTool.friendJid = self.friendUser.jid;
+    self.chatTool.toUser = self.friendUser;
     
     [self.chatTool.freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{

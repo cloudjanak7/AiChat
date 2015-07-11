@@ -48,6 +48,7 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
  */
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
 
+//@property (nonatomic, copy) NSString *chatJid;
 
 
 /**
@@ -75,5 +76,13 @@ ZHBSingletonH(XMPPTool)
  *  @param jid     对方JID
  */
 - (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid;
+/**
+ *  @brief  重置未读消息数
+ *
+ *  @param fromJidStr 消息发送发jid
+ *
+ *  @return YES重置成功 NO重置失败
+ */
+- (BOOL)resetUnreadMessage:(NSString *)fromJidStr;
 
 @end

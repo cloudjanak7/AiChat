@@ -732,11 +732,11 @@ enum XMPPRosterFlags
 		
 		if (!hasRoster)
 		{
-#warning 每次获取联系人列表时，不需要删除数据库中的所有内容，有效性验证
-            [xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:xmppStream];
+#warning 每次获取联系人列表时，不需要删除数据库中的所有内容，主要为了防止未读消息数消失，不过可能导致联系人列表显示不正常？会吗？
+//            [xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:xmppStream];
             [self _setPopulatingRoster:YES];
             [multicastDelegate xmppRosterDidBeginPopulating:self];
-			[xmppRosterStorage beginRosterPopulationForXMPPStream:xmppStream];
+//			[xmppRosterStorage beginRosterPopulationForXMPPStream:xmppStream];
 		}
 		
 		NSArray *items = [query elementsForName:@"item"];

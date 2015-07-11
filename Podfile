@@ -4,6 +4,7 @@ pod 'UMengAnalytics'
 pod 'MJRefresh'#上拉下拉刷新库
 pod 'UITableView+FDTemplateLayoutCell'#计算tableviewcell高度
 pod 'Mantle', '~>1.5.3'#字典模型转换
+#pod 'KYCuteView', '~> 1.3.0'#类似QQ消息拖拽提示
 platform:ios, '7.0'
 pod 'Masonry'
 pod 'ReactiveCocoa', '~>2.5'

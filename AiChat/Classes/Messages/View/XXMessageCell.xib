@@ -14,38 +14,52 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBb-1r-vz3" userLabel="title">
-                        <rect key="frame" x="70" y="8" width="174" height="21"/>
+                        <rect key="frame" x="70" y="10" width="174" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrj-4E-drv" userLabel="subTitle">
-                        <rect key="frame" x="70" y="40" width="240" height="18"/>
+                        <rect key="frame" x="70" y="42" width="240" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="早上11:11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhh-xw-m7e" userLabel="time">
-                        <rect key="frame" x="254" y="8" width="56" height="15"/>
+                        <rect key="frame" x="254" y="10" width="56" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoP-Ip-BxY" userLabel="image">
-                        <rect key="frame" x="10" y="8" width="50" height="50"/>
+                        <rect key="frame" x="10" y="10" width="50" height="50"/>
                         <color key="backgroundColor" red="0.89083435690000001" green="1" blue="0.82576322660000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="3ou-zB-qHW"/>
                             <constraint firstAttribute="height" constant="50" id="unu-sr-Cl0"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ili-vS-4oK" userLabel="unread">
+                        <rect key="frame" x="45" y="-3" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="9rs-nV-HTa"/>
+                            <constraint firstAttribute="width" constant="30" id="imr-Ww-UBm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <state key="normal" title="0" backgroundImage="tabbar_badge">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="disabled" backgroundImage="tabbar_badge"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jhh-xw-m7e" firstAttribute="leading" secondItem="OBb-1r-vz3" secondAttribute="trailing" constant="10" id="D71-eE-tUE"/>
                     <constraint firstAttribute="trailing" secondItem="lrj-4E-drv" secondAttribute="trailing" constant="10" id="DjA-me-7bf"/>
-                    <constraint firstItem="Jhh-xw-m7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Fhq-9L-0MX"/>
-                    <constraint firstItem="CoP-Ip-BxY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="HHM-On-RYe"/>
+                    <constraint firstItem="Ili-vS-4oK" firstAttribute="leading" secondItem="CoP-Ip-BxY" secondAttribute="trailing" constant="-15" id="DtB-GI-wWQ"/>
+                    <constraint firstItem="Jhh-xw-m7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Fhq-9L-0MX"/>
+                    <constraint firstItem="CoP-Ip-BxY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="HHM-On-RYe"/>
                     <constraint firstItem="lrj-4E-drv" firstAttribute="leading" secondItem="CoP-Ip-BxY" secondAttribute="trailing" constant="10" id="R03-iN-Dc9"/>
+                    <constraint firstItem="Ili-vS-4oK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-3" id="WBD-pE-qgv"/>
                     <constraint firstItem="lrj-4E-drv" firstAttribute="bottom" secondItem="CoP-Ip-BxY" secondAttribute="bottom" id="WNr-4X-xcj"/>
                     <constraint firstItem="CoP-Ip-BxY" firstAttribute="top" secondItem="OBb-1r-vz3" secondAttribute="top" id="Wwq-X9-Ylg"/>
                     <constraint firstAttribute="trailing" secondItem="Jhh-xw-m7e" secondAttribute="trailing" constant="10" id="gYH-8S-yC2"/>
@@ -58,8 +72,12 @@
                 <outlet property="subTitleLbl" destination="lrj-4E-drv" id="hUv-GI-FIw"/>
                 <outlet property="timeLbl" destination="Jhh-xw-m7e" id="8hR-DC-ahO"/>
                 <outlet property="titleLbl" destination="OBb-1r-vz3" id="lNW-bi-c36"/>
+                <outlet property="unreadMessageBtn" destination="Ili-vS-4oK" id="Upp-Xs-bVZ"/>
             </connections>
             <point key="canvasLocation" x="230" y="219"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="tabbar_badge" width="30" height="30"/>
+    </resources>
 </document>

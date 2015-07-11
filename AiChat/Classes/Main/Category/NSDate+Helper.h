@@ -22,4 +22,6 @@
 
 - (NSString *)dateString;
 
+- (NSString *)timeString;
+
 @end

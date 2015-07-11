@@ -10,7 +10,8 @@
 #import "XXContactMessage.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPMessageArchiving_Contact_CoreDataObject.h"
-#import "NSDate+XMPPDateTimeProfiles.h"
+#import "NSDate+Helper.h"
+#import <ReactiveCocoa.h>
 
 @interface XXMessageCell ()
 
@@ -22,6 +23,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLbl;
 
+@property (weak, nonatomic) IBOutlet UIButton *unreadMessageBtn;
+
 @end
 
 @implementation XXMessageCell
@@ -30,7 +33,11 @@
 #pragma mark Life Cycle
 
 - (void)awakeFromNib {
-#warning TODO 设置样式
+//    @weakify(self);
+//    [RACObserve(self.contactMessage.friendUser, unreadMessages) subscribeNext:^(id x) {
+//        @strongify(self);
+//        [self updateUnreadMessage];
+//    }];
 }
 
 #pragma mark -
@@ -39,19 +46,25 @@
 #pragma mark -
 #pragma mark Private Methods
 
+- (void)updateUnreadMessage {
+    NSNumber *unreadMessages = self.contactMessage.friendUser.unreadMessages;
+    if (unreadMessages.integerValue > 0) {
+        self.unreadMessageBtn.hidden = NO;
+        [self.unreadMessageBtn setTitle:[unreadMessages stringValue] forState:UIControlStateNormal];
+    } else {
+        self.unreadMessageBtn.hidden = YES;
+    }
+}
+
 - (void)setupCell {
-    self.timeLbl.text = [self.contactMessage.recentMessage.mostRecentMessageTimestamp xmppTimeString];
+    self.timeLbl.text = [self.contactMessage.recentMessage.mostRecentMessageTimestamp timeString];
     self.titleLbl.text = self.contactMessage.recentMessage.bareJidStr;
     self.subTitleLbl.text = self.contactMessage.recentMessage.mostRecentMessageBody;
-    DDLogInfo(@"unreadMessages:%@", self.contactMessage.friendUser.unreadMessages);
+    [self updateUnreadMessage];
 }
 
 #pragma mark -
 #pragma mark Setters
-
-- (void)setMessage:(XMPPMessageArchiving_Contact_CoreDataObject *)message {
-    [self setupCell];
-}
 
 - (void)setContactMessage:(XXContactMessage *)contactMessage {
     _contactMessage = contactMessage;

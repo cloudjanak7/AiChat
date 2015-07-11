@@ -84,6 +84,10 @@ ZHBSingletonM(XMPPTool)
     [self.xmppStream sendElement:xmppMessage];
 }
 
+- (BOOL)resetUnreadMessage:(NSString *)fromJidStr {
+    return [self updateUnreadMessage:fromJidStr reset:YES];
+}
+
 #pragma mark -
 #pragma mark XMPPStream Delegate
 
@@ -142,7 +146,13 @@ ZHBSingletonM(XMPPTool)
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-    //在这里添加未读消息数、在消息界面恢复未读消息数
+//#warning 这样做在网络状况不好时，好友没有刷新到最新的消息，但是这边未读消息数没有添加，未读消息数就会不准确，如果不判断，重复读取会不会性能低下？
+//    if (!message.body || [self.chatJid isEqualToString:message.from.bare]) return;
+    if (!message.body) return;
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf addUnreadMessage:message.from.bare];
+    });
 }
 
 #pragma mark -
@@ -206,6 +216,49 @@ ZHBSingletonM(XMPPTool)
 //    _xmppvCardAvatarModule = nil;
 //    _xmppCapabilities = nil;
 //    _xmppCapabilitiesStorage = nil;
+}
+
+- (void)addUnreadMessage:(NSString *)fromJidStr {
+    [self updateUnreadMessage:fromJidStr reset:NO];
+}
+
+/**
+ *  @brief  更新联系人未读消息数
+ *
+ *  @param fromJidStr 消息发送方jid
+ *  @param reset      YES（重置未读消息数） NO（增加未读消息数）
+ *
+ *  @return YES更新成功 NO更新失败
+ */
+- (BOOL)updateUnreadMessage:(NSString *)fromJidStr reset:(BOOL)reset {
+    NSManagedObjectContext *context = self.xmppRosterStorage.mainThreadManagedObjectContext;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppUserCoreDataStorageObject];
+    
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND jidStr = %@", [ZHBUserInfo sharedUserInfo].jid, fromJidStr];
+    request.predicate = pre;
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];
+    request.sortDescriptors = @[sort];
+    
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    
+    NSError *err = nil;
+    if (![resultsController performFetch:&err]) {
+        DDLogError(@"获取消息联系人失败:\n%@", err);
+        return NO;
+    } else {
+        XMPPUserCoreDataStorageObject *user = resultsController.fetchedObjects.firstObject;
+        NSUInteger unreadMessage = [user.unreadMessages integerValue];
+        unreadMessage = (reset ? 0 : unreadMessage + 1);
+        user.unreadMessages = @(unreadMessage);
+    }
+    err = nil;
+    [context save:&err];
+    if (err) {
+        DDLogError(@"更新联系人未读消息数失败:\n%@", err);
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark -

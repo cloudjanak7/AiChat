@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class XMPPJID;
 @class RACSignal;
+@class XMPPUserCoreDataStorageObject;
 
 @interface TXLChatTool : NSObject
 
@@ -24,11 +25,14 @@
  *  @brief  存储XMPPMessageArchiving_Message_CoreDataObject
  */
 @property (nonatomic, strong, readonly) NSMutableArray *messages;
-
 /**
- *  @brief  好友JID
+ *  @brief  对方user
  */
-@property (nonatomic, strong) XMPPJID *friendJid;
+@property (nonatomic, strong) XMPPUserCoreDataStorageObject *toUser;
+///**
+// *  @brief  对方JID
+// */
+//@property (nonatomic, strong) XMPPJID *toJid;
 
 /**
  *  @brief  发送消息
