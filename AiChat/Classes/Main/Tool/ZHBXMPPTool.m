@@ -141,6 +141,10 @@ ZHBSingletonM(XMPPTool)
     }
 }
 
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
+    //在这里添加未读消息数、在消息界面恢复未读消息数
+}
+
 #pragma mark -
 #pragma mark XMPPRoster Delegate
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {

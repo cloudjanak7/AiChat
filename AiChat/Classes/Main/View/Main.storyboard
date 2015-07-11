@@ -59,7 +59,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fnh-cf-MDu"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="Wla-NN-MaC" kind="show" identifier="messagetvc2chatvc" id="Dzc-JE-fk5"/>
+                        <segue destination="Wla-NN-MaC" kind="show" identifier="messagestvc2chatvc" id="Dzc-JE-fk5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMf-ty-TeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -288,6 +288,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="C1x-gj-CIM"/>
+        <segue reference="Dzc-JE-fk5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,7 +17,7 @@
 @property (nonatomic, strong, readonly) RACSignal *rac_updateSignal;
 
 /**
- *  @brief  存储最近联系人XMPPMessageArchiving_Contact_CoreDataObject
+ *  @brief  存储最近联系人XXContactMessage
  */
 @property (nonatomic, strong, readonly) NSArray *recentContacts;
 

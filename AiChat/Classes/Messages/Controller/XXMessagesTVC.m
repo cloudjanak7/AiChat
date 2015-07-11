@@ -9,8 +9,10 @@
 #import "XXMessagesTVC.h"
 #import "UIView+Frame.h"
 #import "XXMessagesTool.h"
-#import "XMPPMessageArchiving_Contact_CoreDataObject.h"
 #import "NSDate+Helper.h"
+#import "XXMessageCell.h"
+#import "XXContactMessage.h"
+#import "TXLChatVC.h"
 #import <ReactiveCocoa.h>
 
 @interface XXMessagesTVC ()<UISearchBarDelegate>
@@ -23,13 +25,29 @@
 
 @implementation XXMessagesTVC
 
+#pragma mark -
+#pragma mark Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.rowHeight = 70;
+    [self setupTableView];
     [self setupSearchBar];
     [self setupSignal];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TXLChatVC class]]) {
+        TXLChatVC *chatVc = segue.destinationViewController;
+        chatVc.friendUser = sender;
+    }
+}
+
+#pragma mark -
+#pragma mark UITableView Delegate 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    XXContactMessage *message = self.messagesTool.recentContacts[indexPath.row];
+    [self performSegueWithIdentifier:@"messagestvc2chatvc" sender:message.friendUser];
+}
 
 #pragma mark -
 #pragma mark UITableView Datasource
@@ -38,13 +56,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    }
-    XMPPMessageArchiving_Contact_CoreDataObject *contact = (XMPPMessageArchiving_Contact_CoreDataObject *)self.messagesTool.recentContacts[indexPath.row];
-    cell.textLabel.text = [contact.mostRecentMessageTimestamp dateString];
-    cell.detailTextLabel.text = contact.mostRecentMessageBody;
+    XXMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([XXMessageCell class])];
+    cell.contactMessage = self.messagesTool.recentContacts[indexPath.row];
     return cell;
 }
 
@@ -71,6 +84,11 @@
             [self.tableView reloadData];
         });
     }];
+}
+
+- (void)setupTableView {
+    self.tableView.rowHeight = 70;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XXMessageCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([XXMessageCell class])];
 }
 
 #pragma mark -

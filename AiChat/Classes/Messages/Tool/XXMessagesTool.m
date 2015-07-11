@@ -10,6 +10,7 @@
 #import "ZHBXMPPTool.h"
 #import "ZHBXMPPConst.h"
 #import "ZHBUserInfo.h"
+#import "XXContactMessage.h"
 #import <ReactiveCocoa.h>
 
 @interface XXMessagesTool ()<NSFetchedResultsControllerDelegate>
@@ -38,6 +39,7 @@
 #pragma mark -
 #pragma mark NSFetchedResultsController Delegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    DDLOG_INFO
     [(RACSubject *)self.rac_updateSignal sendNext:nil];
 }
 
@@ -88,9 +90,18 @@
 }
 
 - (NSArray *)recentContacts {
-    if (nil == _recentContacts) {
-        _recentContacts = self.fetchedResultsController.fetchedObjects;
+    NSMutableArray *contactMessages = [NSMutableArray array];
+    
+    ZHBXMPPTool *xmppTool = [ZHBXMPPTool sharedXMPPTool];
+    for (XMPPMessageArchiving_Contact_CoreDataObject *recentMessage in self.fetchedResultsController.fetchedObjects) {
+        XXContactMessage *contactMessage = [[XXContactMessage alloc] init];
+        XMPPUserCoreDataStorageObject *friendUser = [xmppTool.xmppRosterStorage userForJID:recentMessage.bareJid xmppStream:xmppTool.xmppStream managedObjectContext:xmppTool.xmppRosterStorage.mainThreadManagedObjectContext];
+        contactMessage.recentMessage = recentMessage;
+        contactMessage.friendUser = friendUser;
+        [contactMessages addObject:contactMessage];
     }
+
+    _recentContacts = contactMessages;
     return _recentContacts;
 }
 

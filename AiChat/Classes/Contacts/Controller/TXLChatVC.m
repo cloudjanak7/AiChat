@@ -58,6 +58,7 @@
     }];
     
     self.chatTool.friendJid = self.friendUser.jid;
+    
     [self.chatTool.freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{
             @strongify(self);

@@ -17,6 +17,7 @@
 		75048E1C1B45770D008C94CC /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 75048E191B45770D008C94CC /* MBProgressHUD.bundle */; };
 		75048E1D1B45770D008C94CC /* MBProgressHUD+ZHB.m in Sources */ = {isa = PBXBuildFile; fileRef = 75048E1B1B45770D008C94CC /* MBProgressHUD+ZHB.m */; };
 		75048E201B458C64008C94CC /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 75048E1F1B458C64008C94CC /* UIDevice+Hardware.m */; };
+		75083A401B51531E009CC0B2 /* XXContactMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 75083A3F1B51531E009CC0B2 /* XXContactMessage.m */; };
 		751B3F701B4E40A20077B735 /* ZHBBaseNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 751B3F6F1B4E40A20077B735 /* ZHBBaseNC.m */; };
 		751B3F731B4E44660077B735 /* ZHBBaseTBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 751B3F721B4E44660077B735 /* ZHBBaseTBC.m */; };
 		751B3F761B4E4B260077B735 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 751B3F751B4E4B260077B735 /* UIImage+Helper.m */; };
@@ -190,6 +191,8 @@
 		759973A61B4ECDBA006C4C29 /* XXMessagesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */; };
 		759973A91B4F734A006C4C29 /* XXMessagesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A81B4F734A006C4C29 /* XXMessagesTool.m */; };
 		759973AC1B4F87FA006C4C29 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */; };
+		759973B01B4F986C006C4C29 /* XXMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973AE1B4F986C006C4C29 /* XXMessageCell.m */; };
+		759973B11B4F986C006C4C29 /* XXMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 759973AF1B4F986C006C4C29 /* XXMessageCell.xib */; };
 		75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */; };
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
@@ -232,6 +235,8 @@
 		75048E1B1B45770D008C94CC /* MBProgressHUD+ZHB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ZHB.m"; sourceTree = "<group>"; };
 		75048E1E1B458C64008C94CC /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
 		75048E1F1B458C64008C94CC /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
+		75083A3E1B51531E009CC0B2 /* XXContactMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXContactMessage.h; sourceTree = "<group>"; };
+		75083A3F1B51531E009CC0B2 /* XXContactMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXContactMessage.m; sourceTree = "<group>"; };
 		751B3F6E1B4E40A20077B735 /* ZHBBaseNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBBaseNC.h; sourceTree = "<group>"; };
 		751B3F6F1B4E40A20077B735 /* ZHBBaseNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBBaseNC.m; sourceTree = "<group>"; };
 		751B3F711B4E44660077B735 /* ZHBBaseTBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBBaseTBC.h; sourceTree = "<group>"; };
@@ -564,6 +569,9 @@
 		759973A81B4F734A006C4C29 /* XXMessagesTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessagesTool.m; sourceTree = "<group>"; };
 		759973AA1B4F87FA006C4C29 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		759973AD1B4F986C006C4C29 /* XXMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXMessageCell.h; sourceTree = "<group>"; };
+		759973AE1B4F986C006C4C29 /* XXMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessageCell.m; sourceTree = "<group>"; };
+		759973AF1B4F986C006C4C29 /* XXMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XXMessageCell.xib; sourceTree = "<group>"; };
 		75B42FFC1B4A4D0F00ED67F1 /* TXLChatTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatTool.h; sourceTree = "<group>"; };
 		75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatTool.m; sourceTree = "<group>"; };
 		75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsTVC.h; sourceTree = "<group>"; };
@@ -1672,6 +1680,8 @@
 		757ACC071B4E57D5009675B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				75083A3E1B51531E009CC0B2 /* XXContactMessage.h */,
+				75083A3F1B51531E009CC0B2 /* XXContactMessage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1695,6 +1705,9 @@
 		757ACC0A1B4E57D5009675B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				759973AD1B4F986C006C4C29 /* XXMessageCell.h */,
+				759973AE1B4F986C006C4C29 /* XXMessageCell.m */,
+				759973AF1B4F986C006C4C29 /* XXMessageCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2017,6 +2030,7 @@
 				753808BB1B43E73400F2033F /* shake_match.wav in Resources */,
 				753808C21B43E73400F2033F /* Talkie_Tick_Short.wav in Resources */,
 				753808BA1B43E73400F2033F /* sasasa.wav in Resources */,
+				759973B11B4F986C006C4C29 /* XXMessageCell.xib in Resources */,
 				756724211B461AB600554473 /* Main.storyboard in Resources */,
 				753808C61B43E73400F2033F /* VoiceSearchOn.wav in Resources */,
 				753808B01B43E73400F2033F /* begin.wav in Resources */,
@@ -2089,6 +2103,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75083A401B51531E009CC0B2 /* XXContactMessage.m in Sources */,
 				75048E121B455F7F008C94CC /* UIColor+Helper.m in Sources */,
 				75382EC51B43929D00CD136B /* XMPPIQ+XEP_0060.m in Sources */,
 				75BCC2201B47E60D00B1CFC0 /* TXLChatVC.m in Sources */,
@@ -2128,6 +2143,7 @@
 				7528AC5E1B44223500F96C0F /* DLLoginVC.m in Sources */,
 				75382E8E1B43929D00CD136B /* XMPPPresence.m in Sources */,
 				75382E7B1B43929D00CD136B /* main.m in Sources */,
+				759973B01B4F986C006C4C29 /* XXMessageCell.m in Sources */,
 				751B3F7C1B4E4B8D0077B735 /* UIView+Helper.m in Sources */,
 				75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */,
 				75382EA51B43929D00CD136B /* XMPPIQ+LastActivity.m in Sources */,
