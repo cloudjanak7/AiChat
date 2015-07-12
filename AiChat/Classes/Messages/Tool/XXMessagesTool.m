@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong, readwrite) RACSubject *rac_updateSignal;
 
-@property (nonatomic, strong) NSManagedObjectContext *objectContext;
+@property (nonatomic, strong) NSManagedObjectContext *recentMessageContext;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
@@ -40,7 +40,8 @@
 #pragma mark NSFetchedResultsController Delegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     DDLOG_INFO
-    [(RACSubject *)self.rac_updateSignal sendNext:nil];
+    if (0 == controller.fetchedObjects.count) return;
+    [self updateFetchedResults];
 }
 
 #pragma mark -
@@ -50,19 +51,41 @@
     DDLOG_INFO
     NSError *error = nil;
     if (![self.fetchedResultsController performFetch:&error]) {
-        DDLogError(@"获取最近联系人失败");
-        DDLogVerbose(@"error: %@", error);
+        DDLogError(@"获取最近联系人失败:\n%@", error);
+    } else {
+        if (self.fetchedResultsController.fetchedObjects.count > 0) {
+            [self updateFetchedResults];
+        }
     }
+}
+
+- (void)updateFetchedResults {
+    NSMutableArray *contactMessages = [NSMutableArray array];
+    
+    ZHBXMPPTool *xmppTool = [ZHBXMPPTool sharedXMPPTool];
+    NSInteger allUnreadNum = 0;
+    for (XMPPMessageArchiving_Contact_CoreDataObject *recentMessage in self.fetchedResultsController.fetchedObjects) {
+        XXContactMessage *contactMessage = [[XXContactMessage alloc] init];
+        XMPPUserCoreDataStorageObject *friendUser = [xmppTool.xmppRosterStorage userForJID:recentMessage.bareJid xmppStream:xmppTool.xmppStream managedObjectContext:xmppTool.xmppRosterStorage.mainThreadManagedObjectContext];
+        contactMessage.recentMessage = recentMessage;
+        contactMessage.friendUser = friendUser;
+        allUnreadNum += [friendUser.unreadMessages integerValue];
+        [contactMessages addObject:contactMessage];
+    }
+    
+    self.allUnreadNum = @(allUnreadNum);
+    self.recentContacts = contactMessages;
+    [(RACSubject *)self.rac_updateSignal sendNext:nil];
 }
 
 #pragma mark -
 #pragma mark Getters
 
-- (NSManagedObjectContext *)objectContext {
-    if (nil == _objectContext) {
-        _objectContext = [ZHBXMPPTool sharedXMPPTool].xmppMessageStorage.mainThreadManagedObjectContext;
+- (NSManagedObjectContext *)recentMessageContext {
+    if (nil == _recentMessageContext) {
+        _recentMessageContext = [ZHBXMPPTool sharedXMPPTool].xmppMessageStorage.mainThreadManagedObjectContext;
     }
-    return _objectContext;
+    return _recentMessageContext;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -76,7 +99,7 @@
         DDLogInfo(@"查询条件:");
         DDLogVerbose(@"%@", request);
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.objectContext sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.recentMessageContext sectionNameKeyPath:nil cacheName:nil];
         _fetchedResultsController.delegate = self;
     }
     return _fetchedResultsController;
@@ -87,22 +110,6 @@
         _rac_updateSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
     }
     return _rac_updateSignal;
-}
-
-- (NSArray *)recentContacts {
-    NSMutableArray *contactMessages = [NSMutableArray array];
-    
-    ZHBXMPPTool *xmppTool = [ZHBXMPPTool sharedXMPPTool];
-    for (XMPPMessageArchiving_Contact_CoreDataObject *recentMessage in self.fetchedResultsController.fetchedObjects) {
-        XXContactMessage *contactMessage = [[XXContactMessage alloc] init];
-        XMPPUserCoreDataStorageObject *friendUser = [xmppTool.xmppRosterStorage userForJID:recentMessage.bareJid xmppStream:xmppTool.xmppStream managedObjectContext:xmppTool.xmppRosterStorage.mainThreadManagedObjectContext];
-        contactMessage.recentMessage = recentMessage;
-        contactMessage.friendUser = friendUser;
-        [contactMessages addObject:contactMessage];
-    }
-
-    _recentContacts = contactMessages;
-    return _recentContacts;
 }
 
 @end

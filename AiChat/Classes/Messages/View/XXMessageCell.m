@@ -31,13 +31,8 @@
 
 #pragma mark -
 #pragma mark Life Cycle
-
 - (void)awakeFromNib {
-//    @weakify(self);
-//    [RACObserve(self.contactMessage.friendUser, unreadMessages) subscribeNext:^(id x) {
-//        @strongify(self);
-//        [self updateUnreadMessage];
-//    }];
+
 }
 
 #pragma mark -
@@ -70,6 +65,5 @@
     _contactMessage = contactMessage;
     [self setupCell];
 }
-
 
 @end

@@ -55,10 +55,6 @@
 #pragma mark -
 #pragma mark Life Cycle
 
-//- (void)dealloc {
-//    [ZHBXMPPTool sharedXMPPTool].chatJid = nil;
-//}
-
 - (instancetype)init {
     if (self = [super init]) {
         self.reset = YES;
@@ -114,9 +110,7 @@
         XMPPMessageArchiving_Message_CoreDataObject *message = [fetchedResults firstObject];
         self.farthestDate = message.timestamp;
         if (self.canResetUnreadMessages) {
-            if ([[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare]) {
-                self.toUser.unreadMessages = @(0);
-            }
+            [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
             self.reset = NO;
         }
         [(RACSubject *)self.historySignal sendNext:@(fetchedResults.count - 1)];
@@ -133,6 +127,9 @@
     NSError *error = nil;
     if (![self.freshResultsController performFetch:&error]) {
         DDLogError(@"获取消息失败:\n%@", error);
+    } else if (self.freshResultsController.fetchedObjects.count > 0) {
+        [self updateFetchedResults];
+        [(RACSubject *)self.freshSignal sendNext:nil];
     }
 }
 
@@ -141,9 +138,7 @@
     [self.messages addObjectsFromArray:self.historyMessages];
     [self.messages addObjectsFromArray:self.freshResultsController.fetchedObjects];
     self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).timestamp;
-    if ([[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare]) {
-        self.toUser.unreadMessages = @(0);
-    }
+    [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
 }
 
 #pragma mark -
@@ -218,13 +213,6 @@
 }
 
 #pragma mark Setters
-
-//- (void)setToJid:(XMPPJID *)friendJid {
-//    _toJid = friendJid;
-//    [self loadHistoryMessages];
-//    [self loadFreshMessages];
-//}
-
 - (void)setToUser:(XMPPUserCoreDataStorageObject *)toUser {
     _toUser = toUser;
     [self loadHistoryMessages];

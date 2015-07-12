@@ -29,10 +29,6 @@
  *  @brief  对方user
  */
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject *toUser;
-///**
-// *  @brief  对方JID
-// */
-//@property (nonatomic, strong) XMPPJID *toJid;
 
 /**
  *  @brief  发送消息

@@ -36,7 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+    [self reloadRecentMessages];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -84,9 +84,9 @@
 - (void)setupSignal {
     @weakify(self);
     [self.messagesTool.rac_updateSignal subscribeNext:^(id x) {
-        @strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
+            @strongify(self);
+            [self reloadRecentMessages];
         });
     }];
 }
@@ -94,6 +94,15 @@
 - (void)setupTableView {
     self.tableView.rowHeight = 70;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XXMessageCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([XXMessageCell class])];
+}
+
+- (void)reloadRecentMessages {
+    [self.tableView reloadData];
+    if ([self.messagesTool.allUnreadNum integerValue] > 0) {
+        self.navigationController.tabBarItem.badgeValue = [self.messagesTool.allUnreadNum stringValue];
+    } else {
+        self.navigationController.tabBarItem.badgeValue = nil;
+    }
 }
 
 #pragma mark -

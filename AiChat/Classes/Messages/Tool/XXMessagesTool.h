@@ -20,5 +20,9 @@
  *  @brief  存储最近联系人XXContactMessage
  */
 @property (nonatomic, strong, readonly) NSArray *recentContacts;
+/**
+ *  @brief  总未读消息数
+ */
+@property (nonatomic, strong) NSNumber *allUnreadNum;
 
 @end
