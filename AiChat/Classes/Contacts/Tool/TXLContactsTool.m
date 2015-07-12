@@ -10,8 +10,11 @@
 #import "ZHBXMPPTool.h"
 #import "ZHBUserInfo.h"
 #import "ZHBXMPPConst.h"
+#import <RACSubject.h>
 
-@interface TXLContactsTool ()<NSFetchedResultsControllerDelegate>
+@interface TXLContactsTool ()
+
+@property (nonatomic, strong, readwrite) RACSubject *rac_updateSignal;
 
 @property (nonatomic, strong) NSFetchedResultsController *resultsController;
 
@@ -34,45 +37,44 @@
 #pragma mark -
 #pragma mark Private Methods
 - (void)loadContactsList {
-    DDLogInfo(@"%@ : %@", THIS_FILE, THIS_METHOD);
-    //使用CoreData获取数据
-    // 1.上下文【关联到数据库XMPPRoster.sqlite】
-    NSManagedObjectContext *context = [ZHBXMPPTool sharedXMPPTool].xmppRosterStorage.mainThreadManagedObjectContext;
-    
-    // 2.FetchRequest【查哪张表】
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppUserCoreDataStorageObject];
-    
-    // 3.设置过滤和排序
-    // 过滤当前登录用户的好友
-    NSString *jid = [ZHBUserInfo sharedUserInfo].jid;
-    NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@",jid];
-    request.predicate = pre;
-    
-    //排序
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];
-    request.sortDescriptors = @[sort];
-    
-    // 4.执行请求获取数据
-    self.resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    self.resultsController.delegate = self;
-    
+    DDLOG_INFO
     NSError *err = nil;
-    [self.resultsController performFetch:&err];
-    if (err) {
+    if (![self.resultsController performFetch:&err]) {
         DDLogError(@"%@", err);
     } else {
-        self.friends = self.resultsController.fetchedObjects;
+        [self updateFetchedResults];
     }
+}
+
+- (void)updateFetchedResults {
+    self.friends = self.resultsController.fetchedObjects;
+    [(RACSubject *)self.rac_updateSignal sendNext:nil];
 }
 
 #pragma mark -
 #pragma mark Getters
+- (NSFetchedResultsController *)resultsController {
+    if (nil == _resultsController) {
+        NSManagedObjectContext *context = [ZHBXMPPTool sharedXMPPTool].xmppRosterStorage.mainThreadManagedObjectContext;
+        
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppUserCoreDataStorageObject];
 
-- (NSArray *)friends {
-    if (nil == _friends) {
-        _friends = [[NSArray alloc] init];
+        NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@",[ZHBUserInfo sharedUserInfo].jid];
+        request.predicate = pre;
+        
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];
+        request.sortDescriptors = @[sort];
+        
+        _resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     }
-    return _friends;
+    return _resultsController;
+}
+
+- (RACSignal *)rac_updateSignal {
+    if (nil == _rac_updateSignal) {
+        _rac_updateSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
+    }
+    return _rac_updateSignal;
 }
 
 @end

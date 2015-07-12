@@ -10,6 +10,7 @@
 #import "ZHBXMPPTool.h"
 #import "ZHBUserInfo.h"
 #import "ZHBXMPPConst.h"
+#import "XXMessagesTool.h"
 #import "XMPPMessageArchiving_Message_CoreDataObject.h"
 #import <ReactiveCocoa.h>
 
@@ -78,7 +79,7 @@
 
 #pragma mark 获取历史消息
 - (void)loadHistoryMessages {
-    DDLogInfo(@"%@::%@", THIS_FILE, THIS_METHOD);
+    DDLOG_INFO
     
     //设置查询条件
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@ AND timestamp < %@", [ZHBUserInfo sharedUserInfo].jid, self.toUser.jid.bare, self.farthestDate];
@@ -95,8 +96,7 @@
 
     NSError *error = nil;
     if (![historyResultesController performFetch:&error]) {
-        DDLogError(@"获取消息失败");
-        DDLogVerbose(@"error: %@", error);
+        DDLogError(@"获取消息失败:\n%@", error);
     } else {
         NSInteger messageCount = historyResultesController.fetchedObjects.count;
         if (0 == messageCount) return;
@@ -111,6 +111,7 @@
         self.farthestDate = message.timestamp;
         if (self.canResetUnreadMessages) {
             [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
+            [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
             self.reset = NO;
         }
         [(RACSubject *)self.historySignal sendNext:@(fetchedResults.count - 1)];
@@ -122,8 +123,7 @@
 
 #pragma mark 获取最新消息
 - (void)loadFreshMessages {
-    DDLogInfo(@"%@::%@", THIS_FILE, THIS_METHOD);
-
+    DDLOG_INFO
     NSError *error = nil;
     if (![self.freshResultsController performFetch:&error]) {
         DDLogError(@"获取消息失败:\n%@", error);
@@ -139,6 +139,7 @@
     [self.messages addObjectsFromArray:self.freshResultsController.fetchedObjects];
     self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).timestamp;
     [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
+    [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
 }
 
 #pragma mark -

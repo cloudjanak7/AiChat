@@ -14,11 +14,13 @@
 /**
  *  @brief  好友列表数组更新信号
  */
-@property (nonatomic, strong) RACSignal *updateSignal;
+@property (nonatomic, strong, readonly) RACSignal *rac_updateSignal;
 
 /**
  *  @brief  存储XMPPUserCoreDataStorageObject
  */
 @property (nonatomic, strong, readonly) NSArray *friends;
+
+- (void)loadContactsList;
 
 @end

@@ -10,6 +10,7 @@
 #import "TXLContactsTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "TXLChatVC.h"
+#import <MJRefresh.h>
 #import <ReactiveCocoa.h>
 @interface TXLContactsTVC ()
 
@@ -24,9 +25,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupTableView];
+    [self setupSignal];
     @weakify(self);
-    [self.contactsTool.updateSignal subscribeNext:^(id x) {
+    [self.contactsTool.rac_updateSignal subscribeNext:^(id x) {
         @strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -62,6 +64,33 @@
      }
     cell.textLabel.text = ((XMPPUserCoreDataStorageObject *)self.contactsTool.friends[indexPath.row]).jidStr;
     return cell;
+}
+
+#pragma mark -
+#pragma mark Private Methods
+- (void)setupTableView {
+    self.tableView.rowHeight = 60;
+    
+    @weakify(self);
+    MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self);
+        [self.contactsTool loadContactsList];
+    }];
+    refreshHeader.lastUpdatedTimeLabel.hidden = YES;
+    [refreshHeader setTitle:@"下拉刷新好友列表" forState:MJRefreshStateIdle];
+    [refreshHeader setTitle:@"松开立即刷新" forState:MJRefreshStatePulling];
+    [refreshHeader setTitle:@"刷新中..." forState:MJRefreshStateRefreshing];
+    
+    self.tableView.header = refreshHeader;
+}
+
+- (void)setupSignal {
+    @weakify(self);
+    [self.contactsTool.rac_updateSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self.tableView reloadData];
+        [self.tableView.header endRefreshing];
+    }];
 }
 
 #pragma mark -

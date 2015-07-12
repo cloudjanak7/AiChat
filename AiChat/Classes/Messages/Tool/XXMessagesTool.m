@@ -23,12 +23,17 @@
 
 @property (nonatomic, strong, readwrite) NSArray *recentContacts;
 
+@property (nonatomic, strong, readwrite) NSNumber *allUnreadNum;
+
 @end
 
 @implementation XXMessagesTool
 
 #pragma mark -
 #pragma mark Life Cycle
+
+ZHBSingletonM(MessagesTool)
+
 - (instancetype)init {
     if (self = [super init]) {
         [self loadRecentContacts];
@@ -40,7 +45,6 @@
 #pragma mark NSFetchedResultsController Delegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     DDLOG_INFO
-    if (0 == controller.fetchedObjects.count) return;
     [self updateFetchedResults];
 }
 
@@ -53,9 +57,7 @@
     if (![self.fetchedResultsController performFetch:&error]) {
         DDLogError(@"获取最近联系人失败:\n%@", error);
     } else {
-        if (self.fetchedResultsController.fetchedObjects.count > 0) {
-            [self updateFetchedResults];
-        }
+        [self updateFetchedResults];
     }
 }
 
@@ -69,8 +71,8 @@
         XMPPUserCoreDataStorageObject *friendUser = [xmppTool.xmppRosterStorage userForJID:recentMessage.bareJid xmppStream:xmppTool.xmppStream managedObjectContext:xmppTool.xmppRosterStorage.mainThreadManagedObjectContext];
         contactMessage.recentMessage = recentMessage;
         contactMessage.friendUser = friendUser;
-        allUnreadNum += [friendUser.unreadMessages integerValue];
         [contactMessages addObject:contactMessage];
+        allUnreadNum += [friendUser.unreadMessages integerValue];
     }
     
     self.allUnreadNum = @(allUnreadNum);

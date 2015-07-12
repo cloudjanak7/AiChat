@@ -34,11 +34,6 @@
     [self setupSignal];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self reloadRecentMessages];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[TXLChatVC class]]) {
         TXLChatVC *chatVc = segue.destinationViewController;
