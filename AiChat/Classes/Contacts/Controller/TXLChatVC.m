@@ -118,7 +118,6 @@
         TXLChatCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TXLChatCell class])];
         cell.message = message;
         self.heightDict[@([message.timestamp timeIntervalSinceReferenceDate])] = @(cell.height);
-        DDLogVerbose(@"%@", self.heightDict);
         return cell.height;
     }
 }

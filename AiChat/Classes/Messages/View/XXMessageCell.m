@@ -32,7 +32,7 @@
 #pragma mark -
 #pragma mark Life Cycle
 - (void)awakeFromNib {
-
+    
 }
 
 #pragma mark -

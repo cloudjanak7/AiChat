@@ -10,11 +10,14 @@
 #import "TXLContactsTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "TXLChatVC.h"
+#import "UIView+Frame.h"
 #import <MJRefresh.h>
 #import <ReactiveCocoa.h>
-@interface TXLContactsTVC ()
+@interface TXLContactsTVC ()<UISearchBarDelegate>
 
 @property (nonatomic, strong) TXLContactsTool *contactsTool;
+
+@property (nonatomic, weak) UISearchBar *searchBar;
 
 @end
 
@@ -27,21 +30,26 @@
     [super viewDidLoad];
     [self setupTableView];
     [self setupSignal];
-    @weakify(self);
-    [self.contactsTool.rac_updateSignal subscribeNext:^(id x) {
-        @strongify(self);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+    [self setupSearchBar];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[TXLChatVC class]]) {
-        TXLChatVC *chatVc = segue.destinationViewController;
-        chatVc.friendUser = (XMPPUserCoreDataStorageObject *)sender;
-    }
-}
+//-(void)viewDidLayoutSubviews
+//{
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+//    }
+//
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+//    }
+//}
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.destinationViewController isKindOfClass:[TXLChatVC class]]) {
+//        TXLChatVC *chatVc = segue.destinationViewController;
+//        chatVc.friendUser = (XMPPUserCoreDataStorageObject *)sender;
+//    }
+//}
 
 #pragma mark -
 #pragma mark UITableView Delegate
@@ -51,7 +59,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"contactstvc2chatvc" sender:self.contactsTool.friends[indexPath.row]];
+    [self performSegueWithIdentifier:@"contactstvc2detail" sender:self.contactsTool.friends[indexPath.row]];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark -
@@ -78,6 +97,20 @@
         [self.contactsTool loadContactsList];
     }];    
     self.tableView.header = refreshHeader;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)setupSearchBar {
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+    searchBar.delegate = self;
+    searchBar.backgroundImage = [UIImage imageNamed:@"widget_searchbar_cell_bg"];
+    searchBar.placeholder = @"搜索";
+    searchBar.showsSearchResultsButton = YES;
+    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"widget_searchbar_textfield"] forState:UIControlStateNormal];
+    [searchBar setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forSearchBarIcon:UISearchBarIconResultsList state:UIControlStateNormal];
+    [searchBar setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forSearchBarIcon:UISearchBarIconResultsList state:UIControlStateHighlighted];
+    self.tableView.tableHeaderView = searchBar;
+    self.searchBar = searchBar;
 }
 
 - (void)setupSignal {

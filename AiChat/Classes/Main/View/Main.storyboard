@@ -96,14 +96,42 @@
                             <outlet property="delegate" destination="pZo-1D-rkK" id="xjA-sd-zEI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="通讯录" id="GIM-BX-aeO"/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="Nbw-uE-2ux"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="通讯录" id="GIM-BX-aeO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fkj-FY-amr"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="Wla-NN-MaC" kind="show" identifier="contactstvc2chatvc" id="C1x-gj-CIM"/>
+                        <segue destination="GvU-te-R1a" kind="show" identifier="contactstvc2detail" id="TE4-j9-utR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zi-CO-dsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1892" y="-538"/>
+        </scene>
+        <!--详细资料-->
+        <scene sceneID="PbC-dv-2NY">
+            <objects>
+                <viewController id="GvU-te-R1a" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lUU-gj-cU0"/>
+                        <viewControllerLayoutGuide type="bottom" id="fm1-7C-pcc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5rC-rn-1cW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="详细资料" id="08X-sZ-ftI">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ajx-QU-Ims"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mng-Ng-HMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2608" y="-538"/>
         </scene>
         <!--ChatVC-->
         <scene sceneID="lno-rL-vrt">
@@ -212,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXT-fL-hVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2608" y="-907"/>
+            <point key="canvasLocation" x="2608" y="-1278"/>
         </scene>
         <!--发现-->
         <scene sceneID="c8a-aH-bmH">
@@ -287,7 +315,4 @@
             <point key="canvasLocation" x="1892" y="986"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Dzc-JE-fk5"/>
-    </inferredMetricsTieBreakers>
 </document>

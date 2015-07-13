@@ -32,6 +32,7 @@
     [self setupTableView];
     [self setupSearchBar];
     [self setupSignal];
+    [self reloadRecentMessages];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -47,6 +48,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     XXContactMessage *message = self.messagesTool.recentContacts[indexPath.row];
     [self performSegueWithIdentifier:@"messagestvc2chatvc" sender:message.friendUser];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark -
@@ -89,6 +101,14 @@
 - (void)setupTableView {
     self.tableView.rowHeight = 70;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XXMessageCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([XXMessageCell class])];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
 }
 
 - (void)reloadRecentMessages {
