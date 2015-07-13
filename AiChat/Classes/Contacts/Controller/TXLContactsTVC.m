@@ -9,7 +9,7 @@
 #import "TXLContactsTVC.h"
 #import "TXLContactsTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
-#import "TXLChatVC.h"
+#import "TXLContactDetailVC.h"
 #import "UIView+Frame.h"
 #import <MJRefresh.h>
 #import <ReactiveCocoa.h>
@@ -44,12 +44,12 @@
 //    }
 //}
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.destinationViewController isKindOfClass:[TXLChatVC class]]) {
-//        TXLChatVC *chatVc = segue.destinationViewController;
-//        chatVc.friendUser = (XMPPUserCoreDataStorageObject *)sender;
-//    }
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TXLContactDetailVC class]]) {
+        TXLContactDetailVC *contactDetailVc = segue.destinationViewController;
+        contactDetailVc.user = (XMPPUserCoreDataStorageObject *)sender;
+    }
+}
 
 #pragma mark -
 #pragma mark UITableView Delegate

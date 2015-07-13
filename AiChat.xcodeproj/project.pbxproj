@@ -186,6 +186,7 @@
 		753831291B43929D00CD136B /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75382E661B43929D00CD136B /* libidn.a */; };
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
+		7544E1EC1B5397C80034AF5A /* TXLContactDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
 		7574E9661B52355B0009B57C /* TXLChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7574E9641B52355B0009B57C /* TXLChatCell.m */; };
 		7574E9671B52355B0009B57C /* TXLChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7574E9651B52355B0009B57C /* TXLChatCell.xib */; };
@@ -562,6 +563,8 @@
 		7538318D1B43933200CD136B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		7538318F1B43939500CD136B /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
+		7544E1EA1B5397C80034AF5A /* TXLContactDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactDetailVC.h; sourceTree = "<group>"; };
+		7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLContactDetailVC.m; sourceTree = "<group>"; };
 		756724201B461AB600554473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7574E9631B52355B0009B57C /* TXLChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatCell.h; sourceTree = "<group>"; };
 		7574E9641B52355B0009B57C /* TXLChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatCell.m; sourceTree = "<group>"; };
@@ -1847,6 +1850,8 @@
 				75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */,
 				75BCC21E1B47E60D00B1CFC0 /* TXLChatVC.h */,
 				75BCC21F1B47E60D00B1CFC0 /* TXLChatVC.m */,
+				7544E1EA1B5397C80034AF5A /* TXLContactDetailVC.h */,
+				7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2276,6 +2281,7 @@
 				75382EF81B43929D00CD136B /* XMPPStringPrep.m in Sources */,
 				75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */,
 				75048E081B4537B0008C94CC /* ZHBXMPPConst.m in Sources */,
+				7544E1EC1B5397C80034AF5A /* TXLContactDetailVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
