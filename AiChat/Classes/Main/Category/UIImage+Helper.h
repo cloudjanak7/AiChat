@@ -14,7 +14,17 @@
 /**
  *  根据图片名返回一张能够自由拉伸的图片
  */
-+ (UIImage *)resizedImage:(NSString *)name;
++ (UIImage *)resizedImageNamed:(NSString *)name;
+/**
+ *  @brief  根据图片名返回一张能够自由拉伸的图片
+ *
+ *  @param name   图片名称
+ *  @param width  宽度截取位置 0-->1 左-->右
+ *  @param height 高度截取位置 0-->1 上-->下
+ *
+ *  @return 拉伸后的图片
+ */
++ (UIImage *)resizedImageNamed:(NSString *)name width:(CGFloat)width height:(CGFloat)height;
 
 /**
  *  根据颜色返回图片

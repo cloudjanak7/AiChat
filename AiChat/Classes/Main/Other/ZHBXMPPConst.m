@@ -17,9 +17,9 @@ NSString * const xmppDoMain   = @"zhuangpc.local";
 NSString * const xmppHostName = @"127.0.0.1";
 NSInteger  const xmppHostPort = 5222;
 #else
-NSString * const xmppDoMain   = @"?";
-NSString * const xmppHostName = @"?";
-NSInteger  const xmppHostPort = @"?";
+NSString * const xmppDoMain   = @"cn-mall";
+NSString * const xmppHostName = @"192.168.0.106";
+NSInteger  const xmppHostPort = 5222;
 #endif
 
 NSTimeInterval const xmppTimeout = 15.f;

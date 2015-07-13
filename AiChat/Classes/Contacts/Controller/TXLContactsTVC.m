@@ -62,6 +62,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
      }
+    cell.imageView.image = [UIImage imageNamed:@"DefaultHead"];
     cell.textLabel.text = ((XMPPUserCoreDataStorageObject *)self.contactsTool.friends[indexPath.row]).jidStr;
     return cell;
 }
@@ -75,12 +76,7 @@
     MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         @strongify(self);
         [self.contactsTool loadContactsList];
-    }];
-    refreshHeader.lastUpdatedTimeLabel.hidden = YES;
-    [refreshHeader setTitle:@"下拉刷新好友列表" forState:MJRefreshStateIdle];
-    [refreshHeader setTitle:@"松开立即刷新" forState:MJRefreshStatePulling];
-    [refreshHeader setTitle:@"刷新中..." forState:MJRefreshStateRefreshing];
-    
+    }];    
     self.tableView.header = refreshHeader;
 }
 

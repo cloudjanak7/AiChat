@@ -10,10 +10,9 @@
 #import "TXLChatTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPMessageArchiving_Message_CoreDataObject.h"
+#import "TXLChatCell.h"
 #import <MJRefresh.h>
 #import <ReactiveCocoa.h>
-
-#define MESSAGE_OF_INDEX(index) ((XMPPMessageArchiving_Message_CoreDataObject *)self.chatTool.messages[index])
 
 @interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -25,6 +24,8 @@
 
 @property (nonatomic, strong) TXLChatTool *chatTool;
 
+@property (nonatomic, strong) NSMutableDictionary *heightDict;
+
 @end
 
 @implementation TXLChatVC
@@ -33,8 +34,34 @@
 #pragma mark Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupTableView];
+    [self setupSignal];
+    self.navigationItem.title = self.friendUser.displayName;
+    self.chatTool.toUser = self.friendUser;
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)scrollToLastOldMessage:(NSNumber *)lastIndex {
+    NSInteger index = [lastIndex integerValue];
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+}
+
+- (void)scrollToLastMessage {
+    NSInteger messagesCount = [self.contentTV numberOfRowsInSection:0];
+    if (0 == messagesCount) return;
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:messagesCount - 1 inSection:0];
+    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+}
+
+- (BOOL)isValidMessage {
+    return (nil != self.contentTxtf.text && self.contentTxtf.text.length > 0);
+}
+
+- (void)setupTableView {
     @weakify(self);
-    
     MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         @strongify(self);
         [self.chatTool loadHistoryMessages];
@@ -45,7 +72,13 @@
     [refreshHeader setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
     
     self.contentTV.header = refreshHeader;
-    
+    self.contentTV.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Plugin_contentlist_backgroud"]];
+    self.contentTV.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.contentTV registerNib:[UINib nibWithNibName:NSStringFromClass([TXLChatCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([TXLChatCell class])];
+}
+
+- (void)setupSignal {
+    @weakify(self);
     [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
         @strongify(self);
         return @(self.contentTxtf.text.length > 0);
@@ -55,8 +88,6 @@
         self.contentTxtf.text = @"";
         [self.view endEditing:YES];
     }];
-    
-    self.chatTool.toUser = self.friendUser;
     
     [self.chatTool.freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -76,28 +107,21 @@
     }];
 }
 
-#pragma mark -
-#pragma mark Private Methods
-
-- (void)scrollToLastOldMessage:(NSNumber *)lastIndex {
-    NSInteger index = [lastIndex integerValue];
-    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
-
-- (void)scrollToLastMessage {
-    NSInteger messagesCount = self.chatTool.messages.count;
-    if (0 == messagesCount || 1 == messagesCount) return;
-    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:messagesCount - 1 inSection:0];
-    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
-
-- (BOOL)isValidMessage {
-    return (nil != self.contentTxtf.text && self.contentTxtf.text.length > 0);
-}
-
 #pragma mark - 
 #pragma mark UITableView Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    XMPPMessageArchiving_Message_CoreDataObject *message = self.chatTool.messages[indexPath.row];
+    if (self.heightDict[@([message.timestamp timeIntervalSinceReferenceDate])]) {
+        return [self.heightDict[@([message.timestamp timeIntervalSinceReferenceDate])] floatValue];
+    } else {
+        TXLChatCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TXLChatCell class])];
+        cell.message = message;
+        self.heightDict[@([message.timestamp timeIntervalSinceReferenceDate])] = @(cell.height);
+        DDLogVerbose(@"%@", self.heightDict);
+        return cell.height;
+    }
+}
 
 
 #pragma mark -
@@ -111,11 +135,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    TXLChatCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TXLChatCell class])];
+    if ([self.chatTool.messages[indexPath.row] isKindOfClass:[XMPPMessageArchiving_Message_CoreDataObject class]]) {
+        cell.message = self.chatTool.messages[indexPath.row];
     }
-    cell.textLabel.text = MESSAGE_OF_INDEX(indexPath.row).body;
     return cell;
 }
 
@@ -129,9 +152,11 @@
     return _chatTool;
 }
 
-//- (void)setFriendUser:(XMPPUserCoreDataStorageObject *)friendUser {
-//    _friendUser = friendUser;
-//    self.chatTool.friendJid = _friendUser.jid;
-//}
+- (NSMutableDictionary *)heightDict {
+    if (nil == _heightDict) {
+        _heightDict = [[NSMutableDictionary alloc] init];
+    }
+    return _heightDict;
+}
 
 @end

@@ -26,8 +26,12 @@
     if ([currentVersion isEqualToString:lastVersion]) {
         DDLogInfo(@"版本无更新,选择启动界面");
         //读取本地存储的账户信息
+#if LOCAL_TEST
         [[ZHBUserInfo sharedUserInfo] userInfoFromSanbox];
         [self showStoryboardWithLogonState:[ZHBUserInfo sharedUserInfo].canAutoLogin];
+#else
+        [self showStoryboardWithLogonState:NO];
+#endif
     } else {
         DDLogInfo(@"版本有更新,显示新特性界面");
         //存储当前版本信息到沙盒中

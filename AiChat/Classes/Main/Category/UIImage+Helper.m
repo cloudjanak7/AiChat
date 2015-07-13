@@ -10,10 +10,15 @@
 
 @implementation UIImage (Helper)
 
-+ (UIImage *)resizedImage:(NSString *)name
++ (UIImage *)resizedImageNamed:(NSString *)name
 {
     UIImage *image = [UIImage imageNamed:name];
     return [image stretchableImageWithLeftCapWidth:image.size.width * 0.5 topCapHeight:image.size.height * 0.5];
+}
+
++ (UIImage *)resizedImageNamed:(NSString *)name width:(CGFloat)width height:(CGFloat)height {
+    UIImage *image = [UIImage imageNamed:name];
+    return [image stretchableImageWithLeftCapWidth:image.size.width * width topCapHeight:image.size.height * height];
 }
 
 + (UIImage *)imageWithColor:(UIColor *)color {

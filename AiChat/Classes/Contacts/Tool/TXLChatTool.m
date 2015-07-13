@@ -68,7 +68,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     if (0 == controller.fetchedObjects.count) return;
     [self updateFetchedResults];
-    [(RACSubject *)self.freshSignal sendNext:nil];
 }
 
 #pragma mark -
@@ -99,7 +98,10 @@
         DDLogError(@"获取消息失败:\n%@", error);
     } else {
         NSInteger messageCount = historyResultesController.fetchedObjects.count;
-        if (0 == messageCount) return;
+        if (0 == messageCount) {
+            [(RACSubject *)self.historySignal sendNext:@(0)];
+            return;
+        };
         
         NSMutableArray *fetchedResults = [NSMutableArray array];
         for (NSInteger index = messageCount - 1; index >= 0; index --) {
@@ -129,7 +131,6 @@
         DDLogError(@"获取消息失败:\n%@", error);
     } else if (self.freshResultsController.fetchedObjects.count > 0) {
         [self updateFetchedResults];
-        [(RACSubject *)self.freshSignal sendNext:nil];
     }
 }
 
@@ -140,6 +141,7 @@
     self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).timestamp;
     [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
     [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
+    [(RACSubject *)self.freshSignal sendNext:nil];
 }
 
 #pragma mark -

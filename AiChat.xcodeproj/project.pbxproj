@@ -187,6 +187,9 @@
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
+		7574E9661B52355B0009B57C /* TXLChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7574E9641B52355B0009B57C /* TXLChatCell.m */; };
+		7574E9671B52355B0009B57C /* TXLChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7574E9651B52355B0009B57C /* TXLChatCell.xib */; };
+		7574E96A1B5254EC0009B57C /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7574E9691B5254EC0009B57C /* NSString+Helper.m */; };
 		757ACC271B4E7789009675B1 /* TabBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757ACC261B4E7789009675B1 /* TabBar.plist */; };
 		759973A61B4ECDBA006C4C29 /* XXMessagesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */; };
 		759973A91B4F734A006C4C29 /* XXMessagesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A81B4F734A006C4C29 /* XXMessagesTool.m */; };
@@ -560,6 +563,11 @@
 		7538318F1B43939500CD136B /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		756724201B461AB600554473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7574E9631B52355B0009B57C /* TXLChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatCell.h; sourceTree = "<group>"; };
+		7574E9641B52355B0009B57C /* TXLChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatCell.m; sourceTree = "<group>"; };
+		7574E9651B52355B0009B57C /* TXLChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TXLChatCell.xib; sourceTree = "<group>"; };
+		7574E9681B5254EC0009B57C /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		7574E9691B5254EC0009B57C /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		757ACC041B4E555A009675B1 /* ZHBTagMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBTagMacro.h; sourceTree = "<group>"; };
 		757ACC201B4E62C9009675B1 /* ZHBColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBColorMacro.h; sourceTree = "<group>"; };
 		757ACC261B4E7789009675B1 /* TabBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TabBar.plist; sourceTree = "<group>"; };
@@ -744,6 +752,8 @@
 		753828CE1B43929900CD136B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				7574E9681B5254EC0009B57C /* NSString+Helper.h */,
+				7574E9691B5254EC0009B57C /* NSString+Helper.m */,
 				751B3F771B4E4B8D0077B735 /* UIView+Frame.h */,
 				751B3F781B4E4B8D0077B735 /* UIView+Frame.m */,
 				751B3F791B4E4B8D0077B735 /* UIView+Helper.h */,
@@ -1869,6 +1879,9 @@
 		75BCC2151B46443F00B1CFC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7574E9631B52355B0009B57C /* TXLChatCell.h */,
+				7574E9641B52355B0009B57C /* TXLChatCell.m */,
+				7574E9651B52355B0009B57C /* TXLChatCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2029,6 +2042,7 @@
 				753808B41B43E73400F2033F /* end.wav in Resources */,
 				753808BB1B43E73400F2033F /* shake_match.wav in Resources */,
 				753808C21B43E73400F2033F /* Talkie_Tick_Short.wav in Resources */,
+				7574E9671B52355B0009B57C /* TXLChatCell.xib in Resources */,
 				753808BA1B43E73400F2033F /* sasasa.wav in Resources */,
 				759973B11B4F986C006C4C29 /* XXMessageCell.xib in Resources */,
 				756724211B461AB600554473 /* Main.storyboard in Resources */,
@@ -2169,6 +2183,7 @@
 				75382EC21B43929D00CD136B /* XMPPvCardTempTel.m in Sources */,
 				75382EF71B43929D00CD136B /* XMPPSRVResolver.m in Sources */,
 				75382EBD1B43929D00CD136B /* XMPPvCardTempAdrTypes.m in Sources */,
+				7574E9661B52355B0009B57C /* TXLChatCell.m in Sources */,
 				75382E9E1B43929D00CD136B /* XMPPRosterMemoryStorage.m in Sources */,
 				75382E901B43929D00CD136B /* XMPPBandwidthMonitor.m in Sources */,
 				75382EEF1B43929D00CD136B /* NSXMLElement+XEP_0297.m in Sources */,
@@ -2185,6 +2200,7 @@
 				75382EDD1B43929D00CD136B /* XMPPMessage+XEP_0172.m in Sources */,
 				75382EC61B43929D00CD136B /* XMPPPubSub.m in Sources */,
 				75382EFA1B43929D00CD136B /* GCDAsyncSocket.m in Sources */,
+				7574E96A1B5254EC0009B57C /* NSString+Helper.m in Sources */,
 				75382ED71B43929D00CD136B /* XMPPMessageArchiving_Contact_CoreDataObject.m in Sources */,
 				75382EE31B43929D00CD136B /* XMPPStreamManagementStanzas.m in Sources */,
 				75382E801B43929D00CD136B /* XMPPPlainAuthentication.m in Sources */,

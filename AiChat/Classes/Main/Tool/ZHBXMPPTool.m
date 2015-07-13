@@ -106,8 +106,8 @@ ZHBSingletonM(XMPPTool)
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
     DDLOG_INFO
-    DDLogError(@"error:\n%@", error);
-    if (error && self.callBack) {
+    DDLogError(@"%@", error);
+    if (self.callBack) {
         self.callBack(XMPPStatusTypeNetErr);
     }
 }
