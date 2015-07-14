@@ -96,14 +96,13 @@
                             <outlet property="delegate" destination="pZo-1D-rkK" id="xjA-sd-zEI"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem systemItem="add" id="Nbw-uE-2ux"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="通讯录" id="GIM-BX-aeO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fkj-FY-amr"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="EjN-Lk-UtT"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="rightBarBtnItem" destination="EjN-Lk-UtT" id="9qR-U5-CXI"/>
                         <segue destination="GvU-te-R1a" kind="show" identifier="contactstvc2detail" id="TE4-j9-utR"/>
                     </connections>
                 </tableViewController>
@@ -379,6 +378,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mng-Ng-HMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2608" y="-538"/>
+        </scene>
+        <!--Add FriendVC-->
+        <scene sceneID="uvz-wn-0z8">
+            <objects>
+                <viewController storyboardIdentifier="TXLAddFriendVC" id="gla-P9-H7u" customClass="TXLAddFriendVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iDm-kG-o5n"/>
+                        <viewControllerLayoutGuide type="bottom" id="vMv-RY-utz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WDo-97-PGy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入要添加的帐号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="W6f-Cx-BJK">
+                                <rect key="frame" x="30" y="70" width="540" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="lF1-HT-Kx4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P05-eL-thG">
+                                <rect key="frame" x="30" y="130" width="540" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="rzg-qk-pTh"/>
+                                </constraints>
+                                <state key="normal" title="添加好友">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="W6f-Cx-BJK" secondAttribute="trailing" constant="30" id="Bka-Hp-Iix"/>
+                            <constraint firstItem="P05-eL-thG" firstAttribute="leading" secondItem="WDo-97-PGy" secondAttribute="leading" constant="30" id="Uxy-OU-lPI"/>
+                            <constraint firstItem="W6f-Cx-BJK" firstAttribute="leading" secondItem="WDo-97-PGy" secondAttribute="leading" constant="30" id="WIo-tJ-RQt"/>
+                            <constraint firstAttribute="trailing" secondItem="P05-eL-thG" secondAttribute="trailing" constant="30" id="aPe-0E-7SL"/>
+                            <constraint firstItem="W6f-Cx-BJK" firstAttribute="top" secondItem="iDm-kG-o5n" secondAttribute="bottom" constant="50" id="dLm-si-5PF"/>
+                            <constraint firstItem="P05-eL-thG" firstAttribute="top" secondItem="W6f-Cx-BJK" secondAttribute="bottom" constant="20" id="fPJ-43-voN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addFriendBtn" destination="P05-eL-thG" id="T7K-uR-LVF"/>
+                        <outlet property="userTxtf" destination="W6f-Cx-BJK" id="49L-wk-6IW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8M-zX-Tsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3393" y="-848"/>
         </scene>
         <!--ChatVC-->
         <scene sceneID="lno-rL-vrt">

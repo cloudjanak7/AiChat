@@ -10,14 +10,20 @@
 #import "TXLContactsTool.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "TXLContactDetailVC.h"
+#import "TXLAddFriendVC.h"
 #import "UIView+Frame.h"
+#import "ZHBPopView.h"
 #import <MJRefresh.h>
 #import <ReactiveCocoa.h>
 @interface TXLContactsTVC ()<UISearchBarDelegate>
 
 @property (nonatomic, strong) TXLContactsTool *contactsTool;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarBtnItem;
+
 @property (nonatomic, weak) UISearchBar *searchBar;
+
+@property (nonatomic, weak) ZHBPopView *popView;
 
 @end
 
@@ -120,6 +126,43 @@
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     }];
+    
+    self.rightBarBtnItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        @strongify(self);
+        [self setupPopView];
+        return [RACSignal empty];
+    }];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIViewController *addFriendVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"TXLAddFriendVC"];
+}
+
+- (void)setupPopView {
+    DDLOG_INFO
+    if (self.popView) {
+        [self.popView removeFromSuperview];
+        return;
+    }
+    ZHBPopView *popView = [[ZHBPopView alloc] init];
+    popView.frame = CGRectMake(self.view.width - 170, 0, 150, 10);
+    [popView addTitle:@"添加好友" image:@"barbuttonicon_InfoSingle" target:self action:@selector(didClickAddFriendButton)];
+    [popView addTitle:@"创建群组" image:@"barbuttonicon_InfoMulti" target:self action:@selector(didClickCreateChatRoomButton)];
+    [self.view addSubview:popView];
+    self.popView = popView;
+}
+
+#pragma mark -
+#pragma mark Event Response
+
+- (void)didClickAddFriendButton {
+    DDLOG_INFO
+    [self.popView removeFromSuperview];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TXLAddFriendVC *addFriendVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"TXLAddFriendVC"];
+    [self.navigationController pushViewController:addFriendVc animated:YES];
+}
+
+- (void)didClickCreateChatRoomButton {
+    DDLOG_INFO
 }
 
 #pragma mark -
