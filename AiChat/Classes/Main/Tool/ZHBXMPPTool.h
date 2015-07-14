@@ -48,7 +48,7 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
  */
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
 
-//@property (nonatomic, copy) NSString *chatJid;
+@property (nonatomic, copy) NSString *chatJid;
 
 
 /**
@@ -84,5 +84,19 @@ ZHBSingletonH(XMPPTool)
  *  @return YES重置成功 NO重置失败
  */
 - (BOOL)resetUnreadMessage:(NSString *)fromJidStr;
+/**
+ *  @brief  判断用户是否为好友
+ *
+ *  @param jidStr 用户jid
+ *
+ *  @return YES是好友 NO非好友
+ */
+- (BOOL)userExistsWithJID:(NSString *)jidStr;
+/**
+ *  @brief  添加好友
+ *
+ *  @param jidStr 用户jid
+ */
+- (void)subscribeUser:(NSString *)jidStr;
 
 @end

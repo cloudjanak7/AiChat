@@ -63,10 +63,15 @@
     return self;
 }
 
+- (void)dealloc {
+    [ZHBXMPPTool sharedXMPPTool].chatJid = nil;
+}
+
 #pragma mark -
 #pragma mark NSFetchedResultsController Delegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     if (0 == controller.fetchedObjects.count) return;
+    if (!((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).body) return;
     [self updateFetchedResults];
 }
 
@@ -218,6 +223,7 @@
 #pragma mark Setters
 - (void)setToUser:(XMPPUserCoreDataStorageObject *)toUser {
     _toUser = toUser;
+    [ZHBXMPPTool sharedXMPPTool].chatJid = _toUser.jid.bare;
     [self loadHistoryMessages];
     [self loadFreshMessages];
 }

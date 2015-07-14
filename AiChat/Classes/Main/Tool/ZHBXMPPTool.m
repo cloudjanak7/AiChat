@@ -9,6 +9,7 @@
 #import "ZHBXMPPTool.h"
 #import "ZHBUserInfo.h"
 #import "ZHBXMPPConst.h"
+#import "NSString+Helper.h"
 #import "UIDevice+Hardware.h"
 
 @interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate>
@@ -88,6 +89,24 @@ ZHBSingletonM(XMPPTool)
     return [self updateUnreadMessage:fromJidStr reset:YES];
 }
 
+- (BOOL)userExistsWithJID:(NSString *)jidStr {
+    NSRange range = [[jidStr trimString] rangeOfString:[NSString stringWithFormat:@"@%@", xmppDoMain]];
+    if (NSNotFound == range.location) {
+        jidStr = [NSString stringWithFormat:@"%@@%@", jidStr, xmppDoMain];
+    }
+    XMPPJID *jid = [XMPPJID jidWithString:jidStr];
+    return [self.xmppRosterStorage userExistsWithJID:jid xmppStream:self.xmppStream];
+}
+
+- (void)subscribeUser:(NSString *)jidStr {
+    NSRange range = [[jidStr trimString] rangeOfString:[NSString stringWithFormat:@"@%@", xmppDoMain]];
+    if (NSNotFound == range.location) {
+        jidStr = [NSString stringWithFormat:@"%@@%@", jidStr, xmppDoMain];
+    }
+    XMPPJID *jid = [XMPPJID jidWithString:jidStr];
+    [self.xmppRoster subscribePresenceToUser:jid];
+}
+
 #pragma mark -
 #pragma mark XMPPStream Delegate
 
@@ -146,9 +165,7 @@ ZHBSingletonM(XMPPTool)
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-//#warning 这样做在网络状况不好时，好友没有刷新到最新的消息，但是这边未读消息数没有添加，未读消息数就会不准确，如果不判断，重复读取会不会性能低下？
-//    if (!message.body || [self.chatJid isEqualToString:message.from.bare]) return;
-    if (!message.body) return;
+    if (!message.body || [self.chatJid isEqualToString:message.from.bare]) return;
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf addUnreadMessage:message.from.bare];
