@@ -94,18 +94,18 @@ ZHBSingletonM(XMPPTool)
 }
 
 - (BOOL)userExistsWithJID:(NSString *)jidStr {
-    NSRange range = [[jidStr trimString] rangeOfString:[NSString stringWithFormat:@"@%@", xmppDoMain]];
+    NSRange range = [[jidStr trimString] rangeOfString:[NSString stringWithFormat:@"@%@", kXmppDoMain]];
     if (NSNotFound == range.location) {
-        jidStr = [NSString stringWithFormat:@"%@@%@", jidStr, xmppDoMain];
+        jidStr = [NSString stringWithFormat:@"%@@%@", jidStr, kXmppDoMain];
     }
     XMPPJID *jid = [XMPPJID jidWithString:jidStr];
     return [self.xmppRosterStorage userExistsWithJID:jid xmppStream:self.xmppStream];
 }
 
 - (void)subscribeUser:(NSString *)jidStr {
-    NSRange range = [[jidStr trimString] rangeOfString:[NSString stringWithFormat:@"@%@", xmppDoMain]];
+    NSRange range = [[jidStr trimString] rangeOfString:[NSString stringWithFormat:@"@%@", kXmppDoMain]];
     if (NSNotFound == range.location) {
-        jidStr = [NSString stringWithFormat:@"%@@%@", jidStr, xmppDoMain];
+        jidStr = [NSString stringWithFormat:@"%@@%@", jidStr, kXmppDoMain];
     }
     XMPPJID *jid = [XMPPJID jidWithString:jidStr];
     [self.xmppRoster subscribePresenceToUser:jid];
@@ -275,12 +275,12 @@ ZHBSingletonM(XMPPTool)
 #pragma mark Private Methods
 
 - (void)connectToHost {
-    XMPPJID *myJID = [XMPPJID jidWithUser:[ZHBUserInfo sharedUserInfo].name domain:xmppDoMain resource:[UIDevice hardWareName]];
+    XMPPJID *myJID = [XMPPJID jidWithUser:[ZHBUserInfo sharedUserInfo].name domain:kXmppDoMain resource:[UIDevice hardWareName]];
     self.xmppStream.myJID = myJID;
-    self.xmppStream.hostName = xmppHostName;
-    self.xmppStream.hostPort = xmppHostPort;
+    self.xmppStream.hostName = kXmppHostName;
+    self.xmppStream.hostPort = kXmppHostPort;
 
-    [self.xmppStream connectWithTimeout:xmppTimeout error:nil];
+    [self.xmppStream connectWithTimeout:kXmppTimeout error:nil];
 }
 
 - (void)sendPwdToHost {
@@ -346,7 +346,7 @@ ZHBSingletonM(XMPPTool)
 - (BOOL)updateUnreadMessage:(NSString *)fromJidStr reset:(BOOL)reset {
     NSManagedObjectContext *context = self.xmppRosterStorage.mainThreadManagedObjectContext;
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppUserCoreDataStorageObject];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kXmppUserCoreDataStorageObject];
     
     NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND jidStr = %@", [ZHBUserInfo sharedUserInfo].jid, fromJidStr];
     request.predicate = pre;
@@ -455,7 +455,7 @@ ZHBSingletonM(XMPPTool)
 
 - (XMPPRoom *)xmppRoom {
     if (nil == _xmppRoom) {
-        XMPPJID *roomJid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", @"chatroom", xmppChatRoomDoMain]];
+        XMPPJID *roomJid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", @"chatroom", kXmppChatRoomDoMain]];
         _xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:self.xmppRoomStorage jid:roomJid dispatchQueue:dispatch_get_main_queue()];
         [_xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }

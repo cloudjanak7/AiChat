@@ -89,7 +89,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ AND bareJidStr = %@ AND timestamp < %@", [ZHBUserInfo sharedUserInfo].jid, self.toUser.jid.bare, self.farthestDate];
     NSSortDescriptor *timeSort = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppMessageArchivingMessageCoreDataObject];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kXmppMessageArchivingMessageCoreDataObject];
     request.sortDescriptors = @[timeSort];
     request.predicate = predicate;
     request.fetchLimit = MAX_HISTORY_MESSAGES_COUNT;
@@ -208,7 +208,7 @@
         
         NSSortDescriptor *timeSort = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES];
         
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppMessageArchivingMessageCoreDataObject];
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kXmppMessageArchivingMessageCoreDataObject];
         request.sortDescriptors = @[timeSort];
         request.predicate = predicate;
         DDLogInfo(@"查询条件:");

@@ -57,7 +57,7 @@
     if (nil == _resultsController) {
         NSManagedObjectContext *context = [ZHBXMPPTool sharedXMPPTool].xmppRosterStorage.mainThreadManagedObjectContext;
         
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppUserCoreDataStorageObject];
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kXmppUserCoreDataStorageObject];
 
         NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@",[ZHBUserInfo sharedUserInfo].jid];
         request.predicate = pre;

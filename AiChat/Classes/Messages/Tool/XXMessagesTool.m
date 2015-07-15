@@ -94,7 +94,7 @@ ZHBSingletonM(MessagesTool)
     if (nil == _fetchedResultsController) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", [ZHBUserInfo sharedUserInfo].jid];
         NSSortDescriptor *timeSort = [NSSortDescriptor sortDescriptorWithKey:@"mostRecentMessageTimestamp" ascending:NO];
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:xmppMessageArchivingContactCoreDataObject];
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kXmppMessageArchivingContactCoreDataObject];
         request.sortDescriptors = @[timeSort];
         request.predicate = predicate;
         

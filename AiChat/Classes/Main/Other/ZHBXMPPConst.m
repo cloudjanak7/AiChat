@@ -8,27 +8,27 @@
 
 #import "ZHBXMPPConst.h"
 
-NSString * const userName    = @"userName";
-NSString * const userPwd     = @"userPwd";
-NSString * const loginStatus = @"loginStatus";
+NSString * const kUserName    = @"userName";
+NSString * const kUserPwd     = @"userPwd";
+NSString * const kLoginStatus = @"loginStatus";
 
 #if LOCAL_TEST
-NSString * const xmppChatRoomDoMain   = @"conference.zhuangpc.local";
-NSString * const xmppDoMain   = @"zhuangpc.local";
-NSString * const xmppHostName = @"127.0.0.1";
-NSInteger  const xmppHostPort = 5222;
+NSString * const kXmppChatRoomDoMain = @"conference.zhuangpc.local";
+NSString * const kXmppDoMain         = @"zhuangpc.local";
+NSString * const kXmppHostName       = @"127.0.0.1";
+NSInteger  const kXmppHostPort       = 5222;
 #else
-NSString * const xmppChatRoomDoMain   = @"conference.zhuangpc.local";
-NSString * const xmppDoMain   = @"cn-mall";
-NSString * const xmppHostName = @"192.168.0.106";
-NSInteger  const xmppHostPort = 5222;
+NSString * const kXmppChatRoomDoMain = @"conference.zhuangpc.local";
+NSString * const kXmppDoMain         = @"cn-mall";
+NSString * const kXmppHostName       = @"192.168.0.106";
+NSInteger  const kXmppHostPort       = 5222;
 #endif
 
-NSTimeInterval const xmppTimeout = 15.f;
+NSTimeInterval const kXmppTimeout = 15.f;
 
 
-NSString * const xmppUserCoreDataStorageObject = @"XMPPUserCoreDataStorageObject";
+NSString * const kXmppUserCoreDataStorageObject = @"XMPPUserCoreDataStorageObject";
 
-NSString * const xmppMessageArchivingMessageCoreDataObject = @"XMPPMessageArchiving_Message_CoreDataObject";
+NSString * const kXmppMessageArchivingMessageCoreDataObject = @"XMPPMessageArchiving_Message_CoreDataObject";
 
-NSString * const xmppMessageArchivingContactCoreDataObject = @"XMPPMessageArchiving_Contact_CoreDataObject";
+NSString * const kXmppMessageArchivingContactCoreDataObject = @"XMPPMessageArchiving_Contact_CoreDataObject";

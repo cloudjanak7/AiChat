@@ -8,24 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const userName;
+extern NSString * const kUserName;
 
-extern NSString * const userPwd;
+extern NSString * const kUserPwd;
 
-extern NSString * const loginStatus;
+extern NSString * const kLoginStatus;
 
-extern NSString * const xmppDoMain;
+extern NSString * const kXmppDoMain;
 
-extern NSString * const xmppChatRoomDoMain;
+extern NSString * const kXmppChatRoomDoMain;
 
-extern NSString * const xmppHostName;
+extern NSString * const kXmppHostName;
 
-extern NSInteger  const xmppHostPort;
+extern NSInteger  const kXmppHostPort;
 
-extern NSTimeInterval const xmppTimeout;
+extern NSTimeInterval const kXmppTimeout;
 
-extern NSString * const xmppUserCoreDataStorageObject;
+extern NSString * const kXmppUserCoreDataStorageObject;
 
-extern NSString * const xmppMessageArchivingMessageCoreDataObject;
+extern NSString * const kXmppMessageArchivingMessageCoreDataObject;
 
-extern NSString * const xmppMessageArchivingContactCoreDataObject;
+extern NSString * const kXmppMessageArchivingContactCoreDataObject;
