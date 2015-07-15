@@ -50,11 +50,11 @@
 //
 //#import "XMPPPrivacy.h"
 //
-//#import "XMPPMUC.h"
-//#import "XMPPRoom.h"
-//#import "XMPPRoomMemoryStorage.h"
-//#import "XMPPRoomCoreDataStorage.h"
-//#import "XMPPRoomHybridStorage.h"
+#import "XMPPMUC.h"
+#import "XMPPRoom.h"
+#import "XMPPRoomMemoryStorage.h"
+#import "XMPPRoomCoreDataStorage.h"
+#import "XMPPRoomHybridStorage.h"
 
 //电子名片
 #import "XMPPvCardTempModule.h"

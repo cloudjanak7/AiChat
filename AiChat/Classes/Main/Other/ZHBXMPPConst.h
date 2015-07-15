@@ -16,6 +16,8 @@ extern NSString * const loginStatus;
 
 extern NSString * const xmppDoMain;
 
+extern NSString * const xmppChatRoomDoMain;
+
 extern NSString * const xmppHostName;
 
 extern NSInteger  const xmppHostPort;

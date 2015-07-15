@@ -12,7 +12,7 @@
 #import "NSString+Helper.h"
 #import "UIDevice+Hardware.h"
 
-@interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate>
+@interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate, XMPPRoomDelegate>
 
 @property (nonatomic, strong, readwrite) XMPPStream *xmppStream;
 
@@ -23,6 +23,10 @@
 @property (nonatomic, strong, readwrite) XMPPRosterCoreDataStorage *xmppRosterStorage;
 
 @property (nonatomic, strong, readwrite) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
+
+@property (nonatomic, strong, readwrite) XMPPRoomCoreDataStorage *xmppRoomStorage;
+
+@property (nonatomic, strong, readwrite) XMPPRoom *xmppRoom;
 
 @property (nonatomic, strong) XMPPvCardCoreDataStorage *xmppvCardStorage;
 /**
@@ -107,6 +111,13 @@ ZHBSingletonM(XMPPTool)
     [self.xmppRoster subscribePresenceToUser:jid];
 }
 
+- (void)createChatRoom {
+    [self.xmppRoom activate:self.xmppStream];
+    [self.xmppRoom configureRoomUsingOptions:nil];
+    [self.xmppRoom joinRoomUsingNickname:@"我是谁" history:nil];
+    [self.xmppRoom fetchConfigurationForm];
+}
+
 #pragma mark -
 #pragma mark XMPPStream Delegate
 
@@ -179,6 +190,88 @@ ZHBSingletonM(XMPPTool)
 }
 
 #pragma mark -
+#pragma mark XMPPRoom Delegate
+
+- (void)xmppRoomDidCreate:(XMPPRoom *)sender {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchConfigurationForm:(NSXMLElement *)configForm {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender willSendConfiguration:(XMPPIQ *)roomConfigForm {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didConfigure:(XMPPIQ *)iqResult {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotConfigure:(XMPPIQ *)iqResult {
+    
+}
+
+- (void)xmppRoomDidJoin:(XMPPRoom *)sender {
+    
+}
+
+- (void)xmppRoomDidLeave:(XMPPRoom *)sender {
+    
+}
+
+- (void)xmppRoomDidDestroy:(XMPPRoom *)sender {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidUpdate:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items {
+    
+}
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchBanList:(XMPPIQ *)iqError {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchMembersList:(NSArray *)items {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchMembersList:(XMPPIQ *)iqError {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchModeratorsList:(NSArray *)items {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchModeratorsList:(XMPPIQ *)iqError {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didEditPrivileges:(XMPPIQ *)iqResult {
+    
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotEditPrivileges:(XMPPIQ *)iqError {
+    
+}
+
+#pragma mark -
 #pragma mark Private Methods
 
 - (void)connectToHost {
@@ -210,6 +303,7 @@ ZHBSingletonM(XMPPTool)
     [self.xmppvCardModule activate:self.xmppStream];
     [self.xmppRoster activate:self.xmppStream];
     [self.xmppMessage activate:self.xmppStream];
+    [self.xmppRoom activate:self.xmppStream];
 }
 
 - (void)teardownXMPP {
@@ -219,7 +313,7 @@ ZHBSingletonM(XMPPTool)
     [self.xmppvCardModule deactivate];
     [self.xmppRoster deactivate];
     [self.xmppMessage deactivate];
-    
+    [self.xmppRoom deactivate];
     [self.xmppStream disconnect];
     
     self.xmppStream = nil;
@@ -230,6 +324,8 @@ ZHBSingletonM(XMPPTool)
     self.xmppRosterStorage = nil;
     self.xmppMessage = nil;
     self.xmppMessageStorage = nil;
+    self.xmppRoom = nil;
+    self.xmppRoomStorage = nil;
 //    _xmppvCardAvatarModule = nil;
 //    _xmppCapabilities = nil;
 //    _xmppCapabilitiesStorage = nil;
@@ -350,7 +446,24 @@ ZHBSingletonM(XMPPTool)
     return _xmppMessage;
 }
 
+- (XMPPRoomCoreDataStorage *)xmppRoomStorage {
+    if (nil == _xmppRoomStorage) {
+        _xmppRoomStorage = [[XMPPRoomCoreDataStorage alloc] init];
+    }
+    return _xmppRoomStorage;
+}
+
+- (XMPPRoom *)xmppRoom {
+    if (nil == _xmppRoom) {
+        XMPPJID *roomJid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", @"chatroom", xmppChatRoomDoMain]];
+        _xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:self.xmppRoomStorage jid:roomJid dispatchQueue:dispatch_get_main_queue()];
+        [_xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    }
+    return _xmppRoom;
+}
+
 #pragma mark Setters
 
 
 @end
+

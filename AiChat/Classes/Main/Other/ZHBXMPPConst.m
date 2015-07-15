@@ -13,10 +13,12 @@ NSString * const userPwd     = @"userPwd";
 NSString * const loginStatus = @"loginStatus";
 
 #if LOCAL_TEST
+NSString * const xmppChatRoomDoMain   = @"conference.zhuangpc.local";
 NSString * const xmppDoMain   = @"zhuangpc.local";
 NSString * const xmppHostName = @"127.0.0.1";
 NSInteger  const xmppHostPort = 5222;
 #else
+NSString * const xmppChatRoomDoMain   = @"conference.zhuangpc.local";
 NSString * const xmppDoMain   = @"cn-mall";
 NSString * const xmppHostName = @"192.168.0.106";
 NSInteger  const xmppHostPort = 5222;

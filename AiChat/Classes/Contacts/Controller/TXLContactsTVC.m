@@ -132,8 +132,6 @@
         [self setupPopView];
         return [RACSignal empty];
     }];
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UIViewController *addFriendVc = [mainStoryboard instantiateViewControllerWithIdentifier:@"TXLAddFriendVC"];
 }
 
 - (void)setupPopView {
@@ -163,6 +161,10 @@
 
 - (void)didClickCreateChatRoomButton {
     DDLOG_INFO
+    [self.popView removeFromSuperview];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TXLAddFriendVC *newChatRoomTvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"TXLNewChatRoomTVC"];
+    [self.navigationController pushViewController:newChatRoomTvc animated:YES];
 }
 
 #pragma mark -

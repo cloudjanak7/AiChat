@@ -47,9 +47,18 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
  *  @brief  消息数据存储
  */
 @property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
-
+/**
+ *  @brief  当前聊天对象
+ */
 @property (nonatomic, copy) NSString *chatJid;
-
+/**
+ *  @brief  聊天室数据存储
+ */
+@property (nonatomic, strong, readonly) XMPPRoomCoreDataStorage *xmppRoomStorage;
+/**
+ *  @brief  聊天室
+ */
+@property (nonatomic, strong, readonly) XMPPRoom *xmppRoom;
 
 /**
  *  @brief  单例sharedXMPPTool
@@ -99,4 +108,7 @@ ZHBSingletonH(XMPPTool)
  */
 - (void)subscribeUser:(NSString *)jidStr;
 
+- (void)createChatRoom;
+
 @end
+

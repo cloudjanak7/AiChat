@@ -45,6 +45,7 @@
 
 - (void)scrollToLastOldMessage:(NSNumber *)lastIndex {
     NSInteger index = [lastIndex integerValue];
+    if (index >= self.chatTool.messages.count) return;
     NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }

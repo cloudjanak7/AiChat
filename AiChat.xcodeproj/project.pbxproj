@@ -204,6 +204,8 @@
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
 		75BCC21D1B465B0900B1CFC0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BCC21C1B465B0900B1CFC0 /* CoreData.framework */; };
 		75BCC2201B47E60D00B1CFC0 /* TXLChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21F1B47E60D00B1CFC0 /* TXLChatVC.m */; };
+		75CBDEB01B564A8A0065F77A /* ZHBXMPPChatRoomTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */; };
+		75CBDEB31B565B460065F77A /* TXLNewChatRoomTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CBDEB21B565B460065F77A /* TXLNewChatRoomTVC.m */; };
 		75F2F7441B428443004829AA /* AiChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F2F7431B428443004829AA /* AiChatTests.m */; };
 		AB54744C06FD2006ED9B425C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5089D826E508437A53A0E41 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -598,6 +600,10 @@
 		75BCC21C1B465B0900B1CFC0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		75BCC21E1B47E60D00B1CFC0 /* TXLChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatVC.h; sourceTree = "<group>"; };
 		75BCC21F1B47E60D00B1CFC0 /* TXLChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatVC.m; sourceTree = "<group>"; };
+		75CBDEAE1B564A8A0065F77A /* ZHBXMPPChatRoomTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBXMPPChatRoomTool.h; sourceTree = "<group>"; };
+		75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBXMPPChatRoomTool.m; sourceTree = "<group>"; };
+		75CBDEB11B565B460065F77A /* TXLNewChatRoomTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLNewChatRoomTVC.h; sourceTree = "<group>"; };
+		75CBDEB21B565B460065F77A /* TXLNewChatRoomTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLNewChatRoomTVC.m; sourceTree = "<group>"; };
 		75F2F7241B428443004829AA /* AiChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AiChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2F73D1B428443004829AA /* AiChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2F7421B428443004829AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -819,6 +825,8 @@
 				75048E0A1B453EAA008C94CC /* ZHBXMPPTool.m */,
 				75048E131B456485008C94CC /* DDLogConfig.h */,
 				75048E141B456485008C94CC /* DDLogConfig.m */,
+				75CBDEAE1B564A8A0065F77A /* ZHBXMPPChatRoomTool.h */,
+				75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1862,6 +1870,8 @@
 				7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */,
 				753360591B5543BA00229662 /* TXLAddFriendVC.h */,
 				7533605A1B5543BA00229662 /* TXLAddFriendVC.m */,
+				75CBDEB11B565B460065F77A /* TXLNewChatRoomTVC.h */,
+				75CBDEB21B565B460065F77A /* TXLNewChatRoomTVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2222,6 +2232,7 @@
 				7581DC2D1B55140900E4D088 /* ZHBPopView.m in Sources */,
 				75382E801B43929D00CD136B /* XMPPPlainAuthentication.m in Sources */,
 				75382E891B43929D00CD136B /* XMPPIQ.m in Sources */,
+				75CBDEB31B565B460065F77A /* TXLNewChatRoomTVC.m in Sources */,
 				75382EAB1B43929D00CD136B /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				75382ECD1B43929D00CD136B /* XMPPMessage+XEP_0085.m in Sources */,
 				75382ECC1B43929D00CD136B /* XMPPDateTimeProfiles.m in Sources */,
@@ -2252,6 +2263,7 @@
 				751B3F731B4E44660077B735 /* ZHBBaseTBC.m in Sources */,
 				75382ED91B43929D00CD136B /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				75382EF11B43929D00CD136B /* XMPPMessage+XEP_0333.m in Sources */,
+				75CBDEB01B564A8A0065F77A /* ZHBXMPPChatRoomTool.m in Sources */,
 				75382ED31B43929D00CD136B /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				75382E821B43929D00CD136B /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */,
