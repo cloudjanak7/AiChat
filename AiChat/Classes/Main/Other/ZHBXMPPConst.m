@@ -26,6 +26,9 @@ NSInteger  const kXmppHostPort       = 5222;
 
 NSTimeInterval const kXmppTimeout = 15.f;
 
+NSString * const kMessageTypeChat = @"chat";
+
+NSString * const kMessageTypeGroupChat = @"groupchat";
 
 NSString * const kXmppUserCoreDataStorageObject = @"XMPPUserCoreDataStorageObject";
 

@@ -177,10 +177,13 @@ ZHBSingletonM(XMPPTool)
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if (!message.body || [self.chatJid isEqualToString:message.from.bare]) return;
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf addUnreadMessage:message.from.bare];
-    });
+    DDLOG_INFO
+    if ([message.type isEqualToString:kMessageTypeChat]) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf addUnreadMessage:message.from.bare];
+        });
+    }
 }
 
 #pragma mark -
@@ -191,84 +194,85 @@ ZHBSingletonM(XMPPTool)
 
 #pragma mark -
 #pragma mark XMPPRoom Delegate
-
 - (void)xmppRoomDidCreate:(XMPPRoom *)sender {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didFetchConfigurationForm:(NSXMLElement *)configForm {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender willSendConfiguration:(XMPPIQ *)roomConfigForm {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didConfigure:(XMPPIQ *)iqResult {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didNotConfigure:(XMPPIQ *)iqResult {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoomDidLeave:(XMPPRoom *)sender {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoomDidDestroy:(XMPPRoom *)sender {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender occupantDidUpdate:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
+    DDLOG_INFO
     
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items {
-    
+    DDLOG_INFO
 }
+
 - (void)xmppRoom:(XMPPRoom *)sender didNotFetchBanList:(XMPPIQ *)iqError {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didFetchMembersList:(NSArray *)items {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didNotFetchMembersList:(XMPPIQ *)iqError {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didFetchModeratorsList:(NSArray *)items {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didNotFetchModeratorsList:(XMPPIQ *)iqError {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didEditPrivileges:(XMPPIQ *)iqResult {
-    
+    DDLOG_INFO
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didNotEditPrivileges:(XMPPIQ *)iqError {
-    
+    DDLOG_INFO
 }
 
 #pragma mark -

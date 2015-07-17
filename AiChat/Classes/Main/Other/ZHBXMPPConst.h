@@ -24,6 +24,10 @@ extern NSInteger  const kXmppHostPort;
 
 extern NSTimeInterval const kXmppTimeout;
 
+extern NSString * const kMessageTypeChat;
+
+extern NSString * const kMessageTypeGroupChat;
+
 extern NSString * const kXmppUserCoreDataStorageObject;
 
 extern NSString * const kXmppMessageArchivingMessageCoreDataObject;

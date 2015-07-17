@@ -18,9 +18,9 @@
 
 @interface TXLChatTool ()<NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong, readwrite) RACSubject *freshSignal;
+@property (nonatomic, strong, readwrite) RACSubject *rac_freshSignal;
 
-@property (nonatomic, strong, readwrite) RACSubject *historySignal;
+@property (nonatomic, strong, readwrite) RACSubject *rac_historySignal;
 
 /**
  *  @brief  最新消息请求
@@ -104,7 +104,7 @@
     } else {
         NSInteger messageCount = historyResultesController.fetchedObjects.count;
         if (0 == messageCount) {
-            [(RACSubject *)self.historySignal sendNext:@(0)];
+            [(RACSubject *)self.rac_historySignal sendNext:@(0)];
             return;
         };
         
@@ -121,7 +121,7 @@
             [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
             self.reset = NO;
         }
-        [(RACSubject *)self.historySignal sendNext:@(fetchedResults.count - 1)];
+        [(RACSubject *)self.rac_historySignal sendNext:@(fetchedResults.count - 1)];
     }
 }
 
@@ -146,7 +146,7 @@
     self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).timestamp;
     [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
     [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
-    [(RACSubject *)self.freshSignal sendNext:nil];
+    [(RACSubject *)self.rac_freshSignal sendNext:nil];
 }
 
 #pragma mark -
@@ -180,18 +180,18 @@
     return _farthestDate;
 }
 
-- (RACSignal *)freshSignal {
-    if (nil == _freshSignal) {
-        _freshSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
+- (RACSignal *)rac_freshSignal {
+    if (nil == _rac_freshSignal) {
+        _rac_freshSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
     }
-    return _freshSignal;
+    return _rac_freshSignal;
 }
 
-- (RACSignal *)historySignal {
-    if (nil == _historySignal) {
-        _historySignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
+- (RACSignal *)rac_historySignal {
+    if (nil == _rac_historySignal) {
+        _rac_historySignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
     }
-    return _historySignal;
+    return _rac_historySignal;
 }
 
 - (NSManagedObjectContext *)messageContext {

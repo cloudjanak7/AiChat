@@ -16,11 +16,11 @@
 /**
  *  @brief  有新消息信号
  */
-@property (nonatomic, strong, readonly) RACSignal *freshSignal;
+@property (nonatomic, strong, readonly) RACSignal *rac_freshSignal;
 /**
  *  @brief  获取到历史信息信号
  */
-@property (nonatomic, strong, readonly) RACSignal *historySignal;
+@property (nonatomic, strong, readonly) RACSignal *rac_historySignal;
 /**
  *  @brief  存储XMPPMessageArchiving_Message_CoreDataObject
  */

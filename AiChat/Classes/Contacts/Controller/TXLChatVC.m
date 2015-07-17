@@ -90,7 +90,7 @@
         [self.view endEditing:YES];
     }];
     
-    [self.chatTool.freshSignal subscribeNext:^(id x) {
+    [self.chatTool.rac_freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{
             @strongify(self);
             [self.contentTV reloadData];
@@ -98,7 +98,7 @@
         });
     }];
     
-    [self.chatTool.historySignal subscribeNext:^(NSNumber *lastIndex) {
+    [self.chatTool.rac_historySignal subscribeNext:^(NSNumber *lastIndex) {
         dispatch_async(dispatch_get_main_queue(), ^{
             @strongify(self);
             [self.contentTV.header endRefreshing];
