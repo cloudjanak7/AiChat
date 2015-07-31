@@ -13,4 +13,6 @@
 
 #define TAB_BAR_TINT_COLOR [UIColor colorWithFFRed:14 green:180 blue:0]
 
+#define SUB_TITLE_COLOR [UIColor lightGrayColor]
+
 #endif

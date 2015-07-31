@@ -10,6 +10,8 @@
 #import "ZHBSingleton.h"
 #import "XMPPFramework.h"
 
+@class RACSignal;
+
 typedef enum {
     XMPPStatusTypeConnecting = 0,//连接中...
     XMPPStatusTypeLoginSuccess,//登录成功
@@ -30,35 +32,26 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
 
 @interface ZHBXMPPTool : NSObject
 
-@property (nonatomic, strong, readonly) XMPPStream *xmppStream;
-/**
- *  @brief  电子名片
- */
-@property (nonatomic, strong, readonly) XMPPvCardTempModule *xmppvCardModule;
-/**
- *  @brief  花名册
- */
-@property (nonatomic, strong, readonly) XMPPRoster *xmppRoster;
-/**
- *  @brief  花名册数据存储
- */
-@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *xmppRosterStorage;
-/**
- *  @brief  消息数据存储
- */
-@property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage;
-/**
- *  @brief  当前聊天对象
- */
-@property (nonatomic, copy) NSString *chatJid;
-/**
- *  @brief  聊天室数据存储
- */
-@property (nonatomic, strong, readonly) XMPPRoomCoreDataStorage *xmppRoomStorage;
-/**
- *  @brief  聊天室
- */
-@property (nonatomic, strong, readonly) XMPPRoom *xmppRoom;
+@property (nonatomic, strong, readonly) XMPPStream *xmppStream; /**< XMPPStream */
+
+@property (nonatomic, strong, readonly) XMPPvCardTempModule *xmppvCardModule; /**< 电子名片 */
+
+@property (nonatomic, strong, readonly) XMPPvCardAvatarModule *xmppAvatarModule; /**< 头像模块 */
+
+@property (nonatomic, strong, readonly) XMPPRoster *xmppRoster; /**< 花名册 */
+
+@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *xmppRosterStorage; /**< 花名册数据存储 */
+
+@property (nonatomic, strong, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageStorage; /**< 消息数据存储 */
+
+@property (nonatomic, strong, readonly) XMPPRoomCoreDataStorage *xmppRoomStorage; /**< 聊天室数据存储 */
+
+@property (nonatomic, strong, readonly) XMPPRoom *xmppRoom; /**< 聊天室 */
+
+@property (nonatomic, copy) NSString *chatJid; /**< 当前聊天对象JID */
+
+/*! @brief  用户头像更新消息(发送UIImage) */
+@property (nonatomic, strong, readonly) RACSignal *rac_myVCardUpdateSignal;
 
 /**
  *  @brief  单例sharedXMPPTool
@@ -71,11 +64,19 @@ ZHBSingletonH(XMPPTool)
  *  @param callBack 回掉block
  */
 - (void)userLogin:(XMPPResultCallBack)callBack;
-
+/*!
+ *  @brief  用户注册
+ *
+ *  @param callBack 注册结果回掉
+ */
 - (void)userRegister:(XMPPResultCallBack)callBack;
-
+/*!
+ *  @brief  用户退出
+ */
 - (void)userLogout;
-
+/*!
+ *  @brief  断开服务器连接
+ */
 - (void)disConnectFromHost;
 
 /**

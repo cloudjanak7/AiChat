@@ -11,12 +11,15 @@
 #import "ZHBXMPPConst.h"
 #import "NSString+Helper.h"
 #import "UIDevice+Hardware.h"
+#import <ReactiveCocoa.h>
 
-@interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate, XMPPRoomDelegate>
+@interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate, XMPPRoomDelegate, XMPPvCardAvatarDelegate, XMPPvCardTempModuleDelegate>
 
 @property (nonatomic, strong, readwrite) XMPPStream *xmppStream;
 
 @property (nonatomic, strong, readwrite) XMPPvCardTempModule *xmppvCardModule;
+
+@property (nonatomic, strong, readwrite) XMPPvCardAvatarModule *xmppAvatarModule;
 
 @property (nonatomic, strong, readwrite) XMPPRoster *xmppRoster;
 
@@ -28,19 +31,18 @@
 
 @property (nonatomic, strong, readwrite) XMPPRoom *xmppRoom;
 
-@property (nonatomic, strong) XMPPvCardCoreDataStorage *xmppvCardStorage;
-/**
- *  @brief  自动重连模块
- */
-@property (nonatomic, strong) XMPPReconnect *xmppReconnect;
-/**
- *  @brief  聊天消息模块
- */
-@property (nonatomic, strong) XMPPMessageArchiving *xmppMessage;
+@property (nonatomic, strong) XMPPvCardCoreDataStorage *xmppvCardStorage; /**< 电子名片存储 */
 
-@property (nonatomic, copy) XMPPResultCallBack callBack;
+@property (nonatomic, strong) XMPPReconnect *xmppReconnect; /**< 自动重连模块 */
 
-@property (nonatomic, assign, getter=isRegisterOperation) BOOL registerOperation;
+@property (nonatomic, strong) XMPPMessageArchiving *xmppMessage; /**< 聊天消息模块 */
+
+@property (nonatomic, copy) XMPPResultCallBack callBack; /**< 登录注册回掉block */
+
+@property (nonatomic, assign, getter=isRegisterOperation) BOOL registerOperation; /**< 是否为注册操作 */
+
+/*! @brief  <#Description#> */
+@property (nonatomic, strong, readwrite) RACSubject *rac_myVCardUpdateSignal;
 
 @end
 
@@ -193,6 +195,37 @@ ZHBSingletonM(XMPPTool)
 }
 
 #pragma mark -
+#pragma mark XMPPvCardAvatar Delegate
+- (void)xmppvCardAvatarModule:(XMPPvCardAvatarModule *)vCardTempModule didReceivePhoto:(UIImage *)photo forJID:(XMPPJID *)jid {
+    DDLOG_INFO
+}
+
+#pragma mark -
+#pragma mark XMPPvCardTempModule Delegate
+- (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
+        didReceivevCardTemp:(XMPPvCardTemp *)vCardTemp
+                     forJID:(XMPPJID *)jid {
+    DDLOG_INFO
+    @weakify(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @strongify(self);
+        if ([jid.bare isEqualToString:[ZHBUserInfo sharedUserInfo].jid]) {
+            [(RACSubject *)self.rac_myVCardUpdateSignal sendNext:vCardTemp];
+        }
+    });
+
+}
+
+- (void)xmppvCardTempModuleDidUpdateMyvCard:(XMPPvCardTempModule *)vCardTempModule {
+    DDLOG_INFO
+}
+
+- (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule failedToUpdateMyvCard:(NSXMLElement *)error {
+    DDLOG_INFO
+    DDLogError(@"%@", error);
+}
+
+#pragma mark -
 #pragma mark XMPPRoom Delegate
 - (void)xmppRoomDidCreate:(XMPPRoom *)sender {
     DDLOG_INFO
@@ -305,6 +338,7 @@ ZHBSingletonM(XMPPTool)
 - (void)setupXMPP {
     [self.xmppReconnect activate:self.xmppStream];
     [self.xmppvCardModule activate:self.xmppStream];
+    [self.xmppAvatarModule activate:self.xmppStream];
     [self.xmppRoster activate:self.xmppStream];
     [self.xmppMessage activate:self.xmppStream];
     [self.xmppRoom activate:self.xmppStream];
@@ -312,9 +346,12 @@ ZHBSingletonM(XMPPTool)
 
 - (void)teardownXMPP {
     [self.xmppStream removeDelegate:self];
+    [self.xmppRoster removeDelegate:self];
+    [self.xmppRoom removeDelegate:self];
     
     [self.xmppReconnect deactivate];
     [self.xmppvCardModule deactivate];
+    [self.xmppAvatarModule deactivate];
     [self.xmppRoster deactivate];
     [self.xmppMessage deactivate];
     [self.xmppRoom deactivate];
@@ -330,9 +367,7 @@ ZHBSingletonM(XMPPTool)
     self.xmppMessageStorage = nil;
     self.xmppRoom = nil;
     self.xmppRoomStorage = nil;
-//    _xmppvCardAvatarModule = nil;
-//    _xmppCapabilities = nil;
-//    _xmppCapabilitiesStorage = nil;
+    self.xmppAvatarModule = nil;
 }
 
 - (void)addUnreadMessage:(NSString *)fromJidStr {
@@ -413,8 +448,17 @@ ZHBSingletonM(XMPPTool)
 - (XMPPvCardTempModule *)xmppvCardModule {
     if (nil == _xmppvCardModule) {
         _xmppvCardModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:self.xmppvCardStorage];
+        [_xmppvCardModule addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     }
     return _xmppvCardModule;
+}
+
+- (XMPPvCardAvatarModule *)xmppAvatarModule {
+    if (nil == _xmppAvatarModule) {
+        _xmppAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:self.xmppvCardModule];
+        [_xmppAvatarModule addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    }
+    return _xmppAvatarModule;
 }
 
 - (XMPPRosterCoreDataStorage *)xmppRosterStorage {
@@ -461,9 +505,16 @@ ZHBSingletonM(XMPPTool)
     if (nil == _xmppRoom) {
         XMPPJID *roomJid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", @"chatroom", kXmppChatRoomDoMain]];
         _xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:self.xmppRoomStorage jid:roomJid dispatchQueue:dispatch_get_main_queue()];
-        [_xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [_xmppRoom addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     }
     return _xmppRoom;
+}
+
+- (RACSignal *)rac_myVCardUpdateSignal {
+    if (nil == _rac_myVCardUpdateSignal) {
+        _rac_myVCardUpdateSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
+    }
+    return _rac_myVCardUpdateSignal;
 }
 
 #pragma mark Setters

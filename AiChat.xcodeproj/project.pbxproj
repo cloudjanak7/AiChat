@@ -188,10 +188,14 @@
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
 		7544E1EC1B5397C80034AF5A /* TXLContactDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */; };
+		755074401B6BC72D003785CD /* ZHBCommentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7550743F1B6BC72D003785CD /* ZHBCommentPopView.m */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
 		7574E9661B52355B0009B57C /* TXLChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7574E9641B52355B0009B57C /* TXLChatCell.m */; };
 		7574E9671B52355B0009B57C /* TXLChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7574E9651B52355B0009B57C /* TXLChatCell.xib */; };
 		7574E96A1B5254EC0009B57C /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7574E9691B5254EC0009B57C /* NSString+Helper.m */; };
+		75799ED81B6A6B9300961448 /* MEProfilesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75799ED71B6A6B9300961448 /* MEProfilesTVC.m */; };
+		75799EDC1B6A71EC00961448 /* MEProfileDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75799EDB1B6A71EC00961448 /* MEProfileDetailTVC.m */; };
+		75799EDF1B6A7AEB00961448 /* MEProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75799EDE1B6A7AEB00961448 /* MEProfileEditVC.m */; };
 		757ACC271B4E7789009675B1 /* TabBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757ACC261B4E7789009675B1 /* TabBar.plist */; };
 		7581DC2D1B55140900E4D088 /* ZHBPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7581DC2A1B55140900E4D088 /* ZHBPopView.m */; };
 		759973A61B4ECDBA006C4C29 /* XXMessagesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973A51B4ECDBA006C4C29 /* XXMessagesTVC.m */; };
@@ -571,12 +575,21 @@
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		7544E1EA1B5397C80034AF5A /* TXLContactDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactDetailVC.h; sourceTree = "<group>"; };
 		7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLContactDetailVC.m; sourceTree = "<group>"; };
+		7550743E1B6BC72D003785CD /* ZHBCommentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommentPopView.h; sourceTree = "<group>"; };
+		7550743F1B6BC72D003785CD /* ZHBCommentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBCommentPopView.m; sourceTree = "<group>"; };
 		756724201B461AB600554473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7574E9631B52355B0009B57C /* TXLChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatCell.h; sourceTree = "<group>"; };
 		7574E9641B52355B0009B57C /* TXLChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatCell.m; sourceTree = "<group>"; };
 		7574E9651B52355B0009B57C /* TXLChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TXLChatCell.xib; sourceTree = "<group>"; };
 		7574E9681B5254EC0009B57C /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		7574E9691B5254EC0009B57C /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		75799ED61B6A6B9300961448 /* MEProfilesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEProfilesTVC.h; sourceTree = "<group>"; };
+		75799ED71B6A6B9300961448 /* MEProfilesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEProfilesTVC.m; sourceTree = "<group>"; };
+		75799ED91B6A6FF700961448 /* ZHBFontMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBFontMacro.h; sourceTree = "<group>"; };
+		75799EDA1B6A71EC00961448 /* MEProfileDetailTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEProfileDetailTVC.h; sourceTree = "<group>"; };
+		75799EDB1B6A71EC00961448 /* MEProfileDetailTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEProfileDetailTVC.m; sourceTree = "<group>"; };
+		75799EDD1B6A7AEB00961448 /* MEProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEProfileEditVC.h; sourceTree = "<group>"; };
+		75799EDE1B6A7AEB00961448 /* MEProfileEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEProfileEditVC.m; sourceTree = "<group>"; };
 		757ACC041B4E555A009675B1 /* ZHBTagMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBTagMacro.h; sourceTree = "<group>"; };
 		757ACC201B4E62C9009675B1 /* ZHBColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHBColorMacro.h; sourceTree = "<group>"; };
 		757ACC261B4E7789009675B1 /* TabBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TabBar.plist; sourceTree = "<group>"; };
@@ -808,6 +821,7 @@
 				7528AC611B45216700F96C0F /* ZHBCommon.h */,
 				75048E0C1B453ED9008C94CC /* ZHBSingleton.h */,
 				757ACC041B4E555A009675B1 /* ZHBTagMacro.h */,
+				75799ED91B6A6FF700961448 /* ZHBFontMacro.h */,
 				757ACC201B4E62C9009675B1 /* ZHBColorMacro.h */,
 				75048E061B4537B0008C94CC /* ZHBXMPPConst.h */,
 				75048E071B4537B0008C94CC /* ZHBXMPPConst.m */,
@@ -1689,6 +1703,8 @@
 				7581DC291B55140900E4D088 /* ZHBPopView.h */,
 				7581DC2A1B55140900E4D088 /* ZHBPopView.m */,
 				756724201B461AB600554473 /* Main.storyboard */,
+				7550743E1B6BC72D003785CD /* ZHBCommentPopView.h */,
+				7550743F1B6BC72D003785CD /* ZHBCommentPopView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1805,6 +1821,12 @@
 		757ACC151B4E61D0009675B1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				75799ED61B6A6B9300961448 /* MEProfilesTVC.h */,
+				75799ED71B6A6B9300961448 /* MEProfilesTVC.m */,
+				75799EDA1B6A71EC00961448 /* MEProfileDetailTVC.h */,
+				75799EDB1B6A71EC00961448 /* MEProfileDetailTVC.m */,
+				75799EDD1B6A7AEB00961448 /* MEProfileEditVC.h */,
+				75799EDE1B6A7AEB00961448 /* MEProfileEditVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2181,6 +2203,7 @@
 				75382E851B43929D00CD136B /* NSNumber+XMPP.m in Sources */,
 				7533605B1B5543BA00229662 /* TXLAddFriendVC.m in Sources */,
 				7528AC5E1B44223500F96C0F /* DLLoginVC.m in Sources */,
+				75799EDF1B6A7AEB00961448 /* MEProfileEditVC.m in Sources */,
 				75382E8E1B43929D00CD136B /* XMPPPresence.m in Sources */,
 				75382E7B1B43929D00CD136B /* main.m in Sources */,
 				759973B01B4F986C006C4C29 /* XXMessageCell.m in Sources */,
@@ -2236,6 +2259,7 @@
 				75382EAB1B43929D00CD136B /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				75382ECD1B43929D00CD136B /* XMPPMessage+XEP_0085.m in Sources */,
 				75382ECC1B43929D00CD136B /* XMPPDateTimeProfiles.m in Sources */,
+				755074401B6BC72D003785CD /* ZHBCommentPopView.m in Sources */,
 				75382E8F1B43929D00CD136B /* XMPPStream.m in Sources */,
 				75382EC81B43929D00CD136B /* XMPPIQ+XEP_0066.m in Sources */,
 				75382EA31B43929D00CD136B /* XMPPIQ+JabberRPCResonse.m in Sources */,
@@ -2297,6 +2321,8 @@
 				75382E8A1B43929D00CD136B /* XMPPJID.m in Sources */,
 				75382E911B43929D00CD136B /* XMPPCoreDataStorage.m in Sources */,
 				75382EE61B43929D00CD136B /* XMPPPing.m in Sources */,
+				75799ED81B6A6B9300961448 /* MEProfilesTVC.m in Sources */,
+				75799EDC1B6A71EC00961448 /* MEProfileDetailTVC.m in Sources */,
 				75382ECF1B43929D00CD136B /* XMPPTransports.m in Sources */,
 				75382EF41B43929D00CD136B /* GCDMulticastDelegate.m in Sources */,
 				75382EF01B43929D00CD136B /* XMPPMessage+XEP_0308.m in Sources */,

@@ -10,6 +10,9 @@
 #ifndef AiChat_ZHBCommon_h
 #define AiChat_ZHBCommon_h
 
+#import "ZHBColorMacro.h"
+#import "ZHBFontMacro.h"
+
 #import <DDLog.h>
 #ifdef DEBUG
 static const DDLogLevel ddLogLevel = LOG_LEVEL_VERBOSE;
