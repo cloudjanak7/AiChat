@@ -59,6 +59,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fnh-cf-MDu"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="rightBarBtnItem" destination="fnh-cf-MDu" id="mg6-Nv-9Q8"/>
                         <segue destination="Wla-NN-MaC" kind="show" identifier="messagestvc2chatvc" id="Dzc-JE-fk5"/>
                     </connections>
                 </tableViewController>
@@ -1067,6 +1068,6 @@
         <image name="contactflag_star_mark" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f5j-9O-odR"/>
+        <segue reference="Dzc-JE-fk5"/>
     </inferredMetricsTieBreakers>
 </document>

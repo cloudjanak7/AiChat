@@ -188,7 +188,8 @@
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
 		7544E1EC1B5397C80034AF5A /* TXLContactDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */; };
-		755074401B6BC72D003785CD /* ZHBCommentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7550743F1B6BC72D003785CD /* ZHBCommentPopView.m */; };
+		755074401B6BC72D003785CD /* ZHBCommonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7550743F1B6BC72D003785CD /* ZHBCommonPopView.m */; };
+		755074431B6BD2C5003785CD /* ZHBCommonSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 755074421B6BD2C5003785CD /* ZHBCommonSearchBar.m */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
 		7574E9661B52355B0009B57C /* TXLChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7574E9641B52355B0009B57C /* TXLChatCell.m */; };
 		7574E9671B52355B0009B57C /* TXLChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7574E9651B52355B0009B57C /* TXLChatCell.xib */; };
@@ -575,8 +576,10 @@
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		7544E1EA1B5397C80034AF5A /* TXLContactDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactDetailVC.h; sourceTree = "<group>"; };
 		7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLContactDetailVC.m; sourceTree = "<group>"; };
-		7550743E1B6BC72D003785CD /* ZHBCommentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommentPopView.h; sourceTree = "<group>"; };
-		7550743F1B6BC72D003785CD /* ZHBCommentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBCommentPopView.m; sourceTree = "<group>"; };
+		7550743E1B6BC72D003785CD /* ZHBCommonPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommonPopView.h; sourceTree = "<group>"; };
+		7550743F1B6BC72D003785CD /* ZHBCommonPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBCommonPopView.m; sourceTree = "<group>"; };
+		755074411B6BD2C5003785CD /* ZHBCommonSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommonSearchBar.h; sourceTree = "<group>"; };
+		755074421B6BD2C5003785CD /* ZHBCommonSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBCommonSearchBar.m; sourceTree = "<group>"; };
 		756724201B461AB600554473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7574E9631B52355B0009B57C /* TXLChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatCell.h; sourceTree = "<group>"; };
 		7574E9641B52355B0009B57C /* TXLChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatCell.m; sourceTree = "<group>"; };
@@ -1703,8 +1706,10 @@
 				7581DC291B55140900E4D088 /* ZHBPopView.h */,
 				7581DC2A1B55140900E4D088 /* ZHBPopView.m */,
 				756724201B461AB600554473 /* Main.storyboard */,
-				7550743E1B6BC72D003785CD /* ZHBCommentPopView.h */,
-				7550743F1B6BC72D003785CD /* ZHBCommentPopView.m */,
+				7550743E1B6BC72D003785CD /* ZHBCommonPopView.h */,
+				7550743F1B6BC72D003785CD /* ZHBCommonPopView.m */,
+				755074411B6BD2C5003785CD /* ZHBCommonSearchBar.h */,
+				755074421B6BD2C5003785CD /* ZHBCommonSearchBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2259,7 +2264,7 @@
 				75382EAB1B43929D00CD136B /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				75382ECD1B43929D00CD136B /* XMPPMessage+XEP_0085.m in Sources */,
 				75382ECC1B43929D00CD136B /* XMPPDateTimeProfiles.m in Sources */,
-				755074401B6BC72D003785CD /* ZHBCommentPopView.m in Sources */,
+				755074401B6BC72D003785CD /* ZHBCommonPopView.m in Sources */,
 				75382E8F1B43929D00CD136B /* XMPPStream.m in Sources */,
 				75382EC81B43929D00CD136B /* XMPPIQ+XEP_0066.m in Sources */,
 				75382EA31B43929D00CD136B /* XMPPIQ+JabberRPCResonse.m in Sources */,
@@ -2267,6 +2272,7 @@
 				75382EC71B43929D00CD136B /* TURNSocket.m in Sources */,
 				75382E861B43929D00CD136B /* NSXMLElement+XMPP.m in Sources */,
 				75382EDF1B43929D00CD136B /* XMPPMessage+XEP_0184.m in Sources */,
+				755074431B6BD2C5003785CD /* ZHBCommonSearchBar.m in Sources */,
 				75382EDB1B43929D00CD136B /* XMPPURI.m in Sources */,
 				751B3F761B4E4B260077B735 /* UIImage+Helper.m in Sources */,
 				75382EEC1B43929D00CD136B /* XMPPMessage+XEP_0224.m in Sources */,

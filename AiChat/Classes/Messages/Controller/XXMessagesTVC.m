@@ -13,11 +13,15 @@
 #import "XXMessageCell.h"
 #import "XXContactMessage.h"
 #import "TXLChatVC.h"
+#import "ZHBCommonSearchBar.h"
+#import "ZHBCommonPopView.h"
 #import <ReactiveCocoa.h>
 
 @interface XXMessagesTVC ()<UISearchBarDelegate>
 
-@property (nonatomic, weak) UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarBtnItem;
+
+@property (nonatomic, weak) ZHBCommonSearchBar *searchBar;
 
 @property (nonatomic, strong) XXMessagesTool *messagesTool;
 
@@ -76,14 +80,9 @@
 #pragma mark -
 #pragma mark Private Methods 
 - (void)setupSearchBar {
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+    ZHBCommonSearchBar *searchBar = [[ZHBCommonSearchBar alloc] init];
+    searchBar.frame = CGRectMake(0, 0, self.view.width, 40);
     searchBar.delegate = self;
-    searchBar.backgroundImage = [UIImage imageNamed:@"widget_searchbar_cell_bg"];
-    searchBar.placeholder = @"搜索";
-    searchBar.showsSearchResultsButton = YES;
-    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"widget_searchbar_textfield"] forState:UIControlStateNormal];
-    [searchBar setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forSearchBarIcon:UISearchBarIconResultsList state:UIControlStateNormal];
-    [searchBar setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forSearchBarIcon:UISearchBarIconResultsList state:UIControlStateHighlighted];
     self.tableView.tableHeaderView = searchBar;
     self.searchBar = searchBar;
 }
@@ -95,6 +94,12 @@
             @strongify(self);
             [self reloadRecentMessages];
         });
+    }];
+    
+    self.rightBarBtnItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        @strongify(self);
+        [ZHBCommonPopView showPopViewInVC:self];
+        return [RACSignal empty];
     }];
 }
 

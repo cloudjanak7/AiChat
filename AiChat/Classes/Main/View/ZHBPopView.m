@@ -9,13 +9,12 @@
 #import "ZHBPopView.h"
 #import "UIView+Frame.h"
 
+static CGFloat const kToolButtoH = 40;
+
 @interface ZHBPopView ()
 
-@property (nonatomic, strong) UIButton *coverBtn;
-
-@property (nonatomic, strong) UIView *toolView;
-
 @property (nonatomic, strong) NSMutableArray *tools;
+
 @end
 
 @implementation ZHBPopView
@@ -28,7 +27,7 @@
     CGFloat btnX = 0;
     CGFloat btnY = 0;
     CGFloat btnW = self.width;
-    CGFloat btnH = 40;
+    CGFloat btnH = kToolButtoH;
     for (UIButton *btn in self.tools) {
         btn.frame = CGRectMake(btnX, btnY + btnH * index, btnW, btnH);
         index ++;
@@ -57,30 +56,7 @@
 }
 
 #pragma mark - 
-#pragma mark Event Response
-- (void)coverClicked {
-    [self removeFromSuperview];
-}
-
-#pragma mark - 
 #pragma mark Getters and Setters
-
-- (UIButton *)coverBtn {
-    if (nil == _coverBtn) {
-        _coverBtn = [[UIButton alloc] init];
-        _coverBtn.backgroundColor = [UIColor blackColor];
-        _coverBtn.alpha = 0.3;
-        [_coverBtn addTarget:self action:@selector(coverClicked) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _coverBtn;
-}
-
-- (UIView *)toolView {
-    if (nil == _toolView) {
-        _toolView = [[UIView alloc] init];
-    }
-    return _toolView;
-}
 
 - (NSMutableArray *)tools {
     if (nil == _tools) {
