@@ -50,8 +50,11 @@ typedef void (^XMPPResultCallBack)(XMPPStatusType type);
 
 @property (nonatomic, copy) NSString *chatJid; /**< 当前聊天对象JID */
 
-/*! @brief  用户头像更新消息(发送UIImage) */
+/*! @brief  用户头像更新信号(发送UIImage) */
 @property (nonatomic, strong, readonly) RACSignal *rac_myVCardUpdateSignal;
+
+/*! @brief  用户最新信息信号 */
+@property (nonatomic, strong, readonly) RACSignal *rac_messageUpdateSignal;
 
 /**
  *  @brief  单例sharedXMPPTool
@@ -71,13 +74,9 @@ ZHBSingletonH(XMPPTool)
  */
 - (void)userRegister:(XMPPResultCallBack)callBack;
 /*!
- *  @brief  用户退出
+ *  @brief  用户断开服务器连接
  */
 - (void)userLogout;
-/*!
- *  @brief  断开服务器连接
- */
-- (void)disConnectFromHost;
 
 /**
  *  @brief  发送消息

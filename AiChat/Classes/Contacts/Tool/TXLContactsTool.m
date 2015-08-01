@@ -59,7 +59,7 @@
         
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kXmppUserCoreDataStorageObject];
 
-        NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@",[ZHBUserInfo sharedUserInfo].jid];
+        NSPredicate *pre = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", [ZHBUserInfo sharedUserInfo].jid];
         request.predicate = pre;
         
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES];

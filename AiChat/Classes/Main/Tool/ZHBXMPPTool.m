@@ -44,6 +44,9 @@
 /*! @brief  <#Description#> */
 @property (nonatomic, strong, readwrite) RACSubject *rac_myVCardUpdateSignal;
 
+/*! @brief  <#Description#> */
+@property (nonatomic, strong, readwrite) RACSubject *rac_messageUpdateSignal;
+
 @end
 
 @implementation ZHBXMPPTool
@@ -75,10 +78,8 @@ ZHBSingletonM(XMPPTool)
 }
 
 - (void)userLogout {
-    
-}
-
-- (void)disConnectFromHost {
+    [ZHBUserInfo sharedUserInfo].autoLogin = NO;
+    [[ZHBUserInfo sharedUserInfo] saveInfoToSanbox];
     [self sendOfflineToHost];
     [self.xmppStream disconnect];
 }
@@ -348,6 +349,8 @@ ZHBSingletonM(XMPPTool)
     [self.xmppStream removeDelegate:self];
     [self.xmppRoster removeDelegate:self];
     [self.xmppRoom removeDelegate:self];
+    [self.xmppvCardModule removeDelegate:self];
+    [self.xmppAvatarModule removeDelegate:self];
     
     [self.xmppReconnect deactivate];
     [self.xmppvCardModule deactivate];
@@ -410,6 +413,9 @@ ZHBSingletonM(XMPPTool)
         DDLogError(@"更新联系人未读消息数失败:\n%@", err);
         return NO;
     }
+    //发送消息更新信号
+    [(RACSubject *)self.rac_messageUpdateSignal sendNext:nil];
+
     return YES;
 }
 
@@ -456,6 +462,7 @@ ZHBSingletonM(XMPPTool)
 - (XMPPvCardAvatarModule *)xmppAvatarModule {
     if (nil == _xmppAvatarModule) {
         _xmppAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:self.xmppvCardModule];
+        _xmppAvatarModule.autoClearMyvcard = NO;
         [_xmppAvatarModule addDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
     }
     return _xmppAvatarModule;
@@ -515,6 +522,13 @@ ZHBSingletonM(XMPPTool)
         _rac_myVCardUpdateSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
     }
     return _rac_myVCardUpdateSignal;
+}
+
+- (RACSignal *)rac_messageUpdateSignal {
+    if (nil == _rac_messageUpdateSignal) {
+        _rac_messageUpdateSignal = [[RACSubject subject] setNameWithFormat:@"%@::%@", THIS_FILE, THIS_METHOD];
+    }
+    return _rac_messageUpdateSignal;
 }
 
 #pragma mark Setters
