@@ -13,11 +13,9 @@
 #import "XXContactMessage.h"
 #import <ReactiveCocoa.h>
 
-@interface XXMessagesTool ()<NSFetchedResultsControllerDelegate>
+@interface XXMessagesTool ()
 
 @property (nonatomic, strong, readwrite) RACSubject *rac_updateSignal;
-
-@property (nonatomic, strong) NSManagedObjectContext *recentMessageContext;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
@@ -32,24 +30,24 @@
 #pragma mark -
 #pragma mark Life Cycle
 
-ZHBSingletonM(MessagesTool)
-
 - (instancetype)init {
     if (self = [super init]) {
         [self loadRecentContacts];
+        [self setupSignal];
     }
     return self;
 }
 
 #pragma mark -
-#pragma mark NSFetchedResultsController Delegate
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    DDLOG_INFO
-    [self updateFetchedResults];
-}
-
-#pragma mark -
 #pragma mark Private Methods
+
+- (void)setupSignal {
+    @weakify(self);
+    [[ZHBXMPPTool sharedXMPPTool].rac_messageUpdateSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self updateFetchedResults];
+    }];
+}
 
 - (void)loadRecentContacts {
     DDLOG_INFO
@@ -83,13 +81,6 @@ ZHBSingletonM(MessagesTool)
 #pragma mark -
 #pragma mark Getters
 
-- (NSManagedObjectContext *)recentMessageContext {
-    if (nil == _recentMessageContext) {
-        _recentMessageContext = [ZHBXMPPTool sharedXMPPTool].xmppMessageStorage.mainThreadManagedObjectContext;
-    }
-    return _recentMessageContext;
-}
-
 - (NSFetchedResultsController *)fetchedResultsController {
     if (nil == _fetchedResultsController) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", [ZHBUserInfo sharedUserInfo].jid];
@@ -101,8 +92,8 @@ ZHBSingletonM(MessagesTool)
         DDLogInfo(@"查询条件:");
         DDLogVerbose(@"%@", request);
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.recentMessageContext sectionNameKeyPath:nil cacheName:nil];
-        _fetchedResultsController.delegate = self;
+        NSManagedObjectContext *recentMessageContext = [ZHBXMPPTool sharedXMPPTool].xmppMessageStorage.mainThreadManagedObjectContext;
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:recentMessageContext sectionNameKeyPath:nil cacheName:nil];
     }
     return _fetchedResultsController;
 }

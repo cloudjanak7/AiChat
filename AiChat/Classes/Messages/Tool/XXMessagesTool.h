@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZHBSingleton.h"
 @class RACSignal;
 
 @interface XXMessagesTool : NSObject
@@ -25,9 +24,5 @@
  *  @brief  总未读消息数
  */
 @property (nonatomic, strong, readonly) NSNumber *allUnreadNum;
-
-ZHBSingletonH(MessagesTool)
-
-- (void)updateFetchedResults;
 
 @end

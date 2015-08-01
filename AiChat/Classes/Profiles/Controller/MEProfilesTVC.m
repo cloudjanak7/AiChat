@@ -9,6 +9,7 @@
 #import "MEProfilesTVC.h"
 #import "XMPPvCardTemp.h"
 #import "ZHBXMPPTool.h"
+#import "ZHBControllerTool.h"
 #import "ZHBUserInfo.h"
 #import <ReactiveCocoa.h>
 
@@ -65,6 +66,16 @@
     }
     self.accountLbl.text = [@"帐号 ：" stringByAppendingString:[ZHBUserInfo sharedUserInfo].name];
     [self.tableView layoutSubviews];
+}
+
+#pragma mark -
+#pragma mark UITableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (3 == indexPath.section && 0 == indexPath.row) {
+        [[ZHBXMPPTool sharedXMPPTool] userLogout];
+        [ZHBControllerTool showStoryboardWithLogonState:NO];
+    }
 }
 
 @end

@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = YES;
     @weakify(self);
     RACSignal *validUsernameSignal = [self.userNameTxtf.rac_textSignal map:^id(NSString * name) {
         @strongify(self);

@@ -46,7 +46,9 @@
  *  @brief  最新一条消息的时间
  */
 @property (nonatomic, strong) NSDate *latestDate;
-
+/*!
+ *  @brief  第一次获取历史消息后需要清空未读消息数,其它情况不用
+ */
 @property (nonatomic, assign, getter=canResetUnreadMessages) BOOL reset;
 
 @end
@@ -118,7 +120,6 @@
         self.farthestDate = message.timestamp;
         if (self.canResetUnreadMessages) {
             [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
-            [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
             self.reset = NO;
         }
         [(RACSubject *)self.rac_historySignal sendNext:@(fetchedResults.count - 1)];
@@ -145,7 +146,6 @@
     [self.messages addObjectsFromArray:self.freshResultsController.fetchedObjects];
     self.latestDate = ((XMPPMessageArchiving_Message_CoreDataObject *)[self.freshResultsController.fetchedObjects lastObject]).timestamp;
     [[ZHBXMPPTool sharedXMPPTool] resetUnreadMessage:self.toUser.jid.bare];
-    [[XXMessagesTool sharedMessagesTool] updateFetchedResults];
     [(RACSubject *)self.rac_freshSignal sendNext:nil];
 }
 
