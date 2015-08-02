@@ -43,10 +43,12 @@ static CGFloat const kToolButtoH = 40;
 
 - (void)addTitle:(NSString *)title image:(NSString *)imageName target:(id)target action:(SEL)action {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [button setContentEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.85]];
+    [button setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.88]];
     if (imageName) {
         [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateHighlighted];

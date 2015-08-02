@@ -50,7 +50,7 @@
 }
 
 - (void)setupDefaultStyle {
-    self.accountLbl.font = TITLE_FONT;
+    self.accountLbl.font = LIST_TITLE_FONT;
     self.accountLbl.textColor = SUB_TITLE_COLOR;
 }
 

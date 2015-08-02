@@ -11,6 +11,8 @@
 #import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPMessageArchiving_Contact_CoreDataObject.h"
 #import "NSDate+Helper.h"
+#import "UIView+Helper.h"
+#import "ZHBXMPPTool.h"
 #import <ReactiveCocoa.h>
 
 @interface XXMessageCell ()
@@ -52,9 +54,23 @@
 }
 
 - (void)setupCell {
-    self.timeLbl.text = [self.contactMessage.recentMessage.mostRecentMessageTimestamp timeString];
+    self.timeLbl.text = [self.contactMessage.recentMessage.mostRecentMessageTimestamp formatIMDate];
     self.titleLbl.text = self.contactMessage.recentMessage.bareJidStr;
     self.subTitleLbl.text = self.contactMessage.recentMessage.mostRecentMessageBody;
+    UIImage *photo = self.contactMessage.friendUser.photo;
+    if (!photo) {
+        if (self.contactMessage.friendUser.jid) {
+            photo = [UIImage imageWithData:[[ZHBXMPPTool sharedXMPPTool].xmppAvatarModule photoDataForJID:self.contactMessage.friendUser.jid]];
+        }
+        if (!photo) {
+            photo = [UIImage imageNamed:@"DefaultHead"];
+        }
+    }
+    //当消息为群消息时根据群成员动态生成头像组合
+    [self.imagesView removeAllSubviews];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:photo];
+    [self.imagesView addSubview:imageView];
+    imageView.frame = self.imagesView.bounds;
     [self updateUnreadMessage];
 }
 

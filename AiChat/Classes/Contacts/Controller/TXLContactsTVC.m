@@ -16,6 +16,8 @@
 #import "ZHBCommonPopView.h"
 #import <MJRefresh.h>
 #import <ReactiveCocoa.h>
+#import "ZHBXMPPTool.h"
+
 @interface TXLContactsTVC ()<UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarBtnItem;
@@ -74,9 +76,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell.imageView.bounds = CGRectMake(0, 0, 40, 40);
      }
-    cell.imageView.image = [UIImage imageNamed:@"DefaultHead"];
-    cell.textLabel.text = ((XMPPUserCoreDataStorageObject *)self.contactsTool.friends[indexPath.row]).jidStr;
+    XMPPUserCoreDataStorageObject *user = self.contactsTool.friends[indexPath.row];
+    UIImage *photo = user.photo;
+    if (!photo) {
+        photo = [UIImage imageWithData:[[ZHBXMPPTool sharedXMPPTool].xmppAvatarModule photoDataForJID:user.jid]];
+        if (!photo) {
+            photo = [UIImage imageNamed:@"DefaultHead"];
+        }
+     }
+    cell.imageView.image = photo;
+    cell.textLabel.text = user.jidStr;
     return cell;
 }
 

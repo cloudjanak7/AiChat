@@ -26,4 +26,16 @@
 
 - (NSString *)dateTimeString;
 
++ (NSDate *)formatLongDateTimeFromString:(NSString *)string;
+
+- (NSString *)formatIMDate;
+
+- (BOOL)isToday;
+
+- (BOOL)isYesterday;
+
+- (BOOL)isTomorrow;
+
+- (BOOL)isInWeek;
+
 @end

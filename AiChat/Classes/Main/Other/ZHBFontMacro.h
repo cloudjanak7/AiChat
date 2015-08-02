@@ -9,10 +9,14 @@
 #ifndef AiChat_ZHBFontMacro_h
 #define AiChat_ZHBFontMacro_h
 
-#define SUB_TITLE_FONT [UIFont systemFontOfSize:14]
+#define LIST_SUB_TITLE_FONT [UIFont systemFontOfSize:14]
 
-#define TITLE_FONT [UIFont systemFontOfSize:16]
+#define LIST_TITLE_FONT [UIFont systemFontOfSize:16]
 
-#define NAV_TITLE_FONT [UIFont boldSystemFontOfSize:18]
+#define NAV_TITLE_FONT [UIFont boldSystemFontOfSize:20]
+
+#define CHAT_TIME_FONT [UIFont boldSystemFontOfSize:12]
+
+#define CHAT_MESSAGE_FONT [UIFont systemFontOfSize:17]
 
 #endif

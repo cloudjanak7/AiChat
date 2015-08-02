@@ -13,96 +13,93 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vY-q3-OFU">
-                        <rect key="frame" x="10" y="30" width="45" height="45"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="081-Do-iJX" userLabel="对方头像">
+                        <rect key="frame" x="10" y="10" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="qbF-1g-tQz"/>
-                            <constraint firstAttribute="height" constant="45" id="shP-uV-U1p"/>
+                            <constraint firstAttribute="width" constant="40" id="Iyc-3L-Mgk"/>
+                            <constraint firstAttribute="height" constant="40" id="acS-YW-qm3"/>
                         </constraints>
-                        <state key="normal" backgroundImage="DefaultHead">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <string key="userLabel" base64-UTF8="YES">
-EOWvueaWueWktOWDjw
-</string>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1G-zz-elN" userLabel="对方消息">
-                        <rect key="frame" x="60" y="30" width="65" height="69"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="18" maxY="10"/>
-                        <state key="normal" backgroundImage="ReceiverTextNodeBkg">
-                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ds1-88-fdH" userLabel="时间">
-                        <rect key="frame" x="145" y="0.0" width="30" height="20"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WK5-XB-JlQ" userLabel="自己头像">
+                        <rect key="frame" x="270" y="10" width="40" height="40"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReceiverTextNodeBkg" highlightedImage="ReceiverTextNodeBkgHL" translatesAutoresizingMaskIntoConstraints="NO" id="LHi-IM-2q0" userLabel="对方消息">
+                        <rect key="frame" x="55" y="10" width="80" height="54"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="wJ8-Ey-nda"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="zv1-pj-Lfi"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJK-C4-YSy" userLabel="对方消息">
+                        <rect key="frame" x="75" y="20" width="40" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SenderTextNodeBkg" translatesAutoresizingMaskIntoConstraints="NO" id="mSt-tN-ra5">
+                        <rect key="frame" x="187" y="10" width="78" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="Gju-3U-yrK"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXK-Y1-Bg8" userLabel="我的消息">
+                        <rect key="frame" x="207" y="20" width="38" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYQ-UI-Tz2" userLabel="消息时间">
+                        <rect key="frame" x="145" y="0.0" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="6jt-V4-Lk5"/>
+                        </constraints>
                         <state key="normal">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ko-9b-Q5h" userLabel="我的头像">
-                        <rect key="frame" x="265" y="30" width="45" height="45"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="45" id="MvE-bF-5MQ"/>
-                            <constraint firstAttribute="height" constant="45" id="uaj-dt-byX"/>
-                        </constraints>
-                        <state key="normal" backgroundImage="DefaultHead">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Am-8P-wzm" userLabel="我的消息">
-                        <rect key="frame" x="195" y="30" width="65" height="69"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="18" maxY="10"/>
-                        <state key="normal" backgroundImage="SenderTextNodeBkg">
-                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="i1G-zz-elN" firstAttribute="leading" secondItem="4vY-q3-OFU" secondAttribute="trailing" constant="5" id="0Va-Ov-nJA"/>
-                    <constraint firstAttribute="bottom" secondItem="i1G-zz-elN" secondAttribute="bottom" constant="10" id="1ih-4F-S4p"/>
-                    <constraint firstItem="ds1-88-fdH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="3JL-EK-BPD"/>
-                    <constraint firstItem="0Ko-9b-Q5h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="40h-O0-zn3"/>
-                    <constraint firstAttribute="centerX" secondItem="ds1-88-fdH" secondAttribute="centerX" id="GHQ-Yb-A7w"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i1G-zz-elN" secondAttribute="trailing" constant="60" id="ITA-bH-3Sj"/>
-                    <constraint firstItem="0Ko-9b-Q5h" firstAttribute="leading" secondItem="2Am-8P-wzm" secondAttribute="trailing" constant="5" id="Qbv-7M-exQ"/>
-                    <constraint firstItem="2Am-8P-wzm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="VcH-te-Qyg"/>
-                    <constraint firstItem="i1G-zz-elN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="YZg-0i-tFU"/>
-                    <constraint firstItem="4vY-q3-OFU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="ag7-t5-7Gp"/>
-                    <constraint firstItem="0Ko-9b-Q5h" firstAttribute="top" secondItem="2Am-8P-wzm" secondAttribute="top" id="lNr-tC-MCT"/>
-                    <constraint firstItem="4vY-q3-OFU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="pqw-rK-nfK"/>
-                    <constraint firstAttribute="trailing" secondItem="0Ko-9b-Q5h" secondAttribute="trailing" constant="10" id="qxd-cF-Akg"/>
-                    <constraint firstAttribute="bottom" secondItem="i1G-zz-elN" secondAttribute="bottom" constant="10" id="yfj-de-eI7"/>
-                    <constraint firstAttribute="bottom" secondItem="2Am-8P-wzm" secondAttribute="bottom" constant="10" id="zpf-Ou-ATI"/>
+                    <constraint firstAttribute="centerX" secondItem="CYQ-UI-Tz2" secondAttribute="centerX" id="0cH-Za-87s"/>
+                    <constraint firstItem="LHi-IM-2q0" firstAttribute="trailing" secondItem="gJK-C4-YSy" secondAttribute="trailing" constant="20" id="0cg-D4-fdY"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="top" secondItem="WK5-XB-JlQ" secondAttribute="top" id="0h2-RX-wZP"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="leading" secondItem="lXK-Y1-Bg8" secondAttribute="leading" constant="-20" id="1AC-lU-vwO"/>
+                    <constraint firstItem="LHi-IM-2q0" firstAttribute="bottom" secondItem="gJK-C4-YSy" secondAttribute="bottom" constant="20" id="72H-XQ-yuu"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LHi-IM-2q0" secondAttribute="bottom" id="8U3-zC-K9m"/>
+                    <constraint firstItem="081-Do-iJX" firstAttribute="top" secondItem="WK5-XB-JlQ" secondAttribute="top" id="AXe-6B-OGE"/>
+                    <constraint firstItem="WK5-XB-JlQ" firstAttribute="leading" secondItem="mSt-tN-ra5" secondAttribute="trailing" constant="5" id="HJJ-lO-7Kl"/>
+                    <constraint firstItem="CYQ-UI-Tz2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Hwt-a1-1ay"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="top" secondItem="lXK-Y1-Bg8" secondAttribute="top" constant="-10" id="LEy-Mq-Euz"/>
+                    <constraint firstItem="081-Do-iJX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="NTO-9d-nNh"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="trailing" secondItem="lXK-Y1-Bg8" secondAttribute="trailing" constant="20" id="OL8-hz-PVG"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mSt-tN-ra5" secondAttribute="bottom" id="Qpi-Y2-yHm"/>
+                    <constraint firstAttribute="trailing" secondItem="WK5-XB-JlQ" secondAttribute="trailing" constant="10" id="UWU-SW-JZq"/>
+                    <constraint firstItem="LHi-IM-2q0" firstAttribute="top" secondItem="081-Do-iJX" secondAttribute="top" id="aJu-OE-FeF"/>
+                    <constraint firstItem="LHi-IM-2q0" firstAttribute="top" secondItem="gJK-C4-YSy" secondAttribute="top" constant="-10" id="eBQ-Mw-7Vc"/>
+                    <constraint firstItem="LHi-IM-2q0" firstAttribute="leading" secondItem="gJK-C4-YSy" secondAttribute="leading" constant="-20" id="h4J-PC-CUb"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="bottom" secondItem="lXK-Y1-Bg8" secondAttribute="bottom" constant="20" id="hjN-u8-4ls"/>
+                    <constraint firstItem="081-Do-iJX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="izY-3W-akI"/>
+                    <constraint firstItem="081-Do-iJX" firstAttribute="height" secondItem="WK5-XB-JlQ" secondAttribute="height" id="lXj-fR-xiP"/>
+                    <constraint firstItem="081-Do-iJX" firstAttribute="width" secondItem="WK5-XB-JlQ" secondAttribute="width" id="n8K-4w-1el"/>
+                    <constraint firstItem="LHi-IM-2q0" firstAttribute="leading" secondItem="081-Do-iJX" secondAttribute="trailing" constant="5" id="zY0-Dd-7yT"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="yfj-de-eI7"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="myHeadBtn" destination="0Ko-9b-Q5h" id="p2Y-ay-CXI"/>
-                <outlet property="myMessageBtn" destination="2Am-8P-wzm" id="BHA-Ld-OrS"/>
-                <outlet property="otherHeadBtn" destination="4vY-q3-OFU" id="qSF-gN-oUN"/>
-                <outlet property="otherMessageBtn" destination="i1G-zz-elN" id="4DB-JO-3Yt"/>
-                <outlet property="timeBtn" destination="ds1-88-fdH" id="Iwn-r8-HMw"/>
-                <outlet property="timeBtnHeight" destination="wJ8-Ey-nda" id="5D6-M3-If9"/>
+                <outlet property="messageTopX" destination="izY-3W-akI" id="qkn-fk-9lG"/>
+                <outlet property="myHeadImageView" destination="WK5-XB-JlQ" id="mXz-9E-y2d"/>
+                <outlet property="myMessageBgImageView" destination="mSt-tN-ra5" id="oKX-1V-CJB"/>
+                <outlet property="myMessageBgMaxW" destination="Gju-3U-yrK" id="bWX-hj-FF0"/>
+                <outlet property="myMessageLbl" destination="lXK-Y1-Bg8" id="4jZ-i5-fs3"/>
+                <outlet property="otherHeadImageView" destination="081-Do-iJX" id="n1D-VZ-p27"/>
+                <outlet property="otherMessageBgImageView" destination="LHi-IM-2q0" id="uEu-Vb-5iW"/>
+                <outlet property="otherMessageBgMaxW" destination="zv1-pj-Lfi" id="HQp-Km-mKr"/>
+                <outlet property="otherMessageLbl" destination="gJK-C4-YSy" id="as4-tM-HLS"/>
+                <outlet property="timeBtn" destination="CYQ-UI-Tz2" id="8mj-LM-1hQ"/>
             </connections>
             <point key="canvasLocation" x="200" y="186"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="DefaultHead" width="46" height="46"/>
         <image name="ReceiverTextNodeBkg" width="65" height="54"/>
+        <image name="ReceiverTextNodeBkgHL" width="65" height="54"/>
         <image name="SenderTextNodeBkg" width="65" height="54"/>
     </resources>
 </document>
