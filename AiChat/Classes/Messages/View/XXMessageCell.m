@@ -55,7 +55,7 @@
 
 - (void)setupCell {
     self.timeLbl.text = [self.contactMessage.recentMessage.mostRecentMessageTimestamp formatIMDate];
-    self.titleLbl.text = self.contactMessage.recentMessage.bareJidStr;
+    self.titleLbl.text = self.contactMessage.recentMessage.bareJid.user;
     self.subTitleLbl.text = self.contactMessage.recentMessage.mostRecentMessageBody;
     UIImage *photo = self.contactMessage.friendUser.photo;
     if (!photo) {

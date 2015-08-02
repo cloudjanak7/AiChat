@@ -11,16 +11,20 @@
 #import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPMessageArchiving_Message_CoreDataObject.h"
 #import "TXLChatCell.h"
+#import "TXLChatToolView.h"
 #import <MJRefresh.h>
 #import <ReactiveCocoa.h>
+#import <Masonry.h>
+#import "UIView+Frame.h"
 
 @interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *contentTV;
-
-@property (weak, nonatomic) IBOutlet UITextField *contentTxtf;
-
-@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+/*! @brief  聊天内容列表 */
+@property (nonatomic, weak) UITableView *contentTV;
+/*! @brief  底部工具条 */
+@property (nonatomic, weak) TXLChatToolView *bottomToolView;
+/*! @brief  背景图片 */
+@property (nonatomic, weak) UIImageView *bgImageView;
 
 @property (nonatomic, strong) TXLChatTool *chatTool;
 
@@ -34,11 +38,33 @@
 #pragma mark Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupTableView];
+    [self setupView];
     [self setupSignal];
     self.navigationItem.title = self.friendUser.displayName;
     self.chatTool.toUser = self.friendUser;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+#pragma mark -
+#pragma mark Event Response
+- (void)keyboardWillShow:(NSNotification *)noti {
+    CGRect kbEndFrm  = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat kbHeight = kbEndFrm.size.height;
+    [self.bottomToolView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-kbHeight);
+    }];
+    [self scrollToLastMessage];
+
+}
+
+- (void)keyboardWillHide:(NSNotification *)noti {
+    [self.bottomToolView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(0);
+    }];
+    [self scrollToLastMessage];
+}
+
 
 #pragma mark -
 #pragma mark Private Methods
@@ -54,14 +80,28 @@
     NSInteger messagesCount = [self.contentTV numberOfRowsInSection:0];
     if (0 == messagesCount) return;
     NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:messagesCount - 1 inSection:0];
-    [self.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf.contentTV scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    });
 }
 
-- (BOOL)isValidMessage {
-    return (nil != self.contentTxtf.text && self.contentTxtf.text.length > 0);
+- (void)setupView {
+    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Plugin_contentlist_backgroud"]];
+    [self.view addSubview:bgView];
+    self.bgImageView = bgView;
+    [self setupTableView];
+    [self setupBottomToolView];
+    [self layoutViewSubviews];
 }
 
 - (void)setupTableView {
+    UITableView *contentTV = [[UITableView alloc] init];
+    contentTV.delegate = self;
+    contentTV.dataSource = self;
+    [self.view addSubview:contentTV];
+    self.contentTV = contentTV;
+
     @weakify(self);
     MJRefreshNormalHeader *refreshHeader = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         @strongify(self);
@@ -73,22 +113,52 @@
     [refreshHeader setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
     
     self.contentTV.header = refreshHeader;
-    self.contentTV.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Plugin_contentlist_backgroud"]];
+    self.contentTV.backgroundColor = [UIColor clearColor];
     self.contentTV.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.contentTV registerNib:[UINib nibWithNibName:NSStringFromClass([TXLChatCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([TXLChatCell class])];
 }
 
+- (void)setupBottomToolView {
+    TXLChatToolView *toolView = [[TXLChatToolView alloc] init];
+    __weak typeof(self) weakSelf = self;
+    toolView.sendOperation = ^(NSString *message) {
+        [weakSelf.chatTool sendMessage:message];
+    };
+    [self.view addSubview:toolView];
+    self.bottomToolView = toolView;
+}
+
+- (void)layoutViewSubviews {
+    __weak typeof(self) weakSelf = self;
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    
+    [self.contentTV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.view.mas_top).offset(0);
+        make.left.equalTo(weakSelf.view.mas_left).offset(0);
+        make.right.equalTo(weakSelf.view.mas_right).offset(0);
+        make.bottom.equalTo(weakSelf.bottomToolView.mas_top).offset(0);
+    }];
+    
+    [self.bottomToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.view.mas_left).offset(0);
+        make.right.equalTo(weakSelf.view.mas_right).offset(0);
+        make.bottom.equalTo(weakSelf.view.mas_bottom).offset(0);
+    }];
+}
+
 - (void)setupSignal {
     @weakify(self);
-    [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
-        @strongify(self);
-        return @(self.contentTxtf.text.length > 0);
-    }] subscribeNext:^(id x) {
-        @strongify(self);
-        [self.chatTool sendMessage:self.contentTxtf.text];
-        self.contentTxtf.text = @"";
-        [self.view endEditing:YES];
-    }];
+//    [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
+//        @strongify(self);
+//        return @(self.contentTxtf.text.length > 0);
+//    }] subscribeNext:^(id x) {
+//        @strongify(self);
+//        [self.chatTool sendMessage:self.contentTxtf.text];
+//        self.contentTxtf.text = @"";
+//        [self.view endEditing:YES];
+//    }];
     
     [self.chatTool.rac_freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -123,6 +193,9 @@
     }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
 
 #pragma mark -
 #pragma mark UITableView Datasource

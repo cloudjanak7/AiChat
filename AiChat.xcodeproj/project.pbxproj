@@ -211,6 +211,7 @@
 		75BCC2201B47E60D00B1CFC0 /* TXLChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21F1B47E60D00B1CFC0 /* TXLChatVC.m */; };
 		75CBDEB01B564A8A0065F77A /* ZHBXMPPChatRoomTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */; };
 		75CBDEB31B565B460065F77A /* TXLNewChatRoomTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CBDEB21B565B460065F77A /* TXLNewChatRoomTVC.m */; };
+		75EED1B01B6DDD96008844AD /* TXLChatToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75EED1AF1B6DDD96008844AD /* TXLChatToolView.m */; };
 		75F2F7441B428443004829AA /* AiChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F2F7431B428443004829AA /* AiChatTests.m */; };
 		AB54744C06FD2006ED9B425C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5089D826E508437A53A0E41 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -620,6 +621,8 @@
 		75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBXMPPChatRoomTool.m; sourceTree = "<group>"; };
 		75CBDEB11B565B460065F77A /* TXLNewChatRoomTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLNewChatRoomTVC.h; sourceTree = "<group>"; };
 		75CBDEB21B565B460065F77A /* TXLNewChatRoomTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLNewChatRoomTVC.m; sourceTree = "<group>"; };
+		75EED1AE1B6DDD96008844AD /* TXLChatToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatToolView.h; sourceTree = "<group>"; };
+		75EED1AF1B6DDD96008844AD /* TXLChatToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatToolView.m; sourceTree = "<group>"; };
 		75F2F7241B428443004829AA /* AiChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AiChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2F73D1B428443004829AA /* AiChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2F7421B428443004829AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1934,6 +1937,8 @@
 				7574E9631B52355B0009B57C /* TXLChatCell.h */,
 				7574E9641B52355B0009B57C /* TXLChatCell.m */,
 				7574E9651B52355B0009B57C /* TXLChatCell.xib */,
+				75EED1AE1B6DDD96008844AD /* TXLChatToolView.h */,
+				75EED1AF1B6DDD96008844AD /* TXLChatToolView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2298,6 +2303,7 @@
 				75382E821B43929D00CD136B /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */,
 				751B3F7B1B4E4B8D0077B735 /* UIView+Frame.m in Sources */,
+				75EED1B01B6DDD96008844AD /* TXLChatToolView.m in Sources */,
 				75382EBA1B43929D00CD136B /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
 				75382E9A1B43929D00CD136B /* XMPPRoster.xcdatamodel in Sources */,
 				75382ED51B43929D00CD136B /* XMPPCapabilities.m in Sources */,

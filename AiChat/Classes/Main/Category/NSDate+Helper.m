@@ -81,7 +81,7 @@
         formatter = [[NSDateFormatter alloc] init];
     }
     
-    formatter.dateFormat = @"hh:mm";
+    formatter.dateFormat = @"HH:mm";
     hourMinuteString = [formatter stringFromDate:self];
     
     if (todayComponents.day == dateComponents.day) {

@@ -11,6 +11,7 @@
 #import "ZHBUserInfo.h"
 #import "ZHBXMPPConst.h"
 #import "XXMessagesTool.h"
+#import "NSString+Helper.h"
 #import "XMPPMessageArchiving_Message_CoreDataObject.h"
 #import <ReactiveCocoa.h>
 
@@ -80,7 +81,9 @@
 #pragma mark -
 #pragma mark Public Methods
 - (void)sendMessage:(NSString *)message {
-    [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.toUser.jid];
+    if (message.length > 0) {
+        [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.toUser.jid];
+    }
 }
 
 #pragma mark 获取历史消息

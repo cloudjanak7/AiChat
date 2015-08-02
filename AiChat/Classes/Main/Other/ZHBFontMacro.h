@@ -19,4 +19,6 @@
 
 #define CHAT_MESSAGE_FONT [UIFont systemFontOfSize:17]
 
+#define CHAT_SEND_BTN_FONT [UIFont systemFontOfSize:14]
+
 #endif
