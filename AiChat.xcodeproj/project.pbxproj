@@ -210,6 +210,8 @@
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
 		75BCC2201B47E60D00B1CFC0 /* TXLChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21F1B47E60D00B1CFC0 /* TXLChatVC.m */; };
+		75C5712B1B6F948C00D046C1 /* ZHBEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75C5712A1B6F948C00D046C1 /* ZHBEmotionTextView.m */; };
+		75C571321B6FA7CC00D046C1 /* ZHBRegexResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 75C571311B6FA7CC00D046C1 /* ZHBRegexResult.m */; };
 		75CBDEB01B564A8A0065F77A /* ZHBXMPPChatRoomTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */; };
 		75CBDEB31B565B460065F77A /* TXLNewChatRoomTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CBDEB21B565B460065F77A /* TXLNewChatRoomTVC.m */; };
 		75D0B9EA1B6F044C0034B9E1 /* default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75D0B9E91B6F044C0034B9E1 /* default.plist */; };
@@ -854,6 +856,10 @@
 		75BCC21C1B465B0900B1CFC0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		75BCC21E1B47E60D00B1CFC0 /* TXLChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatVC.h; sourceTree = "<group>"; };
 		75BCC21F1B47E60D00B1CFC0 /* TXLChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatVC.m; sourceTree = "<group>"; };
+		75C571291B6F948C00D046C1 /* ZHBEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBEmotionTextView.h; sourceTree = "<group>"; };
+		75C5712A1B6F948C00D046C1 /* ZHBEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBEmotionTextView.m; sourceTree = "<group>"; };
+		75C571301B6FA7CC00D046C1 /* ZHBRegexResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBRegexResult.h; sourceTree = "<group>"; };
+		75C571311B6FA7CC00D046C1 /* ZHBRegexResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBRegexResult.m; sourceTree = "<group>"; };
 		75CBDEAE1B564A8A0065F77A /* ZHBXMPPChatRoomTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBXMPPChatRoomTool.h; sourceTree = "<group>"; };
 		75CBDEAF1B564A8A0065F77A /* ZHBXMPPChatRoomTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBXMPPChatRoomTool.m; sourceTree = "<group>"; };
 		75CBDEB11B565B460065F77A /* TXLNewChatRoomTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLNewChatRoomTVC.h; sourceTree = "<group>"; };
@@ -2385,6 +2391,8 @@
 				75DCC9BD1B6E597400F5B45B /* ZHBEmotion.m */,
 				75DCC9C91B6E5ADC00F5B45B /* ZHBEmotionAttachment.h */,
 				75DCC9CA1B6E5ADC00F5B45B /* ZHBEmotionAttachment.m */,
+				75C571301B6FA7CC00D046C1 /* ZHBRegexResult.h */,
+				75C571311B6FA7CC00D046C1 /* ZHBRegexResult.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2683,6 +2691,8 @@
 				759028CF1B6E70A800DDEC78 /* ZHBEmotionListView.m */,
 				75D0B9F11B6F36D00034B9E1 /* ZHBEmotionToolView.h */,
 				75D0B9F21B6F36D00034B9E1 /* ZHBEmotionToolView.m */,
+				75C571291B6F948C00D046C1 /* ZHBEmotionTextView.h */,
+				75C5712A1B6F948C00D046C1 /* ZHBEmotionTextView.m */,
 			);
 			name = EmotionKeyboard;
 			sourceTree = "<group>";
@@ -3197,6 +3207,7 @@
 				75382ECE1B43929D00CD136B /* XMPPSoftwareVersion.m in Sources */,
 				75382EB81B43929D00CD136B /* XMPPvCardCoreDataStorage.m in Sources */,
 				75048E031B4533B7008C94CC /* ZHBControllerTool.m in Sources */,
+				75C5712B1B6F948C00D046C1 /* ZHBEmotionTextView.m in Sources */,
 				75382EE11B43929D00CD136B /* XMPPBlocking.m in Sources */,
 				753831241B43929D00CD136B /* NSString+DDXML.m in Sources */,
 				75382E7E1B43929D00CD136B /* XMPPDeprecatedPlainAuthentication.m in Sources */,
@@ -3261,6 +3272,7 @@
 				75382E9E1B43929D00CD136B /* XMPPRosterMemoryStorage.m in Sources */,
 				75382E901B43929D00CD136B /* XMPPBandwidthMonitor.m in Sources */,
 				75382EEF1B43929D00CD136B /* NSXMLElement+XEP_0297.m in Sources */,
+				75C571321B6FA7CC00D046C1 /* ZHBRegexResult.m in Sources */,
 				75382EBC1B43929D00CD136B /* XMPPvCardTempAdr.m in Sources */,
 				75382E9B1B43929D00CD136B /* XMPPRosterCoreDataStorage.m in Sources */,
 				75382ED81B43929D00CD136B /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,

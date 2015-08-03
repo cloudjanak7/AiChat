@@ -10,9 +10,9 @@
 
 @interface ZHBEmotion : NSObject
 
-/*! 表情的文字描述 */
+/*! 表情的文字描述 简体 */
 @property (nonatomic, copy) NSString *chs;
-/*! 表情的文字描述 */
+/*! 表情的文字描述 繁体 */
 @property (nonatomic, copy) NSString *cht;
 /*! 表情的文png图片名 */
 @property (nonatomic, copy) NSString *png;

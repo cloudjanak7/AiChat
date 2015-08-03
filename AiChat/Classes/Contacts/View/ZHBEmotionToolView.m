@@ -110,8 +110,10 @@ static NSInteger const kEmotionToolButtonMaxCount = 4;
     button.tag = tag;
     [button addTarget:self action:@selector(didClickemotionTypeButton:) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.font = CHAT_TIME_FONT;
-    [button setBackgroundImage:[UIImage resizedImageNamed:@"EmotionsBagTabBg"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage resizedImageNamed:@"EmotionsBagTabBgFocus"] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[UIImage resizedImageNamed:@"Mode_listtextbutton"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage resizedImageNamed:@"Mode_listtextbuttonHL"] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[UIImage resizedImageNamed:@"EmotionsBagTabBgFocus"] forState:UIControlStateSelected];
+    button.adjustsImageWhenHighlighted = NO;
     return button;
 }
 

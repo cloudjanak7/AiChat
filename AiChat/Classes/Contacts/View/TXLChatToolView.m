@@ -12,6 +12,9 @@
 #import "UIImage+Helper.h"
 #import "ZHBEmotionKeyboard.h"
 #import "UIView+Frame.h"
+#import "ZHBNotificationConst.h"
+#import "ZHBEmotion.h"
+#import "ZHBEmotionTextView.h"
 
 @interface TXLChatToolView ()<UITextViewDelegate>
 
@@ -26,7 +29,7 @@
 /*! @brief  键盘输入内容框 */
 @property (nonatomic, strong) UIView *inputToolView;
 /*! @brief  输入 */
-@property (nonatomic, strong) UITextView *inputView;
+@property (nonatomic, strong) ZHBEmotionTextView *inputView;
 /*! @brief  表情 */
 @property (nonatomic, strong) UIButton *iconBtn;
 /*! @brief  横线 */
@@ -60,10 +63,17 @@ static CGFloat const kInputViewMarginX = 5;
         [self addSubview:self.moreBtn];
         [self addSubview:self.inputToolView];
         [self addSubview:self.sendBtn];
-        
+        // 监听表情选中的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedEmotion:) name:ZHBEmotionDidSelectedNotification object:nil];
+        // 监听删除按钮点击的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDeletedEmotion:) name:ZHBEmotionDidDeletedNotification object:nil];
         [self layoutViewSubviews];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -171,6 +181,16 @@ static CGFloat const kInputViewMarginX = 5;
 #pragma mark -
 #pragma mark Event Response
 
+- (void)didSelectedEmotion:(NSNotification *)noti {
+    ZHBEmotion *emotion = noti.userInfo[ZHBEmotionSelectKey];
+    [self.inputView appendEmotion:emotion];
+    [self textViewDidChange:self.inputView];
+}
+
+- (void)didDeletedEmotion:(NSNotification *)noti {
+    [self.inputView deleteBackward];
+}
+
 - (void)didChangeToolViewStatus:(UIButton *)sender {
     DDLOG_INFO
     DDLogVerbose(@"%d", sender.selected);
@@ -202,7 +222,7 @@ static CGFloat const kInputViewMarginX = 5;
 - (void)didClickSendButton:(UIButton *)sender {
     DDLOG_INFO
     if (self.sendOperation) {
-        self.sendOperation(self.inputView.text);
+        self.sendOperation(self.inputView.realText);
     }
     self.inputView.text = @"";
     [self.inputView resignFirstResponder];
@@ -219,22 +239,18 @@ static CGFloat const kInputViewMarginX = 5;
     
     if (self.inputView.inputView) { // 当前显示的是自定义键盘，切换为系统自带的键盘
         self.inputView.inputView = nil;
-//        // 显示表情图片
-//        self.toolbar.showEmotionButton = YES;
     } else { // 当前显示的是系统自带的键盘，切换为自定义键盘
         // 如果临时更换了文本框的键盘，一定要重新打开键盘
         self.inputView.inputView = self.emotionKeyboard;
-        
-//        // 不显示表情图片
-//        self.toolbar.showEmotionButton = NO;
     }
     // 关闭键盘
     [self.inputView resignFirstResponder];
     // 更换完毕完毕
     self.changingKeyboard = NO;
+    __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 打开键盘
-        [self.inputView becomeFirstResponder];
+        [weakSelf.inputView becomeFirstResponder];
     });
 }
 
@@ -314,9 +330,9 @@ static CGFloat const kInputViewMarginX = 5;
     return _inputToolView;
 }
 
-- (UITextView *)inputView {
+- (ZHBEmotionTextView *)inputView {
     if (nil == _inputView) {
-        _inputView = [[UITextView alloc] init];
+        _inputView = [[ZHBEmotionTextView alloc] init];
         _inputView.font = CHAT_MESSAGE_FONT;
         _inputView.backgroundColor = [UIColor clearColor];
         _inputView.tintColor = [UIColor grayColor];

@@ -8,6 +8,7 @@
 
 #import "ZHBEmotionTool.h"
 #import "ZHBEmotion.h"
+#import "ZHBEmotionGridView.h"
 
 #define ZHBEmotionRecentFilepath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"recent_emotions.data"]
 
@@ -73,6 +74,9 @@ static NSMutableArray *_recentEmotions;
     // 添加最新的表情
     [_recentEmotions insertObject:emotion atIndex:0];
     
+    if (_recentEmotions.count > kEmotionMaxCountPerPage) {
+        [_recentEmotions removeObjectsInRange:NSMakeRange(kEmotionMaxCountPerPage, _recentEmotions.count - kEmotionMaxCountPerPage)];
+    }
     // 存储到沙盒中
     [NSKeyedArchiver archiveRootObject:_recentEmotions toFile:ZHBEmotionRecentFilepath];
 }
