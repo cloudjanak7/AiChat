@@ -8,24 +8,20 @@
 
 #import "ZHBEmotionTextView.h"
 #import "ZHBEmotion.h"
-#import "ZHBEmotionAttachment.h"
+#import "ZHBEmotionTool.h"
 
 @implementation ZHBEmotionTextView
 
 #pragma mark -
 #pragma mark Public Methods
-- (void)appendEmotion:(ZHBEmotion *)emotion
-{
+- (void)appendEmotion:(ZHBEmotion *)emotion {
     if (emotion.emoji) { // emoji表情
         [self insertText:emotion.emoji];
     } else { // 图片表情
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
         
         // 创建一个带有图片表情的富文本
-        ZHBEmotionAttachment *attach = [[ZHBEmotionAttachment alloc] init];
-        attach.emotion = emotion;
-        attach.bounds = CGRectMake(0, -3, self.font.lineHeight, self.font.lineHeight);
-        NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
+        NSAttributedString *attachString = [ZHBEmotionTool emotionAttributedString:emotion font:self.font];
         
         // 记录表情的插入位置
         NSInteger insertIndex = self.selectedRange.location;
@@ -48,22 +44,7 @@
 #pragma mark Getters
 
 - (NSString *)realText {
-    // 1.用来拼接所有文字
-    NSMutableString *string = [NSMutableString string];
-    
-    // 2.遍历富文本里面的所有内容
-    [self.attributedText enumerateAttributesInRange:NSMakeRange(0, self.attributedText.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
-        ZHBEmotionAttachment *attach = attrs[@"NSAttachment"];
-        if (attach) { // 如果是带有附件的富文本
-            [string appendString:attach.emotion.chs];
-        } else { // 普通的文本
-            // 截取range范围的普通文本
-            NSString *substr = [self.attributedText attributedSubstringFromRange:range].string;
-            [string appendString:substr];
-        }
-    }];
-
-    return string;
+    return [ZHBEmotionTool stringWithEmotionAttributedString:self.attributedText];
 }
 
 @end

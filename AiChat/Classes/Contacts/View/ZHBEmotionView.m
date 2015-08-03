@@ -12,8 +12,7 @@
 
 @implementation ZHBEmotionView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.adjustsImageWhenHighlighted = NO;
@@ -22,8 +21,7 @@
     return self;
 }
 
-- (void)setEmotion:(ZHBEmotion *)emotion
-{
+- (void)setEmotion:(ZHBEmotion *)emotion {
     _emotion = emotion;
     
     if (emotion.code) { // emoji表情

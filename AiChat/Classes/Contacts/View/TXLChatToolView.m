@@ -36,7 +36,6 @@
 @property (nonatomic, strong) UIView *lineView;
 /*! @brief  背景图 */
 @property (nonatomic, strong) UIImageView *bgImageView;
-
 /*! @brief  emotion键盘 */
 @property (nonatomic, strong) ZHBEmotionKeyboard *emotionKeyboard;
 
@@ -63,11 +62,12 @@ static CGFloat const kInputViewMarginX = 5;
         [self addSubview:self.moreBtn];
         [self addSubview:self.inputToolView];
         [self addSubview:self.sendBtn];
+        [self layoutViewSubviews];
+        
         // 监听表情选中的通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedEmotion:) name:ZHBEmotionDidSelectedNotification object:nil];
         // 监听删除按钮点击的通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDeletedEmotion:) name:ZHBEmotionDidDeletedNotification object:nil];
-        [self layoutViewSubviews];
     }
     return self;
 }
@@ -160,6 +160,16 @@ static CGFloat const kInputViewMarginX = 5;
     self.lineView.backgroundColor = canSend ? AI_CHAT_GREEN_COLOR : [UIColor lightGrayColor];
 }
 
+- (void)resetInputView {
+    self.inputView.text = @"";
+    self.inputView.inputView = nil;
+    [self setInputViewStatus];
+    [self.inputView resignFirstResponder];
+    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(kToolViewDefaultH);
+    }];
+}
+
 #pragma mark -
 #pragma mark UITextView Delegate
 
@@ -195,20 +205,21 @@ static CGFloat const kInputViewMarginX = 5;
     DDLOG_INFO
     DDLogVerbose(@"%d", sender.selected);
     if (!sender.selected) {
+        [self.inputView resignFirstResponder];
+        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(kToolViewDefaultH);
+        }];
         [sender setImage:[UIImage imageNamed:@"ToolViewKeyboardHL"] forState:UIControlStateNormal];
         [sender setImage:[UIImage imageNamed:@"ToolViewKeyboard"] forState:UIControlStateSelected];
     } else {
+        [self.inputView becomeFirstResponder];
+        [self textViewDidChange:self.inputView];
         [sender setImage:[UIImage imageNamed:@"ToolViewInputVoice"] forState:UIControlStateNormal];
         [sender setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL"] forState:UIControlStateHighlighted];
     }
     sender.selected           = !sender.selected;
     self.inputToolView.hidden = sender.selected;
     self.audioBtn.hidden      = !sender.selected;
-}
-
-- (void)didEndChangeToolViewStatus:(UIButton *)sender {
-    DDLOG_INFO
-    
 }
 
 - (void)didClickTakeAudionButton:(UIButton *)sender {
@@ -224,12 +235,7 @@ static CGFloat const kInputViewMarginX = 5;
     if (self.sendOperation) {
         self.sendOperation(self.inputView.realText);
     }
-    self.inputView.text = @"";
-    [self.inputView resignFirstResponder];
-    [self setInputViewStatus];
-    [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(kToolViewDefaultH);
-    }];
+    [self resetInputView];
 }
 
 - (void)didClickIconButton:(UIButton *)sender {
@@ -265,7 +271,6 @@ static CGFloat const kInputViewMarginX = 5;
         [_statusBtn setImage:[UIImage imageNamed:@"ToolViewInputVoice"] forState:UIControlStateNormal];
         [_statusBtn setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL"] forState:UIControlStateHighlighted];
         [_statusBtn addTarget:self action:@selector(didChangeToolViewStatus:) forControlEvents:UIControlEventTouchUpInside];
-        [_statusBtn addTarget:self action:@selector(didEndChangeToolViewStatus:) forControlEvents:UIControlEventTouchUpOutside];
     }
     return _statusBtn;
 }

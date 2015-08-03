@@ -9,6 +9,9 @@
 #import "ZHBEmotionTool.h"
 #import "ZHBEmotion.h"
 #import "ZHBEmotionGridView.h"
+#import "ZHBEmotionAttachment.h"
+#import "ZHBRegexResult.h"
+//#import "RegexKitLite.h"
 
 #define ZHBEmotionRecentFilepath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"recent_emotions.data"]
 
@@ -23,8 +26,10 @@ static NSMutableArray *_recentEmotions;
 
 @implementation ZHBEmotionTool
 
-+ (NSArray *)defaultEmotions
-{
+#pragma mark - 
+#pragma mark Public Methods
+
++ (NSArray *)defaultEmotions {
     if (nil == _defaultEmotions) {
         NSString *plist = [[NSBundle mainBundle] pathForResource:@"default.plist" ofType:nil];
         _defaultEmotions = [ZHBEmotion emotionsWithFile:plist];
@@ -32,8 +37,7 @@ static NSMutableArray *_recentEmotions;
     return _defaultEmotions;
 }
 
-+ (NSArray *)emojiEmotions
-{
++ (NSArray *)emojiEmotions {
     if (nil == _emojiEmotions) {
         NSString *plist = [[NSBundle mainBundle] pathForResource:@"emoji.plist" ofType:nil];
         _emojiEmotions = [ZHBEmotion emotionsWithFile:plist];
@@ -41,8 +45,7 @@ static NSMutableArray *_recentEmotions;
     return _emojiEmotions;
 }
 
-+ (NSArray *)lxhEmotions
-{
++ (NSArray *)lxhEmotions {
     if (nil == _lxhEmotions) {
         NSString *plist = [[NSBundle mainBundle] pathForResource:@"lxh.plist" ofType:nil];
         _lxhEmotions = [ZHBEmotion emotionsWithFile:plist];
@@ -50,8 +53,7 @@ static NSMutableArray *_recentEmotions;
     return _lxhEmotions;
 }
 
-+ (NSArray *)recentEmotions
-{
++ (NSArray *)recentEmotions {
     if (!_recentEmotions) {
         // 去沙盒中加载最近使用的表情数据
         _recentEmotions = [NSKeyedUnarchiver unarchiveObjectWithFile:ZHBEmotionRecentFilepath];
@@ -62,9 +64,7 @@ static NSMutableArray *_recentEmotions;
     return _recentEmotions;
 }
 
-// Emotion -- 戴口罩 -- Emoji的plist里面加载的表情
-+ (void)addRecentEmotion:(ZHBEmotion *)emotion
-{
++ (void)addRecentEmotion:(ZHBEmotion *)emotion {
     // 加载最近的表情数据
     [self recentEmotions];
     
@@ -81,8 +81,7 @@ static NSMutableArray *_recentEmotions;
     [NSKeyedArchiver archiveRootObject:_recentEmotions toFile:ZHBEmotionRecentFilepath];
 }
 
-+ (ZHBEmotion *)emotionWithDesc:(NSString *)desc
-{
++ (ZHBEmotion *)emotionWithDesc:(NSString *)desc {
     if (!desc) return nil;
     
     __block ZHBEmotion *foundEmotion = nil;
@@ -105,6 +104,100 @@ static NSMutableArray *_recentEmotions;
     }];
     
     return foundEmotion;
+}
+
++ (NSAttributedString *)emotionAttributedString:(ZHBEmotion *)emotion font:(UIFont *)font {
+    ZHBEmotionAttachment *attach = [[ZHBEmotionAttachment alloc] init];
+    attach.emotion = emotion;
+    attach.bounds = CGRectMake(0, -3, font.lineHeight, font.lineHeight);
+    return [NSAttributedString attributedStringWithAttachment:attach];
+}
+
++ (NSString *)stringWithEmotionAttributedString:(NSAttributedString *)attributedString {
+    NSMutableString *string = [NSMutableString string];
+    
+    // 遍历富文本里面的所有内容
+    [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        ZHBEmotionAttachment *attach = attrs[@"NSAttachment"];
+        if (attach) { // 如果是带有附件的富文本
+            [string appendString:attach.emotion.chs];
+        } else { // 普通的文本
+            // 截取range范围的普通文本
+            NSString *substr = [attributedString attributedSubstringFromRange:range].string;
+            [string appendString:substr];
+        }
+    }];
+    
+    return string;
+}
+
++ (NSAttributedString *)emotionsAttributedStringWithString:(NSString *)string font:(UIFont *)font {
+    // 1.匹配字符串
+    NSArray *regexResults = [ZHBEmotionTool regexResultsWithString:string];
+
+    // 2.根据匹配结果，拼接对应的图片表情和普通文本
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+    // 遍历
+    [regexResults enumerateObjectsUsingBlock:^(ZHBRegexResult *result, NSUInteger idx, BOOL *stop) {
+        ZHBEmotion *emotion = nil;
+        if (result.isEmotion) { // 表情
+            emotion = [ZHBEmotionTool emotionWithDesc:result.string];
+        }
+
+        if (emotion) { // 如果有表情
+            // 创建附件对象
+            ZHBEmotionAttachment *attach = [[ZHBEmotionAttachment alloc] init];
+
+            // 传递表情
+            attach.emotion = emotion;
+            attach.bounds = CGRectMake(0, -3, font.lineHeight, font.lineHeight);
+
+            // 将附件包装成富文本
+            NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
+            [attributedString appendAttributedString:attachString];
+        } else { // 非表情（直接拼接普通文本）
+            NSMutableAttributedString *substr = [[NSMutableAttributedString alloc] initWithString:result.string];
+            [attributedString appendAttributedString:substr];
+        }
+    }];
+
+    // 设置字体
+    [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attributedString.length)];
+
+    return attributedString;
+}
+
+
++ (NSArray *)regexResultsWithString:(NSString *)string {
+    // 用来存放所有的匹配结果
+    NSMutableArray *regexResults = [NSMutableArray array];
+    
+//    // 匹配表情
+//    NSString *emotionRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
+//    [string enumerateStringsMatchedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+//        ZHBRegexResult *regexResult = [[ZHBRegexResult alloc] init];
+//        regexResult.string = *capturedStrings;
+//        regexResult.range = *capturedRanges;
+//        regexResult.emotion = YES;
+//        [regexResults addObject:regexResult];
+//    }];
+//    
+//    // 匹配非表情
+//    [string enumerateStringsSeparatedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+//        ZHBRegexResult *regexResult = [[ZHBRegexResult alloc] init];
+//        regexResult.string = *capturedStrings;
+//        regexResult.range = *capturedRanges;
+//        regexResult.emotion = NO;
+//        [regexResults addObject:regexResult];
+//    }];
+//    
+//    // 排序
+//    [regexResults sortUsingComparator:^NSComparisonResult(ZHBRegexResult *rr1, ZHBRegexResult *rr2) {
+//        NSUInteger loc1 = rr1.range.location;
+//        NSUInteger loc2 = rr2.range.location;
+//        return [@(loc1) compare:@(loc2)];
+//    }];
+    return regexResults;
 }
 
 @end

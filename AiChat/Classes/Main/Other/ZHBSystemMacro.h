@@ -14,7 +14,7 @@
 #define iOS7 (SYSTEM_VERSION >= 7.0 && SYSTEM_VERSION < 8.0)
 
 #define ZHBScreenW [UIScreen mainScreen].bounds.size.width
-
+#define ZHBScreenH [UIScreen mainScreen].bounds.size.height
 #define ZHBSystemKeyboardH 257.8
 
 #endif

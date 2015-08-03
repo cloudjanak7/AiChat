@@ -30,8 +30,7 @@
 
 #pragma mark -
 #pragma mark Life Cycle
-- (instancetype)init
-{
+- (instancetype)init {
     if (self = [super init]) {
         [self addSubview:self.imageView];
         [self addSubview:self.listView];
@@ -40,8 +39,7 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     self.imageView.frame = self.bounds;

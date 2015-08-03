@@ -36,8 +36,7 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     CGFloat leftInset = 15;
@@ -91,8 +90,7 @@
     return _deleteBtn;
 }
 
-- (NSMutableArray *)emotionViews
-{
+- (NSMutableArray *)emotionViews {
     if (nil == _emotionViews) {
         _emotionViews = [NSMutableArray array];
     }
@@ -100,8 +98,7 @@
 }
 
 #pragma mark Setters
-- (void)setEmotions:(NSArray *)emotions
-{
+- (void)setEmotions:(NSArray *)emotions {
     _emotions = emotions;
     
     // 添加新的表情

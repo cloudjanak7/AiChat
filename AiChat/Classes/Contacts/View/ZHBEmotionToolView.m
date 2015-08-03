@@ -37,8 +37,7 @@ static NSInteger const kEmotionToolButtonMaxCount = 4;
 #pragma mark -
 #pragma mark Life Cycle
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.layer.contents = (id)[UIImage resizedImageNamed:@"buttontoolbarBkg_white"].CGImage;
         // 1.添加4个按钮
@@ -53,13 +52,11 @@ static NSInteger const kEmotionToolButtonMaxCount = 4;
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
 
     // 设置工具条按钮的frame
@@ -104,8 +101,7 @@ static NSInteger const kEmotionToolButtonMaxCount = 4;
  *
  *  @param title 按钮文字
  */
-- (UIButton *)setupButtonWithTag:(ZHBEmotionType)tag
-{
+- (UIButton *)setupButtonWithTag:(ZHBEmotionType)tag {
     UIButton *button = [[UIButton alloc] init];
     button.tag = tag;
     [button addTarget:self action:@selector(didClickemotionTypeButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -162,8 +158,7 @@ static NSInteger const kEmotionToolButtonMaxCount = 4;
 
 #pragma mark -
 #pragma mark Setters
-- (void)setDelegate:(id<ZHBEmotionToolViewDelegate>)delegate
-{
+- (void)setDelegate:(id<ZHBEmotionToolViewDelegate>)delegate {
     _delegate = delegate;
     
     // 获得“默认”按钮

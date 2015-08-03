@@ -22,8 +22,7 @@
 
 @implementation ZHBEmotionListView
 
-- (instancetype)init
-{
+- (instancetype)init {
     if (self = [super init]) {
         [self addSubview:self.scrollView];
         [self addSubview:self.pageControl];
@@ -31,8 +30,7 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     // 1.UIPageControl的frame
@@ -58,8 +56,7 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.pageControl.currentPage = (NSInteger)(scrollView.contentOffset.x / scrollView.width + 0.5);
 }
 
@@ -88,8 +85,7 @@
 }
 
 #pragma mark Setters
-- (void)setEmotions:(NSArray *)emotions
-{
+- (void)setEmotions:(NSArray *)emotions {
     _emotions = emotions;
     
     // 设置总页数
