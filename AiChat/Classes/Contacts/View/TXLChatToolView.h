@@ -14,6 +14,7 @@ typedef void(^SendOperation)(NSString *message);
 
 /*! @brief  发送消息操作 */
 @property (nonatomic, copy) SendOperation sendOperation;
-
+/*! @brief  是否更换键盘 */
+@property (nonatomic, assign, readonly, getter=isChangingKeyboard) BOOL changingKeyboard;
 
 @end

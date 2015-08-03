@@ -11,6 +11,8 @@
 
 @interface UIImage (Helper)
 
++ (UIImage *)imageWithName:(NSString *)name;
+
 /**
  *  根据图片名返回一张能够自由拉伸的图片
  */

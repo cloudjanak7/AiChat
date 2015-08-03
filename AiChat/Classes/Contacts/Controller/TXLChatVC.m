@@ -16,6 +16,7 @@
 #import <ReactiveCocoa.h>
 #import <Masonry.h>
 #import "UIView+Frame.h"
+#import "UIImage+Helper.h"
 
 @interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -59,12 +60,12 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)noti {
+    if (self.bottomToolView.isChangingKeyboard) return;
     [self.bottomToolView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(0);
     }];
     [self scrollToLastMessage];
 }
-
 
 #pragma mark -
 #pragma mark Private Methods

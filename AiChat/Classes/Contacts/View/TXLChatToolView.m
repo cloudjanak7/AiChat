@@ -10,6 +10,8 @@
 #import <Masonry.h>
 #import "NSString+Helper.h"
 #import "UIImage+Helper.h"
+#import "ZHBEmotionKeyboard.h"
+#import "UIView+Frame.h"
 
 @interface TXLChatToolView ()<UITextViewDelegate>
 
@@ -31,6 +33,11 @@
 @property (nonatomic, strong) UIView *lineView;
 /*! @brief  背景图 */
 @property (nonatomic, strong) UIImageView *bgImageView;
+
+/*! @brief  emotion键盘 */
+@property (nonatomic, strong) ZHBEmotionKeyboard *emotionKeyboard;
+
+@property (nonatomic, assign, readwrite, getter=isChangingKeyboard) BOOL changingKeyboard;
 
 @end
 
@@ -140,7 +147,7 @@ static CGFloat const kInputViewMarginX = 5;
     BOOL canSend = self.inputView.text.length > 0;
     self.moreBtn.hidden = canSend;
     self.sendBtn.hidden = !canSend;
-    self.lineView.backgroundColor = canSend ? [UIColor greenColor] : [UIColor lightGrayColor];
+    self.lineView.backgroundColor = canSend ? AI_CHAT_GREEN_COLOR : [UIColor lightGrayColor];
 }
 
 #pragma mark -
@@ -158,6 +165,7 @@ static CGFloat const kInputViewMarginX = 5;
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(lineH);
     }];
+    [textView scrollRangeToVisible:NSMakeRange(0, textView.text.length)];
 }
 
 #pragma mark -
@@ -206,6 +214,28 @@ static CGFloat const kInputViewMarginX = 5;
 
 - (void)didClickIconButton:(UIButton *)sender {
     DDLOG_INFO
+    // 正在切换键盘
+    self.changingKeyboard = YES;
+    
+    if (self.inputView.inputView) { // 当前显示的是自定义键盘，切换为系统自带的键盘
+        self.inputView.inputView = nil;
+//        // 显示表情图片
+//        self.toolbar.showEmotionButton = YES;
+    } else { // 当前显示的是系统自带的键盘，切换为自定义键盘
+        // 如果临时更换了文本框的键盘，一定要重新打开键盘
+        self.inputView.inputView = self.emotionKeyboard;
+        
+//        // 不显示表情图片
+//        self.toolbar.showEmotionButton = NO;
+    }
+    // 关闭键盘
+    [self.inputView resignFirstResponder];
+    // 更换完毕完毕
+    self.changingKeyboard = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 打开键盘
+        [self.inputView becomeFirstResponder];
+    });
 }
 
 #pragma mark -
@@ -306,9 +336,19 @@ static CGFloat const kInputViewMarginX = 5;
 - (UIImageView *)bgImageView {
     if (nil == _bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
-        _bgImageView.image = [UIImage imageNamed:@"buttontoolbarBkg_white"];
+        _bgImageView.image = [UIImage resizedImageNamed:@"buttontoolbarBkg_white"];
     }
     return _bgImageView;
+}
+
+- (ZHBEmotionKeyboard *)emotionKeyboard
+{
+    if (nil == _emotionKeyboard) {
+        _emotionKeyboard = [ZHBEmotionKeyboard emotionKeyboard];
+        _emotionKeyboard.width = ZHBScreenW;
+        _emotionKeyboard.height = ZHBSystemKeyboardH;
+    }
+    return _emotionKeyboard;
 }
 
 @end

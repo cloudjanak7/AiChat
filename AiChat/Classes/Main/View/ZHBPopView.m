@@ -23,6 +23,7 @@ static CGFloat const kToolButtoH = 40;
 #pragma mark Lift Cycle
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
     NSInteger index = 0;
     CGFloat btnX = 0;
     CGFloat btnY = 0;

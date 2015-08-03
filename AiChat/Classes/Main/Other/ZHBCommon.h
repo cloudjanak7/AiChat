@@ -12,6 +12,8 @@
 
 #import "ZHBColorMacro.h"
 #import "ZHBFontMacro.h"
+#import "ZHBSystemMacro.h"
+#import "ZHBColorMacro.h"
 
 #import <DDLog.h>
 #ifdef DEBUG

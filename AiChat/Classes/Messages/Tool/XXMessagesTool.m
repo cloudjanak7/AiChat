@@ -13,7 +13,7 @@
 #import "XXContactMessage.h"
 #import <ReactiveCocoa.h>
 
-@interface XXMessagesTool ()
+@interface XXMessagesTool ()<NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong, readwrite) RACSubject *rac_updateSignal;
 
@@ -32,10 +32,17 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self loadRecentContacts];
         [self setupSignal];
+        [self loadRecentContacts];
     }
     return self;
+}
+
+#pragma mark -
+#pragma mark NSFetchedResultsController Delegate
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    DDLOG_INFO
+    [self updateFetchedResults];
 }
 
 #pragma mark -
@@ -94,6 +101,7 @@
         
         NSManagedObjectContext *recentMessageContext = [ZHBXMPPTool sharedXMPPTool].xmppMessageStorage.mainThreadManagedObjectContext;
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:recentMessageContext sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController.delegate = self;
     }
     return _fetchedResultsController;
 }

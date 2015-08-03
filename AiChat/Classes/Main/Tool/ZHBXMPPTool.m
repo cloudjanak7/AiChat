@@ -414,7 +414,10 @@ ZHBSingletonM(XMPPTool)
         return NO;
     }
     //发送消息更新信号
-    [(RACSubject *)self.rac_messageUpdateSignal sendNext:nil];
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [(RACSubject *)weakSelf.rac_messageUpdateSignal sendNext:nil];
+    });
 
     return YES;
 }
