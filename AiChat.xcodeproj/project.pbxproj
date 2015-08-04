@@ -206,6 +206,8 @@
 		759973AC1B4F87FA006C4C29 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */; };
 		759973B01B4F986C006C4C29 /* XXMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 759973AE1B4F986C006C4C29 /* XXMessageCell.m */; };
 		759973B11B4F986C006C4C29 /* XXMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 759973AF1B4F986C006C4C29 /* XXMessageCell.xib */; };
+		75A8FC861B70623F00727A50 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A8FC851B70623F00727A50 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		75A8FC881B7063B600727A50 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A8FC871B7063B600727A50 /* libicucore.dylib */; };
 		75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */; };
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
@@ -847,6 +849,9 @@
 		759973AD1B4F986C006C4C29 /* XXMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXMessageCell.h; sourceTree = "<group>"; };
 		759973AE1B4F986C006C4C29 /* XXMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXMessageCell.m; sourceTree = "<group>"; };
 		759973AF1B4F986C006C4C29 /* XXMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XXMessageCell.xib; sourceTree = "<group>"; };
+		75A8FC841B70623F00727A50 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		75A8FC851B70623F00727A50 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		75A8FC871B7063B600727A50 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		75B42FFC1B4A4D0F00ED67F1 /* TXLChatTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatTool.h; sourceTree = "<group>"; };
 		75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatTool.m; sourceTree = "<group>"; };
 		75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsTVC.h; sourceTree = "<group>"; };
@@ -1120,6 +1125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75A8FC881B7063B600727A50 /* libicucore.dylib in Frameworks */,
 				753831901B43939500CD136B /* libresolv.dylib in Frameworks */,
 				7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */,
 				753831291B43929D00CD136B /* libidn.a in Frameworks */,
@@ -1333,6 +1339,7 @@
 		753828D81B43929900CD136B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				75A8FC831B70623F00727A50 /* RegexKitLite */,
 				753828D91B43929900CD136B /* XMPPFramework */,
 			);
 			path = Vendor;
@@ -2355,6 +2362,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		75A8FC831B70623F00727A50 /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				75A8FC841B70623F00727A50 /* RegexKitLite.h */,
+				75A8FC851B70623F00727A50 /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
 		75BCC2101B46443F00B1CFC0 /* Contacts（通讯录） */ = {
 			isa = PBXGroup;
 			children = (
@@ -2798,6 +2814,7 @@
 		F6E730C669FBFEC11DE65762 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75A8FC871B7063B600727A50 /* libicucore.dylib */,
 				75D0B9EF1B6F32330034B9E1 /* Foundation.framework */,
 				75BCC21C1B465B0900B1CFC0 /* CoreData.framework */,
 				7538318F1B43939500CD136B /* libresolv.dylib */,
@@ -3208,6 +3225,7 @@
 				75382EB81B43929D00CD136B /* XMPPvCardCoreDataStorage.m in Sources */,
 				75048E031B4533B7008C94CC /* ZHBControllerTool.m in Sources */,
 				75C5712B1B6F948C00D046C1 /* ZHBEmotionTextView.m in Sources */,
+				75A8FC861B70623F00727A50 /* RegexKitLite.m in Sources */,
 				75382EE11B43929D00CD136B /* XMPPBlocking.m in Sources */,
 				753831241B43929D00CD136B /* NSString+DDXML.m in Sources */,
 				75382E7E1B43929D00CD136B /* XMPPDeprecatedPlainAuthentication.m in Sources */,
@@ -3530,6 +3548,7 @@
 					"-framework",
 					"\"UIKit\"",
 					"-lxml2",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3583,6 +3602,7 @@
 					"-framework",
 					"\"UIKit\"",
 					"-lxml2",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -11,7 +11,7 @@
 #import "ZHBEmotionGridView.h"
 #import "ZHBEmotionAttachment.h"
 #import "ZHBRegexResult.h"
-//#import "RegexKitLite.h"
+#import "RegexKitLite.h"
 
 #define ZHBEmotionRecentFilepath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"recent_emotions.data"]
 
@@ -172,31 +172,32 @@ static NSMutableArray *_recentEmotions;
     // 用来存放所有的匹配结果
     NSMutableArray *regexResults = [NSMutableArray array];
     
-//    // 匹配表情
-//    NSString *emotionRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-//    [string enumerateStringsMatchedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-//        ZHBRegexResult *regexResult = [[ZHBRegexResult alloc] init];
-//        regexResult.string = *capturedStrings;
-//        regexResult.range = *capturedRanges;
-//        regexResult.emotion = YES;
-//        [regexResults addObject:regexResult];
-//    }];
-//    
-//    // 匹配非表情
-//    [string enumerateStringsSeparatedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-//        ZHBRegexResult *regexResult = [[ZHBRegexResult alloc] init];
-//        regexResult.string = *capturedStrings;
-//        regexResult.range = *capturedRanges;
-//        regexResult.emotion = NO;
-//        [regexResults addObject:regexResult];
-//    }];
-//    
-//    // 排序
-//    [regexResults sortUsingComparator:^NSComparisonResult(ZHBRegexResult *rr1, ZHBRegexResult *rr2) {
-//        NSUInteger loc1 = rr1.range.location;
-//        NSUInteger loc2 = rr2.range.location;
-//        return [@(loc1) compare:@(loc2)];
-//    }];
+    // 匹配表情
+    NSString *emotionRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
+    
+    [string enumerateStringsMatchedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+        ZHBRegexResult *regexResult = [[ZHBRegexResult alloc] init];
+        regexResult.string = *capturedStrings;
+        regexResult.range = *capturedRanges;
+        regexResult.emotion = YES;
+        [regexResults addObject:regexResult];
+    }];
+    
+    // 匹配非表情
+    [string enumerateStringsSeparatedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+        ZHBRegexResult *regexResult = [[ZHBRegexResult alloc] init];
+        regexResult.string = *capturedStrings;
+        regexResult.range = *capturedRanges;
+        regexResult.emotion = NO;
+        [regexResults addObject:regexResult];
+    }];
+    
+    // 排序
+    [regexResults sortUsingComparator:^NSComparisonResult(ZHBRegexResult *rr1, ZHBRegexResult *rr2) {
+        NSUInteger loc1 = rr1.range.location;
+        NSUInteger loc2 = rr2.range.location;
+        return [@(loc1) compare:@(loc2)];
+    }];
     return regexResults;
 }
 

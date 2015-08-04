@@ -83,24 +83,22 @@
     self.myMessageLbl.hidden            = !self.message.isOutgoing;
     self.myHeadImageView.hidden         = !self.message.isOutgoing;
 
-//    NSAttributedString *attributedString = [ZHBEmotionTool emotionsAttributedStringWithString:self.message.body font:CHAT_MESSAGE_FONT];
-    
+    NSAttributedString *attributedString = [ZHBEmotionTool emotionsAttributedStringWithString:self.message.body font:CHAT_MESSAGE_FONT];
+
     if (self.message.isOutgoing) {
         UIImage *photo = [UIImage imageWithData:[ZHBXMPPTool sharedXMPPTool].xmppvCardModule.myvCardTemp.photo];
         if (!photo) {
             photo = [UIImage imageNamed:@"DefaultHead"];
         }
         self.myHeadImageView.image       = photo;
-//        self.myMessageLbl.attributedText = attributedString;
-        self.myMessageLbl.text = self.message.body;
+        self.myMessageLbl.attributedText = attributedString;
     } else {
         UIImage *photo = [UIImage imageWithData:[[ZHBXMPPTool sharedXMPPTool].xmppAvatarModule photoDataForJID:self.message.bareJid]];
         if (!photo) {
             photo = [UIImage imageNamed:@"DefaultHead"];
         }
         self.otherHeadImageView.image       = photo;
-//        self.otherMessageLbl.attributedText = attributedString;
-        self.otherMessageLbl.text = self.message.body;
+        self.otherMessageLbl.attributedText = attributedString;
     }
     if ((int)[self.message.timestamp timeIntervalSince1970] % 2) {
         self.timeBtn.hidden       = YES;
@@ -115,7 +113,9 @@
 - (CGFloat)calCellHeight {
     //消息宽度 = 消息宽度约束 - 内容距离背景左右间距
     CGFloat messageLblW = self.otherMessageBgMaxW.constant - 40;
-    CGSize messageSize = [self.message.body calculateSize:CGSizeMake(messageLblW , MAXFLOAT) font:CHAT_MESSAGE_FONT];
+    NSAttributedString *attributedString = [ZHBEmotionTool emotionsAttributedStringWithString:self.message.body font:CHAT_MESSAGE_FONT];
+    CGSize expectedLabelSize = [attributedString boundingRectWithSize:CGSizeMake(messageLblW , MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    CGSize messageSize = CGSizeMake(ceil(expectedLabelSize.width), ceil(expectedLabelSize.height));
     //消息高度 = 内容高度 + 距离背景的上下间距 - 距离顶部的高度
     return messageSize.height + 30 + self.messageTopX.constant;
 }

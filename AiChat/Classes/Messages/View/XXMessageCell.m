@@ -14,6 +14,7 @@
 #import "UIView+Helper.h"
 #import "ZHBXMPPTool.h"
 #import <ReactiveCocoa.h>
+#import "ZHBEmotionTool.h"
 
 @interface XXMessageCell ()
 
@@ -56,7 +57,7 @@
 - (void)setupCell {
     self.timeLbl.text = [self.contactMessage.recentMessage.mostRecentMessageTimestamp formatIMDate];
     self.titleLbl.text = self.contactMessage.recentMessage.bareJid.user;
-    self.subTitleLbl.text = self.contactMessage.recentMessage.mostRecentMessageBody;
+    self.subTitleLbl.attributedText = [ZHBEmotionTool emotionsAttributedStringWithString:self.contactMessage.recentMessage.mostRecentMessageBody font:self.subTitleLbl.font];
     UIImage *photo = self.contactMessage.friendUser.photo;
     if (!photo) {
         if (self.contactMessage.friendUser.jid) {
