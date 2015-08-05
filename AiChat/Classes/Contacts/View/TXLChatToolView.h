@@ -7,14 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXLHelpKeyboard.h"
+@class TXLChatToolView;
 
-typedef void(^SendOperation)(NSString *message);
+@protocol TXLChatToolViewDelegate <NSObject>
+
+@optional
+- (void)chatToolView:(TXLChatToolView *)chatToolView didSelectedShareType:(TXLShareType)type;
+
+- (void)chatToolView:(TXLChatToolView *)chatToolView didClickedSendMessage:(NSString *)message;
+
+@end
 
 @interface TXLChatToolView : UIView
 
-/*! @brief  发送消息操作 */
-@property (nonatomic, copy) SendOperation sendOperation;
 /*! @brief  是否更换键盘 */
 @property (nonatomic, assign, readonly, getter=isChangingKeyboard) BOOL changingKeyboard;
+/*! @brief  代理 */
+@property (nonatomic, weak) id<TXLChatToolViewDelegate> delegate;
+
+/*!
+ *  @brief  取消第一响应者
+ */
+- (void)endEditing;
 
 @end

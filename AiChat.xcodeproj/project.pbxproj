@@ -208,6 +208,7 @@
 		759973B11B4F986C006C4C29 /* XXMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 759973AF1B4F986C006C4C29 /* XXMessageCell.xib */; };
 		75A8FC861B70623F00727A50 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A8FC851B70623F00727A50 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75A8FC881B7063B600727A50 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A8FC871B7063B600727A50 /* libicucore.dylib */; };
+		75A8FC931B7084A400727A50 /* TXLHelpKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A8FC921B7084A400727A50 /* TXLHelpKeyboard.m */; };
 		75B42FFE1B4A4D0F00ED67F1 /* TXLChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */; };
 		75BCC2181B46550000B1CFC0 /* TXLContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC2171B46550000B1CFC0 /* TXLContactsTVC.m */; };
 		75BCC21B1B46559F00B1CFC0 /* TXLContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCC21A1B46559F00B1CFC0 /* TXLContactsTool.m */; };
@@ -852,6 +853,8 @@
 		75A8FC841B70623F00727A50 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		75A8FC851B70623F00727A50 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		75A8FC871B7063B600727A50 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		75A8FC911B7084A400727A50 /* TXLHelpKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLHelpKeyboard.h; sourceTree = "<group>"; };
+		75A8FC921B7084A400727A50 /* TXLHelpKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLHelpKeyboard.m; sourceTree = "<group>"; };
 		75B42FFC1B4A4D0F00ED67F1 /* TXLChatTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLChatTool.h; sourceTree = "<group>"; };
 		75B42FFD1B4A4D0F00ED67F1 /* TXLChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLChatTool.m; sourceTree = "<group>"; };
 		75BCC2161B46550000B1CFC0 /* TXLContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactsTVC.h; sourceTree = "<group>"; };
@@ -2189,6 +2192,20 @@
 			path = libidn;
 			sourceTree = "<group>";
 		};
+		753C21551B710A4100B3DCC0 /* ChatToolView */ = {
+			isa = PBXGroup;
+			children = (
+				75EED1AE1B6DDD96008844AD /* TXLChatToolView.h */,
+				75EED1AF1B6DDD96008844AD /* TXLChatToolView.m */,
+				75A8FC911B7084A400727A50 /* TXLHelpKeyboard.h */,
+				75A8FC921B7084A400727A50 /* TXLHelpKeyboard.m */,
+				75C571291B6F948C00D046C1 /* ZHBEmotionTextView.h */,
+				75C5712A1B6F948C00D046C1 /* ZHBEmotionTextView.m */,
+				75DCC9B81B6E58C900F5B45B /* EmotionKeyboard */,
+			);
+			name = ChatToolView;
+			sourceTree = "<group>";
+		};
 		7567241F1B461AAD00554473 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2429,12 +2446,10 @@
 		75BCC2151B46443F00B1CFC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				75DCC9B81B6E58C900F5B45B /* EmotionKeyboard */,
+				753C21551B710A4100B3DCC0 /* ChatToolView */,
 				7574E9631B52355B0009B57C /* TXLChatCell.h */,
 				7574E9641B52355B0009B57C /* TXLChatCell.m */,
 				7574E9651B52355B0009B57C /* TXLChatCell.xib */,
-				75EED1AE1B6DDD96008844AD /* TXLChatToolView.h */,
-				75EED1AF1B6DDD96008844AD /* TXLChatToolView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2707,8 +2722,6 @@
 				759028CF1B6E70A800DDEC78 /* ZHBEmotionListView.m */,
 				75D0B9F11B6F36D00034B9E1 /* ZHBEmotionToolView.h */,
 				75D0B9F21B6F36D00034B9E1 /* ZHBEmotionToolView.m */,
-				75C571291B6F948C00D046C1 /* ZHBEmotionTextView.h */,
-				75C5712A1B6F948C00D046C1 /* ZHBEmotionTextView.m */,
 			);
 			name = EmotionKeyboard;
 			sourceTree = "<group>";
@@ -3375,6 +3388,7 @@
 				75382E7C1B43929D00CD136B /* XMPPAnonymousAuthentication.m in Sources */,
 				75DCC9EA1B6E5E5E00F5B45B /* ZHBEmotionTool.m in Sources */,
 				75382EDA1B43929D00CD136B /* XMPPMessageArchiving.m in Sources */,
+				75A8FC931B7084A400727A50 /* TXLHelpKeyboard.m in Sources */,
 				75382E941B43929D00CD136B /* XMPPOutgoingFileTransfer.m in Sources */,
 				75382EBF1B43929D00CD136B /* XMPPvCardTempEmail.m in Sources */,
 				75382EBE1B43929D00CD136B /* XMPPvCardTempBase.m in Sources */,

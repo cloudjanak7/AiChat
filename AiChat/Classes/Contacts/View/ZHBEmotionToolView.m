@@ -25,9 +25,6 @@
 /*! @brief  浪小花 */
 @property (nonatomic, strong) UIButton *lxhBtn;
 
-/*! @brief  背景 */
-@property (nonatomic, strong) UIImageView *imageView;
-
 @end
 
 static NSInteger const kEmotionToolButtonMaxCount = 4;
@@ -146,14 +143,6 @@ static NSInteger const kEmotionToolButtonMaxCount = 4;
         [_lxhBtn setImage:[UIImage imageNamed:@"EmotionsSetting"] forState:UIControlStateNormal];
     }
     return _lxhBtn;
-}
-
-- (UIImageView *)imageView {
-    if (nil == _imageView) {
-        _imageView = [[UIImageView alloc] init];
-        _imageView.image = [UIImage resizedImageNamed:@"buttontoolbarBkg_white"];
-    }
-    return _imageView;
 }
 
 #pragma mark -

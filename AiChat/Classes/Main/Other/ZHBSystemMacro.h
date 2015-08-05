@@ -15,6 +15,7 @@
 
 #define ZHBScreenW [UIScreen mainScreen].bounds.size.width
 #define ZHBScreenH [UIScreen mainScreen].bounds.size.height
-#define ZHBSystemKeyboardH 257.8
+#define ZHBSystemKeyboardH_V 258
+#define ZHBSystemKeyboardH_H 194
 
 #endif

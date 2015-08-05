@@ -18,12 +18,13 @@
 #import "UIView+Frame.h"
 #import "UIImage+Helper.h"
 
-@interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource, TXLChatToolViewDelegate>
 
 /*! @brief  聊天内容列表 */
 @property (nonatomic, weak) UITableView *contentTV;
 /*! @brief  底部工具条 */
 @property (nonatomic, weak) TXLChatToolView *bottomToolView;
+
 /*! @brief  背景图片 */
 @property (nonatomic, weak) UIImageView *bgImageView;
 
@@ -121,10 +122,7 @@
 
 - (void)setupBottomToolView {
     TXLChatToolView *toolView = [[TXLChatToolView alloc] init];
-    __weak typeof(self) weakSelf = self;
-    toolView.sendOperation = ^(NSString *message) {
-        [weakSelf.chatTool sendMessage:message];
-    };
+    toolView.delegate = self;
     [self.view addSubview:toolView];
     self.bottomToolView = toolView;
 }
@@ -151,15 +149,6 @@
 
 - (void)setupSignal {
     @weakify(self);
-//    [[[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] filter:^BOOL(id value) {
-//        @strongify(self);
-//        return @(self.contentTxtf.text.length > 0);
-//    }] subscribeNext:^(id x) {
-//        @strongify(self);
-//        [self.chatTool sendMessage:self.contentTxtf.text];
-//        self.contentTxtf.text = @"";
-//        [self.view endEditing:YES];
-//    }];
     
     [self.chatTool.rac_freshSignal subscribeNext:^(id x) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -179,6 +168,24 @@
     }];
 }
 
+#pragma mark -
+#pragma mark TXLChatTooView Delegate
+
+- (void)chatToolView:(TXLChatToolView *)chatToolView didClickedSendMessage:(NSString *)message {
+    [self.chatTool sendMessage:message];
+}
+
+- (void)chatToolView:(TXLChatToolView *)chatToolView didSelectedShareType:(TXLShareType)type {
+    switch (type) {
+        case TXLShareTypePic:
+            //发照片
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - 
 #pragma mark UITableView Delegate
 
@@ -195,7 +202,7 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
+    [self.bottomToolView endEditing];
 }
 
 #pragma mark -

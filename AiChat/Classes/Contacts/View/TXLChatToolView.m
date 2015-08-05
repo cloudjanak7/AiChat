@@ -38,6 +38,8 @@
 @property (nonatomic, strong) UIImageView *bgImageView;
 /*! @brief  emotion键盘 */
 @property (nonatomic, strong) ZHBEmotionKeyboard *emotionKeyboard;
+/*! @brief  功能选择面板 */
+@property (nonatomic, strong) TXLHelpKeyboard *helpKeyboard;
 
 @property (nonatomic, assign, readwrite, getter=isChangingKeyboard) BOOL changingKeyboard;
 
@@ -74,6 +76,13 @@ static CGFloat const kInputViewMarginX = 5;
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark -
+#pragma mark Public Methods
+- (void)endEditing {
+    self.inputView.inputView = nil;
+    [self.inputView resignFirstResponder];
 }
 
 #pragma mark -
@@ -161,13 +170,32 @@ static CGFloat const kInputViewMarginX = 5;
 }
 
 - (void)resetInputView {
-    self.inputView.text = @"";
+    self.inputView.text      = @"";
     self.inputView.inputView = nil;
+    self.moreBtn.selected    = NO;
     [self setInputViewStatus];
     [self.inputView resignFirstResponder];
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(kToolViewDefaultH);
     }];
+}
+
+- (void)changeKeyboard:(UIView *)keyboard {
+    // 正在切换键盘
+    self.changingKeyboard = YES;
+    if ([self.inputView.inputView isKindOfClass:[keyboard class]]) {
+        self.inputView.inputView = nil;
+    } else {
+        self.inputView.inputView = keyboard;
+    }
+    [self.inputView resignFirstResponder];
+    // 更换完毕完毕
+    self.changingKeyboard = NO;
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 打开键盘
+        [weakSelf.inputView becomeFirstResponder];
+    });
 }
 
 #pragma mark -
@@ -205,7 +233,7 @@ static CGFloat const kInputViewMarginX = 5;
     DDLOG_INFO
     DDLogVerbose(@"%d", sender.selected);
     if (!sender.selected) {
-        [self.inputView resignFirstResponder];
+        [self endEditing];
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(kToolViewDefaultH);
         }];
@@ -228,12 +256,13 @@ static CGFloat const kInputViewMarginX = 5;
 
 - (void)didClickShowMoreButton:(UIButton *)sender {
     DDLOG_INFO
+    [self changeKeyboard:self.helpKeyboard];
 }
 
 - (void)didClickSendButton:(UIButton *)sender {
     DDLOG_INFO
-    if (self.sendOperation) {
-        self.sendOperation(self.inputView.realText);
+    if ([self.delegate respondsToSelector:@selector(chatToolView:didClickedSendMessage:)]) {
+        [self.delegate chatToolView:self didClickedSendMessage:self.inputView.realText];
     }
     [self resetInputView];
 }
@@ -241,23 +270,7 @@ static CGFloat const kInputViewMarginX = 5;
 - (void)didClickIconButton:(UIButton *)sender {
     DDLOG_INFO
     // 正在切换键盘
-    self.changingKeyboard = YES;
-    
-    if (self.inputView.inputView) { // 当前显示的是自定义键盘，切换为系统自带的键盘
-        self.inputView.inputView = nil;
-    } else { // 当前显示的是系统自带的键盘，切换为自定义键盘
-        // 如果临时更换了文本框的键盘，一定要重新打开键盘
-        self.inputView.inputView = self.emotionKeyboard;
-    }
-    // 关闭键盘
-    [self.inputView resignFirstResponder];
-    // 更换完毕完毕
-    self.changingKeyboard = NO;
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 打开键盘
-        [weakSelf.inputView becomeFirstResponder];
-    });
+    [self changeKeyboard:self.emotionKeyboard];
 }
 
 #pragma mark -
@@ -366,10 +379,25 @@ static CGFloat const kInputViewMarginX = 5;
 {
     if (nil == _emotionKeyboard) {
         _emotionKeyboard = [ZHBEmotionKeyboard emotionKeyboard];
-        _emotionKeyboard.width = ZHBScreenW;
-        _emotionKeyboard.height = ZHBSystemKeyboardH;
+        _emotionKeyboard.height = ZHBSystemKeyboardH_V;
     }
     return _emotionKeyboard;
+}
+
+- (TXLHelpKeyboard *)helpKeyboard
+{
+    if (nil == _helpKeyboard) {
+        _helpKeyboard = [TXLHelpKeyboard helpKeyboard];
+        _helpKeyboard.height = ZHBSystemKeyboardH_V;
+        __weak typeof(self) weakSelf = self;
+        _helpKeyboard.shareOperation = ^(TXLShareType type) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if ([strongSelf.delegate respondsToSelector:@selector(chatToolView:didSelectedShareType:)]) {
+                [strongSelf.delegate chatToolView:strongSelf didSelectedShareType:type];
+            }
+        };
+    }
+    return _helpKeyboard;
 }
 
 @end
