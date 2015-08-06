@@ -17,8 +17,9 @@
 #import <Masonry.h>
 #import "UIView+Frame.h"
 #import "UIImage+Helper.h"
+#import "ZHBChatCell.h"
 
-@interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource, TXLChatToolViewDelegate>
+@interface TXLChatVC ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  TXLChatToolViewDelegate>
 
 /*! @brief  聊天内容列表 */
 @property (nonatomic, weak) UITableView *contentTV;
@@ -177,13 +178,29 @@
 
 - (void)chatToolView:(TXLChatToolView *)chatToolView didSelectedShareType:(TXLShareType)type {
     switch (type) {
-        case TXLShareTypePic:
+        case TXLShareTypePic: {
             //发照片
+            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) return;
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            ipc.delegate = self;
+            [self presentViewController:ipc animated:YES completion:nil];
             break;
+        }
             
         default:
             break;
     }
+}
+
+#pragma mark UIImagePickerController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    DDLOG_INFO
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    // 1.取出选中的图片
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    [self.chatTool sendImage:image];
 }
 
 #pragma mark - 

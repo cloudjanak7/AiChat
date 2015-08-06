@@ -70,6 +70,8 @@ static CGFloat const kInputViewMarginX = 5;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedEmotion:) name:ZHBEmotionDidSelectedNotification object:nil];
         // 监听删除按钮点击的通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDeletedEmotion:) name:ZHBEmotionDidDeletedNotification object:nil];
+        // 监听状态栏方向改变通知
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidChangeStatusBarOrientation:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     }
     return self;
 }
@@ -218,6 +220,31 @@ static CGFloat const kInputViewMarginX = 5;
 
 #pragma mark -
 #pragma mark Event Response
+
+//- (void)applicationDidChangeStatusBarOrientation:(NSNotification *)noti {
+//    DDLOG_INFO
+//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    switch (orientation) {
+//        case UIInterfaceOrientationLandscapeRight:
+//        case UIInterfaceOrientationLandscapeLeft:
+//            DDLogVerbose(@"水平%@", @(orientation));
+//            self.helpKeyboard.height    = 0;
+//            self.emotionKeyboard.height = 0;
+//            break;
+//        case UIInterfaceOrientationPortrait:
+//        case UIInterfaceOrientationPortraitUpsideDown:
+//            DDLogVerbose(@"竖直%@", @(orientation));
+//            self.helpKeyboard.height    = ZHBSystemKeyboardH_V;
+//            self.emotionKeyboard.height = ZHBSystemKeyboardH_V;
+//            break;
+//        default:
+//            DDLogVerbose(@"其他%@", @(orientation));
+//            self.helpKeyboard.height    = ZHBSystemKeyboardH_V;
+//            self.emotionKeyboard.height = ZHBSystemKeyboardH_V;
+//            break;
+//    }
+//    [self layoutSubviews];
+//}
 
 - (void)didSelectedEmotion:(NSNotification *)noti {
     ZHBEmotion *emotion = noti.userInfo[ZHBEmotionSelectKey];

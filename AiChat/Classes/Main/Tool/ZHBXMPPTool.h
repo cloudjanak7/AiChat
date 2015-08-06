@@ -12,20 +12,25 @@
 
 @class RACSignal;
 
-typedef enum {
-    XMPPStatusTypeConnecting = 0,//连接中...
+typedef NS_ENUM(NSUInteger, XMPPStatusType) {
+    XMPPStatusTypeConnecting,//连接中...
     XMPPStatusTypeLoginSuccess,//登录成功
     XMPPStatusTypeLoginFailure,//登录失败
     XMPPStatusTypeNetErr,//网络不给力
     XMPPStatusTypeRegisterSuccess,//注册成功
     XMPPStatusTypeRegisterFailure//注册失败
-}XMPPStatusType;
+};
 
-typedef enum {
-    XMPPUserStatusTypeOnline = 0,
+typedef NS_ENUM(NSUInteger, XMPPUserStatusType) {
+    XMPPUserStatusTypeOnline,
     XMPPUserStatusTypeLeave,
     XMPPUserStatusTypeOffline
-}XMPPUserStatusType;
+};
+
+extern NSString * const kXMPPMessageBodyTypeText;
+extern NSString * const kXMPPMessageBodyTypeImage;
+extern NSString * const kXMPPMessageBodyTypeVoice;
+extern NSString * const kXMPPMessageBodyType;
 
 //XMPP请求结果的block
 typedef void (^XMPPResultCallBack)(XMPPStatusType type);
@@ -78,13 +83,15 @@ ZHBSingletonH(XMPPTool)
  */
 - (void)userLogout;
 
-/**
+/*!
  *  @brief  发送消息
  *
  *  @param message 消息内容
  *  @param jid     对方JID
+ *  @param type    消息类别
  */
-- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid;
+- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid bodyType:(NSString *)type;
+
 /**
  *  @brief  重置未读消息数
  *

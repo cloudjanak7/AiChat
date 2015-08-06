@@ -82,8 +82,22 @@
 #pragma mark Public Methods
 - (void)sendMessage:(NSString *)message {
     if (message.length > 0) {
-        [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.toUser.jid];
+        [[ZHBXMPPTool sharedXMPPTool] sendMessage:message toJID:self.toUser.jid bodyType:kXMPPMessageBodyTypeText];
     }
+}
+
+- (void)sendImage:(UIImage *)image {
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
+    NSString *imageStr = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [[ZHBXMPPTool sharedXMPPTool] sendMessage:imageStr toJID:self.toUser.jid bodyType:kXMPPMessageBodyTypeImage];
+}
+
+- (void)sendVideo:(id)video {
+    
+}
+
+- (void)sendVoice:(id)voice {
+    
 }
 
 #pragma mark 获取历史消息

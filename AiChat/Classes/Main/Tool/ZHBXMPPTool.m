@@ -13,6 +13,11 @@
 #import "UIDevice+Hardware.h"
 #import <ReactiveCocoa.h>
 
+NSString * const kXMPPMessageBodyTypeText  = @"text";
+NSString * const kXMPPMessageBodyTypeImage = @"image";
+NSString * const kXMPPMessageBodyTypeVoice = @"voice";
+NSString * const kXMPPMessageBodyType = @"bodyType";
+
 @interface ZHBXMPPTool ()<XMPPStreamDelegate, XMPPRosterDelegate, XMPPRoomDelegate, XMPPvCardAvatarDelegate, XMPPvCardTempModuleDelegate>
 
 @property (nonatomic, strong, readwrite) XMPPStream *xmppStream;
@@ -84,9 +89,10 @@ ZHBSingletonM(XMPPTool)
     [self.xmppStream disconnect];
 }
 
-- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid {
+- (void)sendMessage:(NSString *)message toJID:(XMPPJID *)jid bodyType:(NSString *)type {
     DDLOG_INFO
     XMPPMessage *xmppMessage = [XMPPMessage messageWithType:@"chat" to:jid];
+    [xmppMessage addAttributeWithName:kXMPPMessageBodyType stringValue:type];
     [xmppMessage addBody:message];
     DDLogInfo(@"发送消息-->%@", jid);
     [self.xmppStream sendElement:xmppMessage];

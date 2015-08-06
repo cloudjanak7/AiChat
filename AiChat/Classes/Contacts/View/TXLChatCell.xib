@@ -56,39 +56,55 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Acg-HA-46e">
+                        <rect key="frame" x="192" y="15" width="62" height="43"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HLd-Nr-6cc">
+                        <rect key="frame" x="66" y="15" width="64" height="43"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerX" secondItem="CYQ-UI-Tz2" secondAttribute="centerX" id="0cH-Za-87s"/>
                     <constraint firstItem="LHi-IM-2q0" firstAttribute="trailing" secondItem="gJK-C4-YSy" secondAttribute="trailing" constant="20" id="0cg-D4-fdY"/>
                     <constraint firstItem="mSt-tN-ra5" firstAttribute="top" secondItem="WK5-XB-JlQ" secondAttribute="top" id="0h2-RX-wZP"/>
                     <constraint firstItem="mSt-tN-ra5" firstAttribute="leading" secondItem="lXK-Y1-Bg8" secondAttribute="leading" constant="-20" id="1AC-lU-vwO"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="leading" secondItem="Acg-HA-46e" secondAttribute="leading" constant="-5" id="4dI-D0-Ukj"/>
                     <constraint firstItem="LHi-IM-2q0" firstAttribute="bottom" secondItem="gJK-C4-YSy" secondAttribute="bottom" constant="20" id="72H-XQ-yuu"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LHi-IM-2q0" secondAttribute="bottom" id="8U3-zC-K9m"/>
                     <constraint firstItem="081-Do-iJX" firstAttribute="top" secondItem="WK5-XB-JlQ" secondAttribute="top" id="AXe-6B-OGE"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="bottom" secondItem="Acg-HA-46e" secondAttribute="bottom" constant="6" id="D19-sg-bIr"/>
                     <constraint firstItem="WK5-XB-JlQ" firstAttribute="leading" secondItem="mSt-tN-ra5" secondAttribute="trailing" constant="5" id="HJJ-lO-7Kl"/>
                     <constraint firstItem="CYQ-UI-Tz2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Hwt-a1-1ay"/>
+                    <constraint firstItem="HLd-Nr-6cc" firstAttribute="trailing" secondItem="LHi-IM-2q0" secondAttribute="trailing" constant="-5" id="K4Z-VY-2kb"/>
                     <constraint firstItem="mSt-tN-ra5" firstAttribute="top" secondItem="lXK-Y1-Bg8" secondAttribute="top" constant="-10" id="LEy-Mq-Euz"/>
+                    <constraint firstItem="HLd-Nr-6cc" firstAttribute="top" secondItem="LHi-IM-2q0" secondAttribute="top" constant="5" id="Mf6-nV-uBl"/>
                     <constraint firstItem="081-Do-iJX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="NTO-9d-nNh"/>
                     <constraint firstItem="mSt-tN-ra5" firstAttribute="trailing" secondItem="lXK-Y1-Bg8" secondAttribute="trailing" constant="20" id="OL8-hz-PVG"/>
+                    <constraint firstItem="HLd-Nr-6cc" firstAttribute="leading" secondItem="LHi-IM-2q0" secondAttribute="leading" constant="11" id="Q3m-4g-sZB"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mSt-tN-ra5" secondAttribute="bottom" id="Qpi-Y2-yHm"/>
                     <constraint firstAttribute="trailing" secondItem="WK5-XB-JlQ" secondAttribute="trailing" constant="10" id="UWU-SW-JZq"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="top" secondItem="Acg-HA-46e" secondAttribute="top" constant="-5" id="Yx1-7U-Izd"/>
                     <constraint firstItem="LHi-IM-2q0" firstAttribute="top" secondItem="081-Do-iJX" secondAttribute="top" id="aJu-OE-FeF"/>
                     <constraint firstItem="LHi-IM-2q0" firstAttribute="top" secondItem="gJK-C4-YSy" secondAttribute="top" constant="-10" id="eBQ-Mw-7Vc"/>
                     <constraint firstItem="LHi-IM-2q0" firstAttribute="leading" secondItem="gJK-C4-YSy" secondAttribute="leading" constant="-20" id="h4J-PC-CUb"/>
                     <constraint firstItem="mSt-tN-ra5" firstAttribute="bottom" secondItem="lXK-Y1-Bg8" secondAttribute="bottom" constant="20" id="hjN-u8-4ls"/>
+                    <constraint firstItem="mSt-tN-ra5" firstAttribute="trailing" secondItem="Acg-HA-46e" secondAttribute="trailing" constant="11" id="i3E-2m-EYb"/>
                     <constraint firstItem="081-Do-iJX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="izY-3W-akI"/>
                     <constraint firstItem="081-Do-iJX" firstAttribute="height" secondItem="WK5-XB-JlQ" secondAttribute="height" id="lXj-fR-xiP"/>
                     <constraint firstItem="081-Do-iJX" firstAttribute="width" secondItem="WK5-XB-JlQ" secondAttribute="width" id="n8K-4w-1el"/>
+                    <constraint firstItem="HLd-Nr-6cc" firstAttribute="bottom" secondItem="LHi-IM-2q0" secondAttribute="bottom" constant="-6" id="w5t-JP-i5s"/>
                     <constraint firstItem="LHi-IM-2q0" firstAttribute="leading" secondItem="081-Do-iJX" secondAttribute="trailing" constant="5" id="zY0-Dd-7yT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="messageTopX" destination="izY-3W-akI" id="qkn-fk-9lG"/>
                 <outlet property="myHeadImageView" destination="WK5-XB-JlQ" id="mXz-9E-y2d"/>
+                <outlet property="myImageView" destination="Acg-HA-46e" id="6gE-AX-a7M"/>
                 <outlet property="myMessageBgImageView" destination="mSt-tN-ra5" id="oKX-1V-CJB"/>
                 <outlet property="myMessageBgMaxW" destination="Gju-3U-yrK" id="bWX-hj-FF0"/>
                 <outlet property="myMessageLbl" destination="lXK-Y1-Bg8" id="4jZ-i5-fs3"/>
                 <outlet property="otherHeadImageView" destination="081-Do-iJX" id="n1D-VZ-p27"/>
+                <outlet property="otherImageView" destination="HLd-Nr-6cc" id="tzl-a5-TKs"/>
                 <outlet property="otherMessageBgImageView" destination="LHi-IM-2q0" id="uEu-Vb-5iW"/>
                 <outlet property="otherMessageBgMaxW" destination="zv1-pj-Lfi" id="HQp-Km-mKr"/>
                 <outlet property="otherMessageLbl" destination="gJK-C4-YSy" id="as4-tM-HLS"/>

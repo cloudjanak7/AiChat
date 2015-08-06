@@ -187,6 +187,8 @@
 		753831291B43929D00CD136B /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75382E661B43929D00CD136B /* libidn.a */; };
 		7538318E1B43933200CD136B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318D1B43933200CD136B /* libxml2.dylib */; };
 		753831901B43939500CD136B /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7538318F1B43939500CD136B /* libresolv.dylib */; };
+		7543619E1B723E3A0032DEB2 /* ZHBChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7543619D1B723E3A0032DEB2 /* ZHBChatCell.m */; };
+		754361A11B7246C00032DEB2 /* ZHBTextChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 754361A01B7246C00032DEB2 /* ZHBTextChatCell.m */; };
 		7544E1EC1B5397C80034AF5A /* TXLContactDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */; };
 		755074401B6BC72D003785CD /* ZHBCommonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7550743F1B6BC72D003785CD /* ZHBCommonPopView.m */; };
 		755074431B6BD2C5003785CD /* ZHBCommonSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 755074421B6BD2C5003785CD /* ZHBCommonSearchBar.m */; };
@@ -813,6 +815,10 @@
 		7538318D1B43933200CD136B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		7538318F1B43939500CD136B /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		753831931B43954B00CD136B /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
+		7543619C1B723E3A0032DEB2 /* ZHBChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBChatCell.h; sourceTree = "<group>"; };
+		7543619D1B723E3A0032DEB2 /* ZHBChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBChatCell.m; sourceTree = "<group>"; };
+		7543619F1B7246C00032DEB2 /* ZHBTextChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBTextChatCell.h; sourceTree = "<group>"; };
+		754361A01B7246C00032DEB2 /* ZHBTextChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBTextChatCell.m; sourceTree = "<group>"; };
 		7544E1EA1B5397C80034AF5A /* TXLContactDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactDetailVC.h; sourceTree = "<group>"; };
 		7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLContactDetailVC.m; sourceTree = "<group>"; };
 		7550743E1B6BC72D003785CD /* ZHBCommonPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommonPopView.h; sourceTree = "<group>"; };
@@ -2206,6 +2212,17 @@
 			name = ChatToolView;
 			sourceTree = "<group>";
 		};
+		7543619B1B723E160032DEB2 /* ChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				7543619C1B723E3A0032DEB2 /* ZHBChatCell.h */,
+				7543619D1B723E3A0032DEB2 /* ZHBChatCell.m */,
+				7543619F1B7246C00032DEB2 /* ZHBTextChatCell.h */,
+				754361A01B7246C00032DEB2 /* ZHBTextChatCell.m */,
+			);
+			name = ChatCell;
+			sourceTree = "<group>";
+		};
 		7567241F1B461AAD00554473 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2446,6 +2463,7 @@
 		75BCC2151B46443F00B1CFC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7543619B1B723E160032DEB2 /* ChatCell */,
 				753C21551B710A4100B3DCC0 /* ChatToolView */,
 				7574E9631B52355B0009B57C /* TXLChatCell.h */,
 				7574E9641B52355B0009B57C /* TXLChatCell.m */,
@@ -3289,6 +3307,7 @@
 				75382E921B43929D00CD136B /* XMPPFileTransfer.m in Sources */,
 				75382E871B43929D00CD136B /* XMPPConstants.m in Sources */,
 				75382EDC1B43929D00CD136B /* XMPPvCardAvatarModule.m in Sources */,
+				754361A11B7246C00032DEB2 /* ZHBTextChatCell.m in Sources */,
 				75382EA81B43929D00CD136B /* XMPPRoom.xcdatamodeld in Sources */,
 				75382EB41B43929D00CD136B /* XMPPMUC.m in Sources */,
 				75382EA41B43929D00CD136B /* XMPPJabberRPCModule.m in Sources */,
@@ -3326,6 +3345,7 @@
 				7581DC2D1B55140900E4D088 /* ZHBPopView.m in Sources */,
 				75382E801B43929D00CD136B /* XMPPPlainAuthentication.m in Sources */,
 				75382E891B43929D00CD136B /* XMPPIQ.m in Sources */,
+				7543619E1B723E3A0032DEB2 /* ZHBChatCell.m in Sources */,
 				75CBDEB31B565B460065F77A /* TXLNewChatRoomTVC.m in Sources */,
 				75382EAB1B43929D00CD136B /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				75382ECD1B43929D00CD136B /* XMPPMessage+XEP_0085.m in Sources */,

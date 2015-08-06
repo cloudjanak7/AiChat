@@ -37,6 +37,10 @@
 /*! @brief  我的消息背景 */
 @property (weak, nonatomic) IBOutlet UIImageView *myMessageBgImageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *myImageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *otherImageView;
+
 @end
 
 @implementation TXLChatCell
@@ -46,45 +50,105 @@
 - (void)awakeFromNib {
     self.selectionStyle  = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
-    
+    //设置时间样式
+    self.timeBtn.titleLabel.font = CHAT_TIME_FONT;
+    self.timeBtn.userInteractionEnabled = NO;
+    [self.timeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.timeBtn setBackgroundImage:[UIImage resizedImageNamed:@"MessageContent_TimeNodeBkg"] forState:UIControlStateNormal];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)setupMessage {
+    self.otherMessageBgImageView.hidden = self.message.isOutgoing;
+    self.otherHeadImageView.hidden      = self.message.isOutgoing;
+    self.myMessageBgImageView.hidden    = !self.message.isOutgoing;
+    self.myHeadImageView.hidden         = !self.message.isOutgoing;
+
+    NSString *messageType = [self.message.message attributeStringValueForName:kXMPPMessageBodyType];
+    //内容为图片
+    if ([messageType isEqualToString:kXMPPMessageBodyTypeImage]) {
+        [self setupImageMessage];
+    }
+    //内容为文字
+    if([messageType isEqualToString:kXMPPMessageBodyTypeText]) {
+        [self setupTextMessage];
+    }
+    //时间是否显示
+    if ((int)[self.message.timestamp timeIntervalSince1970] % 2) {
+        self.timeBtn.hidden       = YES;
+        self.messageTopX.constant = 10;
+    } else {
+        self.timeBtn.hidden       = NO;
+        self.messageTopX.constant = 30;
+    }
+    [self.timeBtn setTitle:[self.message.timestamp formatIMDate] forState:UIControlStateNormal];
+}
+
+- (void)setupImageMessage {
+    self.otherMessageLbl.hidden = YES;
+    self.myMessageLbl.hidden    = YES;
+    self.myImageView.hidden     = !self.message.isOutgoing;
+    self.otherImageView.hidden  = self.message.isOutgoing;
+    if (!self.otherMessageBgImageView.hidden) {
+        self.otherMessageBgImageView.image = [UIImage resizedImageNamed:@"ReceiverImageNodeBorder"];
+        self.otherMessageBgImageView.highlightedImage = [UIImage resizedImageNamed:@"ReceiverImageNodeMask"];
+    }
+    if (!self.myMessageBgImageView.hidden) {
+        self.myMessageBgImageView.image = [UIImage resizedImageNamed:@"SenderImageNodeBorder"];
+        self.myMessageBgImageView.highlightedImage = [UIImage resizedImageNamed:@"SenderImageNodeMask"];
+    }
+    //设置消息最长宽度
+    CGFloat messageMaxW              = 120;
+    self.otherMessageBgMaxW.constant = messageMaxW;
+    self.myMessageBgMaxW.constant    = messageMaxW;
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:self.message.body options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *image = [UIImage imageWithData:data];
+    self.myHeadImageView.image = image;
+    if (self.message.isOutgoing) {
+        UIImage *photo = [UIImage imageWithData:[ZHBXMPPTool sharedXMPPTool].xmppvCardModule.myvCardTemp.photo];
+        if (!photo) {
+            photo = [UIImage imageNamed:@"DefaultHead"];
+        }
+        self.myHeadImageView.image = photo;
+        self.myImageView.image     = image;
+    } else {
+        UIImage *photo = [UIImage imageWithData:[[ZHBXMPPTool sharedXMPPTool].xmppAvatarModule photoDataForJID:self.message.bareJid]];
+        if (!photo) {
+            photo = [UIImage imageNamed:@"DefaultHead"];
+        }
+        self.otherHeadImageView.image = photo;
+        self.otherImageView.image     = image;
+    }
+}
+
+- (void)setupTextMessage {
+    self.myImageView.hidden     = YES;
+    self.otherImageView.hidden  = YES;
+    self.otherMessageLbl.hidden = self.message.isOutgoing;
+    self.myMessageLbl.hidden    = !self.message.isOutgoing;
+    if (!self.otherMessageBgImageView.hidden) {
+        self.otherMessageLbl.font                     = CHAT_MESSAGE_FONT;
+        self.otherMessageLbl.numberOfLines            = 0;
+        self.otherMessageLbl.textAlignment            = NSTextAlignmentLeft;
+        self.otherMessageBgImageView.image            = [UIImage resizedImageNamed:@"ReceiverTextNodeBkg"];
+        self.otherMessageBgImageView.highlightedImage = [UIImage resizedImageNamed:@"ReceiverTextNodeBkgHL"];
+    }
+    if (!self.myMessageBgImageView.hidden) {
+        self.myMessageLbl.font                     = CHAT_MESSAGE_FONT;
+        self.myMessageLbl.numberOfLines            = 0;
+        self.myMessageLbl.textAlignment            = NSTextAlignmentLeft;
+        self.myMessageBgImageView.image            = [UIImage resizedImageNamed:@"SenderTextNodeBkg"];
+        self.myMessageBgImageView.highlightedImage = [UIImage resizedImageNamed:@"SenderTextNodeBkgHL"];
+    }
     //设置消息最长宽度
     //屏幕宽度 - 头像宽度*2 - 距离边框距离*2 - 距离消息距离*2
     CGFloat messageMaxW              = [UIScreen mainScreen].bounds.size.width - 110;
     self.otherMessageBgMaxW.constant = messageMaxW;
     self.myMessageBgMaxW.constant    = messageMaxW;
     
-    //设置时间样式
-    self.timeBtn.titleLabel.font = CHAT_TIME_FONT;
-    self.timeBtn.userInteractionEnabled = NO;
-    [self.timeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.timeBtn setBackgroundImage:[UIImage resizedImageNamed:@"MessageContent_TimeNodeBkg"] forState:UIControlStateNormal];
-
-    //设置消息内容样式
-    self.otherMessageLbl.font = CHAT_MESSAGE_FONT;
-    self.otherMessageLbl.numberOfLines = 0;
-    self.otherMessageLbl.textAlignment = NSTextAlignmentLeft;
-    self.otherMessageBgImageView.image = [UIImage resizedImageNamed:@"ReceiverTextNodeBkg"];
-    self.otherMessageBgImageView.highlightedImage = [UIImage resizedImageNamed:@"ReceiverTextNodeBkgHL"];
-    
-    self.myMessageLbl.font = CHAT_MESSAGE_FONT;
-    self.myMessageLbl.numberOfLines = 0;
-    self.myMessageLbl.textAlignment = NSTextAlignmentLeft;
-    self.myMessageBgImageView.image = [UIImage resizedImageNamed:@"SenderTextNodeBkg"];
-    self.myMessageBgImageView.highlightedImage = [UIImage resizedImageNamed:@"SenderTextNodeBkgHL"];
-}
-
-#pragma mark -
-#pragma mark Private Methods
-- (void)setupMessage {
-    self.otherMessageBgImageView.hidden = self.message.isOutgoing;
-    self.otherMessageLbl.hidden         = self.message.isOutgoing;
-    self.otherHeadImageView.hidden      = self.message.isOutgoing;
-    self.myMessageBgImageView.hidden    = !self.message.isOutgoing;
-    self.myMessageLbl.hidden            = !self.message.isOutgoing;
-    self.myHeadImageView.hidden         = !self.message.isOutgoing;
-
     NSAttributedString *attributedString = [ZHBEmotionTool emotionsAttributedStringWithString:self.message.body font:CHAT_MESSAGE_FONT];
-
     if (self.message.isOutgoing) {
         UIImage *photo = [UIImage imageWithData:[ZHBXMPPTool sharedXMPPTool].xmppvCardModule.myvCardTemp.photo];
         if (!photo) {
@@ -100,17 +164,13 @@
         self.otherHeadImageView.image       = photo;
         self.otherMessageLbl.attributedText = attributedString;
     }
-    if ((int)[self.message.timestamp timeIntervalSince1970] % 2) {
-        self.timeBtn.hidden       = YES;
-        self.messageTopX.constant = 10;
-    } else {
-        self.timeBtn.hidden       = NO;
-        self.messageTopX.constant = 30;
-    }
-    [self.timeBtn setTitle:[self.message.timestamp formatIMDate] forState:UIControlStateNormal];
 }
 
 - (CGFloat)calCellHeight {
+    NSString *messageType = [self.message.message attributeStringValueForName:kXMPPMessageBodyType];
+    if ([messageType isEqualToString:kXMPPMessageBodyTypeImage]) {
+        return 200;
+    }
     //消息宽度 = 消息宽度约束 - 内容距离背景左右间距
     CGFloat messageLblW = self.otherMessageBgMaxW.constant - 40;
     NSAttributedString *attributedString = [ZHBEmotionTool emotionsAttributedStringWithString:self.message.body font:CHAT_MESSAGE_FONT];

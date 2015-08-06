@@ -37,6 +37,8 @@
  */
 - (void)sendMessage:(NSString *)message;
 
+- (void)sendImage:(UIImage *)image;
+
 - (void)loadHistoryMessages;
 
 @end
