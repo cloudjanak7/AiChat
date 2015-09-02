@@ -2747,10 +2747,6 @@
 		75DCC9BF1B6E59B500F5B45B /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				75048E0D1B455F4E008C94CC /* UIColor+Hex.h */,
-				75048E0E1B455F4E008C94CC /* UIColor+Hex.m */,
-				75048E101B455F7F008C94CC /* UIColor+Helper.h */,
-				75048E111B455F7F008C94CC /* UIColor+Helper.m */,
 				751B3F771B4E4B8D0077B735 /* UIView+Frame.h */,
 				751B3F781B4E4B8D0077B735 /* UIView+Frame.m */,
 				751B3F791B4E4B8D0077B735 /* UIView+Helper.h */,
@@ -2762,6 +2758,10 @@
 		75DCC9C01B6E59C200F5B45B /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
+				75048E0D1B455F4E008C94CC /* UIColor+Hex.h */,
+				75048E0E1B455F4E008C94CC /* UIColor+Hex.m */,
+				75048E101B455F7F008C94CC /* UIColor+Helper.h */,
+				75048E111B455F7F008C94CC /* UIColor+Helper.m */,
 			);
 			name = UIColor;
 			sourceTree = "<group>";

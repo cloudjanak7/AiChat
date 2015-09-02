@@ -164,6 +164,7 @@
         self.otherHeadImageView.image       = photo;
         self.otherMessageLbl.attributedText = attributedString;
     }
+    [self layoutSubviews];
 }
 
 - (CGFloat)calCellHeight {
