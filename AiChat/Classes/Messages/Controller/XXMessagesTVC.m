@@ -47,6 +47,12 @@
 }
 
 #pragma mark -
+
+#pragma mark SearchBar Delegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.view endEditing:YES];
+}
+
 #pragma mark UITableView Delegate 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

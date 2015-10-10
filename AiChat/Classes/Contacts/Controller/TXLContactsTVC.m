@@ -48,6 +48,12 @@
 }
 
 #pragma mark -
+
+#pragma mark SearchBar Delegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.view endEditing:YES];
+}
+
 #pragma mark UITableView Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
