@@ -104,11 +104,11 @@ static CGFloat const kPopViewMarginX = 20;
 - (ZHBPopView *)popView {
     if (nil == _popView) {
         _popView = [[ZHBPopView alloc] init];
-        [self.popView addTitle:@"添加好友" image:@"barbuttonicon_InfoSingle" target:self action:@selector(didClickAddFriendButton)];
-        [self.popView addTitle:@"创建群组" image:@"barbuttonicon_InfoMulti" target:self action:@selector(didClickCreateChatRoomButton)];
-        [self.popView addTitle:@"扫一扫" image:@"barbuttonicon_Camera" target:nil action:nil];
-        [self.popView addTitle:@"收钱" image:@"barbuttonicon_more" target:nil action:nil];
-        [self.popView addTitle:@"帮助与反馈" image:@"barbuttonicon_question" target:nil action:nil];
+        [_popView addTitle:@"添加好友" image:@"barbuttonicon_InfoSingle" target:self action:@selector(didClickAddFriendButton)];
+        [_popView addTitle:@"创建群组" image:@"barbuttonicon_InfoMulti" target:self action:@selector(didClickCreateChatRoomButton)];
+        [_popView addTitle:@"扫一扫" image:@"barbuttonicon_Camera" target:nil action:nil];
+        [_popView addTitle:@"收钱" image:@"barbuttonicon_more" target:nil action:nil];
+        [_popView addTitle:@"帮助与反馈" image:@"barbuttonicon_question" target:nil action:nil];
     }
     return _popView;
 }

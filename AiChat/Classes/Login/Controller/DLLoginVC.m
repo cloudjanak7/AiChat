@@ -93,7 +93,7 @@
             [MBProgressHUD hideHUD];
             switch ([type integerValue]) {
                 case XMPPStatusTypeRegisterSuccess:
-                    [MBProgressHUD showError:@"注册成功"];
+                    [MBProgressHUD showSuccess:@"注册成功"];
                     break;
                 case XMPPStatusTypeRegisterFailure:
                     [MBProgressHUD showError:@"注册失败"];

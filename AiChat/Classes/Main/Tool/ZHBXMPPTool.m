@@ -70,15 +70,17 @@ ZHBSingletonM(XMPPTool)
 
 - (void)userLogin:(XMPPResultCallBack)callBack {
     self.registerOperation = NO;
-    self.callBack = callBack;
+    self.callBack = nil;
     [self.xmppStream disconnect];
+    self.callBack = callBack;
     [self connectToHost];
 }
 
 - (void)userRegister:(XMPPResultCallBack)callBack {
     self.registerOperation = YES;
-    self.callBack = callBack;
+    self.callBack = nil;
     [self.xmppStream disconnect];
+    self.callBack = callBack;
     [self connectToHost];
 }
 
@@ -146,9 +148,9 @@ ZHBSingletonM(XMPPTool)
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
     DDLOG_INFO
     DDLogError(@"%@", error);
-    if (self.callBack) {
-        self.callBack(XMPPStatusTypeNetErr);
-    }
+//    if (self.callBack) {
+//        self.callBack(XMPPStatusTypeNetErr);
+//    }
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
@@ -319,7 +321,7 @@ ZHBSingletonM(XMPPTool)
 #pragma mark Private Methods
 
 - (void)connectToHost {
-    XMPPJID *myJID = [XMPPJID jidWithUser:[ZHBUserInfo sharedUserInfo].name domain:kXmppDoMain resource:[UIDevice hardWareName]];
+    XMPPJID *myJID = [XMPPJID jidWithUser:[ZHBUserInfo sharedUserInfo].name domain:kXmppDoMain resource:nil];
     self.xmppStream.myJID = myJID;
     self.xmppStream.hostName = kXmppHostName;
     self.xmppStream.hostPort = kXmppHostPort;
