@@ -121,6 +121,8 @@
         self.otherHeadImageView.image = photo;
         self.otherImageView.image     = image;
     }
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
 }
 
 - (void)setupTextMessage {
@@ -164,7 +166,8 @@
         self.otherHeadImageView.image       = photo;
         self.otherMessageLbl.attributedText = attributedString;
     }
-    [self layoutSubviews];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
 }
 
 - (CGFloat)calCellHeight {

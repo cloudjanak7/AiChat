@@ -14,9 +14,9 @@ NSString * const kLoginStatus = @"loginStatus";
 
 #if LOCAL_TEST
 NSString * const kXmppChatRoomDoMain = @"conference.localhost";
-NSString * const kXmppDoMain         = @"zhuangPC.local";
-NSString * const kXmppHostName       = @"127.0.0.1";
-//NSString * const kXmppHostName       = @"192.168.1.5";
+NSString * const kXmppDoMain         = @"zhuangpc.local";
+NSString * const kXmppHostName       = @"172.20.10.8";
+//NSString * const kXmppHostName       = @"192.168.1.22";
 NSInteger  const kXmppHostPort       = 5222;
 #else
 NSString * const kXmppChatRoomDoMain = @"conference.zhuangpc.local";

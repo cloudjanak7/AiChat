@@ -190,6 +190,7 @@
 		7543619E1B723E3A0032DEB2 /* ZHBChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7543619D1B723E3A0032DEB2 /* ZHBChatCell.m */; };
 		754361A11B7246C00032DEB2 /* ZHBTextChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 754361A01B7246C00032DEB2 /* ZHBTextChatCell.m */; };
 		7544E1EC1B5397C80034AF5A /* TXLContactDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */; };
+		7544F56A1C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7544F5691C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.m */; };
 		755074401B6BC72D003785CD /* ZHBCommonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7550743F1B6BC72D003785CD /* ZHBCommonPopView.m */; };
 		755074431B6BD2C5003785CD /* ZHBCommonSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 755074421B6BD2C5003785CD /* ZHBCommonSearchBar.m */; };
 		756724211B461AB600554473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756724201B461AB600554473 /* Main.storyboard */; };
@@ -821,6 +822,8 @@
 		754361A01B7246C00032DEB2 /* ZHBTextChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBTextChatCell.m; sourceTree = "<group>"; };
 		7544E1EA1B5397C80034AF5A /* TXLContactDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLContactDetailVC.h; sourceTree = "<group>"; };
 		7544E1EB1B5397C80034AF5A /* TXLContactDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLContactDetailVC.m; sourceTree = "<group>"; };
+		7544F5681C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+StatusBarStyle.h"; sourceTree = "<group>"; };
+		7544F5691C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+StatusBarStyle.m"; sourceTree = "<group>"; };
 		7550743E1B6BC72D003785CD /* ZHBCommonPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommonPopView.h; sourceTree = "<group>"; };
 		7550743F1B6BC72D003785CD /* ZHBCommonPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHBCommonPopView.m; sourceTree = "<group>"; };
 		755074411B6BD2C5003785CD /* ZHBCommonSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHBCommonSearchBar.h; sourceTree = "<group>"; };
@@ -1296,6 +1299,8 @@
 				75048E1F1B458C64008C94CC /* UIDevice+Hardware.m */,
 				759973AA1B4F87FA006C4C29 /* NSDate+Helper.h */,
 				759973AB1B4F87FA006C4C29 /* NSDate+Helper.m */,
+				7544F5681C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.h */,
+				7544F5691C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3300,6 +3305,7 @@
 				75382E9D1B43929D00CD136B /* XMPPResourceMemoryStorageObject.m in Sources */,
 				75048E1D1B45770D008C94CC /* MBProgressHUD+ZHB.m in Sources */,
 				75382EF31B43929D00CD136B /* DDList.m in Sources */,
+				7544F56A1C3FBD8A005158A8 /* UINavigationController+StatusBarStyle.m in Sources */,
 				75382EED1B43929D00CD136B /* XMPPMessage+XEP_0280.m in Sources */,
 				75382E831B43929D00CD136B /* XMPPXOAuth2Google.m in Sources */,
 				75D0B9F31B6F36D00034B9E1 /* ZHBEmotionToolView.m in Sources */,

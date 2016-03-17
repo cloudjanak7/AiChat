@@ -9,6 +9,7 @@
 #import "ZHBBaseNC.h"
 #import "ZHBColorMacro.h"
 #import "UIImage+Helper.h"
+#import "UINavigationController+StatusBarStyle.h"
 
 @interface ZHBBaseNC ()
 

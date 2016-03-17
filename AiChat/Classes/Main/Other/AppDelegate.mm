@@ -22,6 +22,14 @@
     self.window.rootViewController = [[UIViewController alloc] init];
     [self.window makeKeyAndVisible];
     [ZHBControllerTool chooseRootViewController];
+    NSString *path = NSHomeDirectory();//主目录
+    NSLog(@"NSHomeDirectory:%@",path);
+    NSString *userName = NSUserName();//与上面相同
+    NSString *rootPath = NSHomeDirectoryForUser(userName);
+    NSLog(@"NSHomeDirectoryForUser:%@",rootPath);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory=[paths objectAtIndex:0];//Documents目录
+    NSLog(@"NSDocumentDirectory:%@",documentsDirectory);
     return YES;
 }
 
